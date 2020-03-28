@@ -54,7 +54,10 @@ class GlinkController extends Controller
           'topic_id' => 'required',
           'endtime' => 'required',
         ]);
-
+        $six_digit_random_number = mt_rand(100000, 999999);
+          $md5data = md5($six_digit_random_number);
+          $token = substr($md5data,0,8);
+          $input['token'] = $token;
        // $input = $request->all();
            $quiz = Generatelinks::create($input);
            
@@ -96,40 +99,20 @@ class GlinkController extends Controller
     {
         $request->validate([
 
-          'title' => 'required|string',
-          'per_q_mark' => 'required'
+          'topic_id' => 'required',
+          'endtime' => 'required',
           
         ]);
 
-        if(isset($request->pricechk)){
-          $request->validate([
-            'amount' => 'required'
-          ]);
-        }
+          $links = Generatelinks::findOrFail($id);
 
-          $topic = Topic::findOrFail($id);
           
-          $topic->title = $request->title;
-          $topic->description = $request->description;
-          $topic->per_q_mark = $request->per_q_mark;
-          $topic->timer = $request->timer;
+          
+          $links->topic_id = $request->topic_id;
+          $links->endtime = $request->endtime;
+          
 
-          if(isset($request->show_ans)){
-            $topic->show_ans = 1;
-          }else{
-            $topic->show_ans = 0;
-            
-          }
-
-          if(isset($request->pricechk)){
-            $topic->amount = $request->amount;
-          }else{
-            $topic->amount = NULL;
-          }
-
-         
-
-          $topic->save();
+          $links->save();
 
           return back()->with('updated','Link updated !');
     }

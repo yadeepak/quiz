@@ -61,6 +61,7 @@
           <tr>
             <th>#</th>
             <th>Quiz Title</th>
+            <th>Link</th>
             <th>End Time</th>
             <th>Actions</th>
           </tr>
@@ -75,10 +76,11 @@
                   @php($i++)
                 </td>
                 <td>{{$glink->title}}</td>
+                <td>{{url('mcq-quiz')}}/{{$glink->token}}</td>
                 <td>{{$glink->endtime}} mins</td>
                 <td>
                   <!-- Edit Button -->
-                  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$glink->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>
+                  <!-- <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$glink->id}}EditModal"><i class="fa fa-edit"></i> Edit</a> -->
                   <!-- Delete Button -->
                   <a type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{$glink->id}}deleteModal"><i class="fa fa-close"></i> Delete</a>
                   <div id="{{$glink->id}}deleteModal" class="delete-modal modal fade" role="dialog">
@@ -114,13 +116,23 @@
                     </div>
                     {!! Form::model($glink, ['method' => 'PATCH', 'action' => ['GlinkController@update', $glink->id]]) !!}
                       <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group{{ $errors->has('topic_id') ? ' has-error' : '' }}">
+                            {!! Form::label('topic_id', 'Select Quiz') !!}
+                            <span class="required">*</span>
+                            {!! Form::select('topic_id', $topics, null, ['class' => 'form-control']) !!}
+                            <small class="text-danger">{{ $errors->first('topic_id') }}</small>
+                          </div>
+                        </div>
+                      </div>
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                              {!! Form::label('minute', 'Minute') !!}
+                              {!! Form::label('endtime', 'Minute') !!}
                               <span class="required">*</span>
-                              {!! Form::text('minute', null, ['class' => 'form-control', 'placeholder' => 'Please Enter minute', 'required' => 'required']) !!}
-                              <small class="text-danger">{{ $errors->first('minute') }}</small>
+                              {!! Form::text('endtime', null, ['class' => 'form-control', 'placeholder' => 'Please Enter minute', 'required' => 'required']) !!}
+                              <small class="text-danger">{{ $errors->first('endtime') }}</small>
                             </div>
                           </div>
                         </div>  

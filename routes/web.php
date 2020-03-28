@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::redirect('/', 'home');
 
+
+//Route::get('quiz_start/{id}', 'MainQuizController@quiz_start');
+
 Auth::routes();
 
 /*google login route*/

@@ -199,7 +199,9 @@ $setting = App\Setting::first();
     <!-- Default to the left -->
     <strong>
         
-        {{ $copyright }}
+        {{-- $copyright --}}
+
+        &copy; <?php echo date("Y"); ?> Troislogic. All Rights Reserved.
 
     </strong>
   </footer>

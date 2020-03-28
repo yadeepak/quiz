@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use 
 class ExpireLink extends Command
 {
     /**

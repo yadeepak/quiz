@@ -13,7 +13,7 @@
 @include('message')
   @if ($auth->role == 'A')
     <div class="margin-bottom">
-      <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#createModal">Add Student</button>
+    <!--  <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#createModal">Add Student</button>   -->
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#AllDeleteModal">Delete All Students</button>
     </div>
     <!-- All Delete Button -->
@@ -137,7 +137,7 @@
                   <td>{{$user->role == 'S' ? 'Student' : '-'}}</td>
                   <td>
                     <!-- Edit Button -->
-                    <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$user->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>
+                 <!--   <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$user->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>   -->
                     <!-- Delete Button -->
                     <a type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{$user->id}}deleteModal"><i class="fa fa-close"></i> Delete</a>
                     <div id="{{$user->id}}deleteModal" class="delete-modal modal fade" role="dialog">

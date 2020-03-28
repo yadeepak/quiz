@@ -28,7 +28,7 @@
             <div class="navbar-header">
               <!-- Branding Image -->
               @if($setting)
-                <a class="tt" title="Quick Quiz Home" href="{{url('/')}}"><h4 class="heading">{{$setting->welcome_txt}}</h4></a>
+                <a class="tt" title="DcodeTech" href="{{url('/')}}"><h4 class="heading">DcodeTech</h4></a>
               @endif
             </div>
           </div>
@@ -38,8 +38,8 @@
               <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                  <li><a href="{{ route('login') }}" title="Login">Login</a></li>
-                  <li><a href="{{ route('register') }}" title="Register">Register</a></li>
+               <!--   <li><a href="{{ route('login') }}" title="Login">Login</a></li>
+                  <li><a href="{{ route('register') }}" title="Register">Register</a></li>  -->
 
                 @else
                   <li class="dropdown">
@@ -199,11 +199,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="home-main-block">
               @if ($setting)
-                <h1 class="main-block-heading text-center">{{$setting->welcome_txt}}</h1>
+            <!--    <h1 class="main-block-heading text-center">{{$setting->welcome_txt}}</h1> -->
               @endif
-                <blockquote>
-                  Please <a href="{{ route('login') }}">Login</a> To Start Quiz >>>
-                </blockquote>
+            <!--      <blockquote>
+                Please <a href="{{ route('login') }}">Login</a> To Start Quiz >>>  
+                </blockquote>-->
             </div>
         </div>
     </div>

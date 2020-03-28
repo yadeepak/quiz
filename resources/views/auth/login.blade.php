@@ -88,7 +88,7 @@
             <button type="submit" class="btn btn-wave">
                 Login
             </button>
-            <p class="messege text-center">Not registered? <a href="{{url('/register')}}" title="Create An Account">Create an account</a></p>
+         <!--   <p class="messege text-center">Not registered? <a href="{{url('/register')}}" title="Create An Account">Create an account</a></p>   -->
           </div>
           <div class="form-group text-center">
             <a href="{{url('/password/reset')}}" title="Forgot Password">Forgot Password?</a>

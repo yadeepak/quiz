@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 28, 2020 at 12:44 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Host: localhost
+-- Generation Time: Mar 28, 2020 at 03:32 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,7 +59,7 @@ CREATE TABLE `companies` (
   `company_website` varchar(191) NOT NULL,
   `username` varchar(191) NOT NULL,
   `password` varchar(191) NOT NULL,
-  `address` text,
+  `address` text DEFAULT NULL,
   `city` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -139,8 +139,10 @@ CREATE TABLE `faq` (
 CREATE TABLE `generatelinks` (
   `id` int(11) NOT NULL,
   `topic_id` int(11) DEFAULT NULL,
-  `token` text,
+  `token` text DEFAULT NULL,
   `endtime` int(11) DEFAULT NULL,
+  `startTime` datetime DEFAULT NULL,
+  `expired` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -149,8 +151,8 @@ CREATE TABLE `generatelinks` (
 -- Dumping data for table `generatelinks`
 --
 
-INSERT INTO `generatelinks` (`id`, `topic_id`, `token`, `endtime`, `created_at`, `updated_at`) VALUES
-(2, 1, NULL, 150, '2020-03-27 13:47:14', '2020-03-27 13:47:14');
+INSERT INTO `generatelinks` (`id`, `topic_id`, `token`, `endtime`, `startTime`, `expired`, `created_at`, `updated_at`) VALUES
+(2, 1, NULL, 13, '2020-03-28 18:39:00', 1, '2020-03-27 13:47:14', '2020-03-28 13:22:00');
 
 -- --------------------------------------------------------
 
@@ -234,8 +236,8 @@ CREATE TABLE `questions` (
   `c` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `d` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `answer` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code_snippet` text COLLATE utf8mb4_unicode_ci,
-  `answer_exp` text COLLATE utf8mb4_unicode_ci,
+  `code_snippet` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `answer_exp` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `question_img` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -259,7 +261,7 @@ CREATE TABLE `sessions` (
   `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -275,13 +277,13 @@ CREATE TABLE `settings` (
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `favicon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `welcome_txt` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Quick Quiz',
-  `userquiz` tinyint(1) DEFAULT '0',
+  `userquiz` tinyint(1) DEFAULT 0,
   `w_email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency_symbol` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `google_login` tinyint(1) DEFAULT '0',
-  `fb_login` tinyint(1) DEFAULT '0',
-  `gitlab_login` tinyint(1) DEFAULT '0',
+  `google_login` tinyint(1) DEFAULT 0,
+  `fb_login` tinyint(1) DEFAULT 0,
+  `gitlab_login` tinyint(1) DEFAULT 0,
   `right_setting` tinyint(1) DEFAULT NULL,
   `element_setting` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -334,7 +336,7 @@ CREATE TABLE `tests` (
 CREATE TABLE `topics` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `per_q_mark` int(11) NOT NULL,
   `timer` int(11) DEFAULT NULL,
   `show_ans` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -379,7 +381,7 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mobile` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
+  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` char(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

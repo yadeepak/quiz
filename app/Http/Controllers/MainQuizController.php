@@ -20,6 +20,10 @@ class MainQuizController extends Controller
 
     }
 
+    public function quiz_start($id){
+        return $id;    
+    }
+
     /**
      * Show the form for creating a new resource.
      *

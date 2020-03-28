@@ -58,7 +58,8 @@
             @endif
         </div>
         <br>
-        <form class="form login-form" method="POST" action="{{ route('company/login') }}">
+        <!-- <form class="form login-form" method="POST" action="{{ route('company/login') }}"> -->
+        <form class="form login-form" method="POST">
           {{ csrf_field() }}
           <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter Your Email" required autofocus>

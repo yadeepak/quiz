@@ -118,7 +118,8 @@ Route::get('start_quiz/{id}', function($id){
   return view('main_quiz', compact('topic','answers'));
 })->name('start_quiz');
 
-
+ Route::get('mcq-quiz/{token}','FrntendQuizController@index')->name('mcq_home');
+ Route::post('mcq-quiz/register','FrntendQuizController@registerSubmit')->name('register');
 
 
 

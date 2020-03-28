@@ -33,7 +33,7 @@
         <div class="container" >
             <div class="row">
                 <div class="col-md-6">
-                    {{ $ct->name }}
+                © 2019 Dcodtech. All Rights Reserved
                 </div>
                 <div class="col-md-6">
                     @php

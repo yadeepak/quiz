@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2020 at 03:32 PM
+-- Generation Time: Mar 28, 2020 at 09:18 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -152,7 +152,7 @@ CREATE TABLE `generatelinks` (
 --
 
 INSERT INTO `generatelinks` (`id`, `topic_id`, `token`, `endtime`, `startTime`, `expired`, `created_at`, `updated_at`) VALUES
-(2, 1, NULL, 13, '2020-03-28 18:39:00', 1, '2020-03-27 13:47:14', '2020-03-28 13:22:00');
+(2, 1, '1', 13, '2020-03-28 23:40:01', 0, '2020-03-27 13:47:14', '2020-03-28 18:10:01');
 
 -- --------------------------------------------------------
 

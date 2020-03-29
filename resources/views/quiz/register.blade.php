@@ -57,7 +57,43 @@
                 <form action="{{route('register')}}" method="post">
                     {{ csrf_field() }}
                     <input type="text" value={{$tokenid}} name="tokenid"/>
-                    <input type="submit" value="submit" />
+
+                    <div class="form-group{{ $errors->has('student_name') ? ' has-error' : '' }}">
+                    {!! Form::label('student_name', 'Student Name') !!}
+                    <span class="required">*</span>
+                    {!! Form::text('student_name', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Your Name']) !!}
+                    <small class="text-danger">{{ $errors->first('student_name') }}</small>
+                  </div>
+
+                  <div class="form-group{{ $errors->has('mob_number') ? ' has-error' : '' }}">
+                    {!! Form::label('mob_number', 'Mobile Number') !!}
+                    <span class="required">*</span>
+                    {!! Form::text('mob_number', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Your Mobile']) !!}
+                    <small class="text-danger">{{ $errors->first('mob_number') }}</small>
+                  </div>
+
+                  <div class="form-group{{ $errors->has('email_id') ? ' has-error' : '' }}">
+                    {!! Form::label('email_id', 'Email Id') !!}
+                    <span class="required">*</span>
+                    {!! Form::text('email_id', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Your Email']) !!}
+                    <small class="text-danger">{{ $errors->first('email_id') }}</small>
+                  </div>
+
+                  <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                    {!! Form::label('city', 'City') !!}
+                    <span class="required">*</span>
+                    {!! Form::text('city', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Your City']) !!}
+                    <small class="text-danger">{{ $errors->first('city') }}</small>
+                  </div>
+
+                  <div class="form-group{{ $errors->has('stream') ? ' has-error' : '' }}">
+                    {!! Form::label('stream', 'Stream') !!}
+                    <span class="required">*</span>
+                    {!! Form::text('stream', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Your Stream']) !!}
+                    <small class="text-danger">{{ $errors->first('stream') }}</small>
+                  </div>
+
+                    <input type="submit" class="btn btn-wave" value="submit" />
                 </form>
             </div>
         </div>

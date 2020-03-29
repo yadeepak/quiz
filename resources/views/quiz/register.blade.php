@@ -279,20 +279,20 @@ margin-left: 15px;
 <div class="container-fluid">
    
 {!! Form::open(['method' => 'POST', 'action' => 'FrntendQuizController@registerSubmit']) !!}
-<div class="aspNetHidden">
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="d4M0izVA2NHxFoNjGaWuMJdSIQFoMEkAYVAR0XJXJ5CPOVhpv25eqSqXK7FEzlByjWwLRIpBVUAqZpl1Su6o5IDEcMT/R3gBJVHzy2nF2rKBFou+roGkI2GfEhusGTe0e4S0Q+VzjuEQKCKd7qyQ/ySYHchW7Hk19ZGVQa9rjKIHNjcB6Om1AJcLFblGaNG2nhHMxE2O5H63SXjQR1SA7RdXs/ij81tpgLJGg/Oc6APUhe/NUje9NblVoK2hO7ym/D/Uj6eS3mFBaxWG8gR5VtbsSyDOIBoeqAY/f9rEpAw3bn2nPPVrpkZKl4BCCb38xcnIeZq6lzhk3ix5gxXIhFTRNiUmbSAcIyggz37LCau5WkkXoLSRj4fScx5A8kbvHxjJQEURyhxk6jVlC7ijgPnggikFGid+WbuFSNtOiiRmUvJ6RNhMbjXMB0W4ipVUsD5y6mlSz2Lk65G3rlSh6Q==" />
-</div>
-
-<div class="aspNetHidden">
-
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="1B83B3C8" />
-	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="pKGgk3chvUYhZps5KHi2SqI8BrV9FxVM1noOfK3K4CpKQOEn2gx9K+XwnjI8gqMp7pU8v9+SlZKEjAaY9HMF+OhRJFKLPeV1G0uzuVYkmFk+jeYRVfyfSHm4s4ExF9cPbd+VGZLCcKTxtf9D64UfHpnpQLSS8QCirA0bCOwBI2zAteeIcv9iiGnd+HP2MDcxDsBYo7o98anziFczfmDGk3FzAbwxvc4AX3HO5wV21Re92JHY47GO5as3o+c2FArkq/TRXb0DXwa4hx5Zw7S4J0FTNRIn86iBYEDjTmJhBWOMvbDX9M/G9TDQRTkGPqE6Ig8+3EhedwO4jQdjWNuNCQw1bVHxbzyD5NcphlA5q/v5s1Cu81Lh5IpBx+sff72JvMnSreU8YBdCRFhbhQaWCeUl1XCbauLLL+4DigfDDQ3PuNQoXdrEOO7MDZuFFYM95SHiNg6NKtT4hPCxShaon/BxSOyo3uvpZJP9ZdNzTblV6BmZdFtmyTlopCUMdXUJLGHpJfcn0H0T2hOcUXvXRA==" />
-</div>
-
+{{csrf_field()}}
+<input type="hidden" value={{$tokenid}} name="tokenid" />
         <div class="auto-style1">
-       <!--    <a href="http://www.greysoft.co" target="_blank"> <img src="Assets/Images/greysoftnewlogo_blacktxt.png" />     </a>   -->
             <div class="row">
-                <h3 style=" color:slategrey;align-content:center " class="auto-style3">Welcome To DcodeTech!!</h3>
+                <h3 style=" color:slategrey;align-content:center " class="auto-style3">Welcome To DcodeTech</h3>
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 <div class="input-group input-group-icon">
                
                     <input name="name" type="text" id="txtName" placeholder="Full Name" required="" autocomplete="off" />
@@ -372,7 +372,7 @@ margin-left: 15px;
                        </div>
                 </div>
              <br />
-             {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}          
+             {!! Form::submit("submit", ['class' => 'btn btn-wave']) !!}          
                <br />
                 <br />
               </div>

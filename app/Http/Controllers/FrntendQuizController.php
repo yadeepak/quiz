@@ -33,27 +33,39 @@ class FrntendQuizController extends Controller
     public function registerSubmit(Request $request)
     { 
 
-        $request->session()->put('tokenid',$request->tokenid);
-       // return redirect()->route('mcq_home',$request->tokenid);
-
-       $input = $request->all();
-
-       User::create([
-         'name' => $input['name'],
-         'email' => $input['email'],
-         'dob' => $input['dob'],
-         'gender' => $input['gender'],
-         'college' => $input['college'],
-         'experience' => $input['experience'],
-         'appearing' => $input['appearing'],
-         'mobile' => $input['mobile'],
-         'address' => $input['address'],
-         'role' => "U",
-        ]);
-
-       return back()->with('added', 'User has been added');
-
-    }
+       $token = $request->tokenid;
+       if($token){
+         $request->validate([
+             'name' => 'required',
+             'dob' => 'required',
+             'email' => 'required|email',
+             'gender' => 'required',
+             'experience' => 'required',
+             'college' => 'required',
+             'mobile' => 'required',
+             'appearing' => 'required',
+           ]);
+           $input = $request->all();
+           $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
+          
+        $user =   User::firstOrCreate([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'dob' => $input['dob'],
+            'gender' => $input['gender'],
+            'college' => $input['college'],
+            'experience' => $input['experience'],
+            'appearing' => $input['appearing'],
+            'mobile' => $input['mobile'],
+            'address' => $input['address'],
+            'role' => "U",
+            'linkId' => $linkDetails->id,
+           ]);
+           $quizDetails = Topic::find($linkDetails->topic_id)->description;
+             $desc = explode(',',$quizDetails);    
+          return view('quiz.quizhome',['tokenid'=>$token,'data'=>$request->all(),'desc'=>$desc]);
+          }
+        }
 
     public function proceed(Request $request)
     {

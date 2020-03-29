@@ -55,9 +55,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
                             
-                  <li><a href="#" >{{$data['student_name']}}</a></li>
-                  <li><a href="#" >{{$data['email_id']}}</a></li>
-                  <li><a href="#" >{{$data['mob_number']}}</a></li>
+                  <li><a href="#" >{{$data['name']}}</a></li>
+                  <li><a href="#" >{{$data['email']}}</a></li>
+                  <li><a href="#" >{{$data['mobile']}}</a></li>
                          
                         </ul>
                     </div>
@@ -80,7 +80,7 @@
             <form action="{{route('proceed')}}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" value={{$tokenid}} name="tokenid"/>
-                    <input type="hidden" value="{{$data['email_id']}}" name="student_email"/>
+                    <input type="hidden" value="{{$data['email']}}" name="student_email"/>
                     <input type="submit" class="btn btn-wave btn-lg w-25" value="Proceed" style="width: 286px;"/>
                 </form>
          </div>

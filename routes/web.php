@@ -122,7 +122,7 @@ Route::get('start_quiz/{id}', function($id){
 })->name('start_quiz');
 
  Route::get('mcq-quiz/{token}','FrntendQuizController@index')->name('mcq_home');
- Route::post('mcq-quiz/register','FrntendQuizController@registerSubmit')->name('register');
+ Route::post('mcq-quiz/home','FrntendQuizController@registerSubmit')->name('register');
 
 
 

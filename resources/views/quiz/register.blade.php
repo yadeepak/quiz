@@ -52,14 +52,14 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-3">
             <div class="home-main-block">
                 <form action="{{route('register')}}" method="post">
                     {{ csrf_field() }}
-                    <input type="text" value={{$tokenid}} name="tokenid"/>
+                    <input type="hidden" value={{$tokenid}} name="tokenid"/>
 
                     <div class="form-group{{ $errors->has('student_name') ? ' has-error' : '' }}">
-                    {!! Form::label('student_name', 'Student Name') !!}
+                    {!! Form::label('student_name', ' Name') !!}
                     <span class="required">*</span>
                     {!! Form::text('student_name', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Enter Your Name']) !!}
                     <small class="text-danger">{{ $errors->first('student_name') }}</small>
@@ -93,7 +93,7 @@
                     <small class="text-danger">{{ $errors->first('stream') }}</small>
                   </div>
 
-                    <input type="submit" class="btn btn-wave" value="submit" />
+                    <input type="submit" class="btn btn-wave w-25" value="submit" />
                 </form>
             </div>
         </div>

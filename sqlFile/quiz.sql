@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 28, 2020 at 09:18 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 29, 2020 at 05:01 PM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -379,25 +379,31 @@ CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` char(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `appearing` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `experience` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `college` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'NTAUMdy7jeDTbA2x6PYEfl1dCK3RRuxp2DxEC7owpHoS0BAwbyN8oCJaX25M', '2017-12-10 17:16:00', '2019-02-12 15:07:00'),
-(3, 'Jhon Doe', 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46'),
-(4, 'prashant mishra', 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53'),
-(7, 'suraj mishra', 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`, `dob`, `appearing`, `experience`, `college`, `gender`) VALUES
+(1, 'Admin', 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'NTAUMdy7jeDTbA2x6PYEfl1dCK3RRuxp2DxEC7owpHoS0BAwbyN8oCJaX25M', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL),
+(3, 'Jhon Doe', 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46', NULL, NULL, NULL, NULL, NULL),
+(4, 'prashant mishra', 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53', NULL, NULL, NULL, NULL, NULL),
+(7, 'suraj mishra', 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53', NULL, NULL, NULL, NULL, NULL),
+(11, 'Rajesh Kevat', 'rakesh@gmail.com', NULL, '8286297405', 'Room no.45, Vishalgadh soc. Ramnagar B near Ram Mandir', NULL, 'U', NULL, '2020-03-29 14:41:12', '2020-03-29 14:41:12', '1998-10-10', '2', '2', 'novus logic', 'rbtnMale');
 
 --
 -- Indexes for dumped tables
@@ -599,7 +605,7 @@ ALTER TABLE `topic_user`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

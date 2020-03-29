@@ -21,7 +21,6 @@
             <th>Topic</th>
             <th>Marks Got</th>
             <th>Total Marks</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -54,13 +53,13 @@
                 <td>
                   {{$c_que*$topic->per_q_mark}}
                 </td>
-                <td>
+                <!-- <td>
                   <a data-toggle="modal" data-target="#delete{{ $topic->id }}" title="It will delete the answer sheet of this student" href="#" class="btn btn-sm btn-warning">
                     Reset Response
                   </a>
 
                   <div id="delete{{ $topic->id }}" class="delete-modal modal fade" role="dialog">
-                      <!-- Delete Modal -->
+                     
                       <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -81,7 +80,7 @@
                       </div>
                     </div>
 
-                </td>
+                </td> -->
               </tr>
             @endforeach
           @endif

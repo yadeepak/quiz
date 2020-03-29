@@ -12,7 +12,7 @@
 @section('content')
   <div class="margin-bottom">
     <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#createModal">Add Question</button>
-    <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#importQuestions">Import Questions</button>
+    <!-- <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#importQuestions">Import Questions</button> -->
   </div>
   <!-- Create Modal -->
   <div id="createModal" class="modal fade" role="dialog">
@@ -72,11 +72,15 @@
                     {!! Form::textarea('code_snippet', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Code Snippets', 'rows' => '5']) !!}
                     <small class="text-danger">{{ $errors->first('code_snippet') }}</small>
                 </div>
-                <div class="form-group{{ $errors->has('answer_ex') ? ' has-error' : '' }}">
+                <!-- <div class="form-group{{ $errors->has('answer_ex') ? ' has-error' : '' }}">
+                    {!! Form::label('answer_exp', 'Answer Explanation') !!}
+                    {!! Form::textarea('answer_exp', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Answer Explanation', 'rows' => '4']) !!}
+                    <small class="text  <div class="form-group{{ $errors->has('answer_ex') ? ' has-error' : '' }}">
                     {!! Form::label('answer_exp', 'Answer Explanation') !!}
                     {!! Form::textarea('answer_exp', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Answer Explanation', 'rows' => '4']) !!}
                     <small class="text-danger">{{ $errors->first('answer_ex') }}</small>
-                </div>
+                </div>-danger">{{ $errors->first('answer_ex') }}</small>
+                </div> -->
               </div>
               <div class="col-md-12">
                 <div class="extras-block">
@@ -279,11 +283,11 @@
                                 {!! Form::textarea('code_snippet', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Code Snippets', 'rows' => '5']) !!}
                                 <small class="text-danger">{{ $errors->first('code_snippet') }}</small>
                             </div>
-                            <div class="form-group{{ $errors->has('answer_ex') ? ' has-error' : '' }}">
+                            <!-- <div class="form-group{{ $errors->has('answer_ex') ? ' has-error' : '' }}">
                                 {!! Form::label('answer_exp', 'Answer Explanation') !!}
                                 {!! Form::textarea('answer_exp', null, ['class' => 'form-control',  'placeholder' => 'Please Enter Answer Explanation',  'rows' => '4']) !!}
                                 <small class="text-danger">{{ $errors->first('answer_ex') }}</small>
-                            </div>
+                            </div> -->
                           </div>
                           <div class="col-md-12">
                             <div class="extras-block">

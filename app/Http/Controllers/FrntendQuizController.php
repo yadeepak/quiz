@@ -17,6 +17,7 @@ class FrntendQuizController extends Controller
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $signInCheck = $request->session()->has('tokenid');
             if ($linkDetails && $signInCheck) {
+
                 return view('quiz.quizstart');
             } else  if ($linkDetails && !$signInCheck) {
                 return view('quiz.register',['tokenid'=>$token]);
@@ -52,5 +53,18 @@ class FrntendQuizController extends Controller
         }
        return view('quiz.quizhome',['tokenid'=>$token,'data'=>$request->all(),'desc'=>$desc]);
        //return redirect()->route('mcq_home',$request->tokenid);
+    }
+
+    public function proceed(Request $request)
+    {
+        $linkDetails = Generatelinks::where(['token' => $request->tokenid, 'expired' => 0])->first();
+        if (!isset($linkDetails->startTime)) {
+            $now = Carbon::now();
+            $linkDetails->startTime = $now;
+            $linkDetails->save();
+        }
+        $request->session()->put('tokenid',$request->tokenid);
+        $request->session()->put('emailid',$request->student_email);
+        return redirect()->route('mcq_home',$request->tokenid);
     }
 }

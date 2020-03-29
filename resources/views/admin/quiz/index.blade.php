@@ -42,7 +42,7 @@
                   {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
                   <small class="text-danger">{{ $errors->first('timer') }}</small>
                 </div>
-
+<!-- 
                 <label for="married_status">Quiz Price:</label>
                 {{-- <select name="married_status" id="ms" class="form-control">
                   <option value="no">Free</option>
@@ -72,7 +72,7 @@
                  <input type="checkbox" class="toggle-input" name="show_ans" id="toggle2">
                  <label for="toggle2"></label>
                 <br>
-              </div>
+              </div> -->
                 
               </div>
               <div class="col-md-6">
@@ -179,7 +179,7 @@
                             </div>
 
                              
-                           <label for="">Enable Show Answer: </label>
+                           <!-- <label for="">Enable Show Answer: </label>
                            <input {{ $topic->show_ans ==1 ? "checked" : "" }} type="checkbox" class="toggle-input" name="show_ans" id="toggle{{ $topic->id }}">
                            <label for="toggle{{ $topic->id }}"></label>
                           
@@ -194,7 +194,7 @@
                            <input value="{{ $topic->amount }}" name="amount" id="doa" type="text" class="form-control"  placeholder="Please Enter Quiz Price">
                            <small class="text-danger">{{ $errors->first('amount') }}</small>
                           </div>
-                        </div>
+                        </div> -->
                
                              
                             </div>

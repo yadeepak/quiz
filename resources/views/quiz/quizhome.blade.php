@@ -77,7 +77,7 @@
             <h2>Welcome</h2>
             <h2>Start a Test</h2>
             <p>Note : read the notes right side of screen</p>
-            <form action="{{route('proceed')}}" method="post">
+            <form action="{{route('quizstart')}}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" value={{$tokenid}} name="tokenid"/>
                     <input type="hidden" value="{{$data['email']}}" name="student_email"/>

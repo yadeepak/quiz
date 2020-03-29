@@ -110,8 +110,8 @@ Route::get('/admin/profile', function(){
   }
 });
 Route::get('/admin/my_reports', 'MyReportsController@index')->name('my_report');
-Route::get('/admin/my_reports/{my_reports}', 'MyReportsController@show')->name('my_report_show');
 
+Route::get('/admin/my_reports/{my_reports}', 'MyReportsController@show')->name('my_report_show');
 
 
 
@@ -123,7 +123,7 @@ Route::get('start_quiz/{id}', function($id){
 
  Route::get('mcq-quiz/{token}','FrntendQuizController@index')->name('mcq_home');
  Route::post('mcq-quiz/home','FrntendQuizController@registerSubmit')->name('register');
- Route::post('mcq-quiz/proceed','FrntendQuizController@proceed')->name('proceed');
+ Route::post('mcq-proceed', 'FrntendQuizController@proceed')->name('quizstart');
 
 
 

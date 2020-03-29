@@ -6,7 +6,6 @@ use App\Generatelinks;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\User;
 use Session;
 use App\Topic;
 use App\Question;
@@ -90,16 +89,5 @@ class FrntendQuizController extends Controller
         return redirect()->route('mcq_home',$request->tokenid);
     }
 
-    public function proceed(Request $request)
-    {
-        $linkDetails = Generatelinks::where(['token' => $request->tokenid, 'expired' => 0])->first();
-        if (!isset($linkDetails->startTime)) {
-            $now = Carbon::now();
-            $linkDetails->startTime = $now;
-            $linkDetails->save();
-        }
-        $request->session()->put('tokenid',$request->tokenid);
-        $request->session()->put('emailid',$request->student_email);
-        return redirect()->route('mcq_home',$request->tokenid);
-    }
+    
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Generatelinks;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
@@ -11,31 +10,34 @@ use App\Topic;
 use App\Question;
 use App\User;
 use Illuminate\Support\Facades\DB;
-
+use Exception;
 
 class FrntendQuizController extends Controller
 {
     //
     public function index(Request $request, $token = null)
     {
+       // $request->session()->flush();
         if ($token) {
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $signInCheck = $request->session()->has('tokenid');
+            $testStart = $request->session()->has('testStart');
             $emailid = $request->session()->get('emailid');
-            if ($linkDetails && $signInCheck) {
-
+            if ($linkDetails && $signInCheck && !$testStart) {
+                $request->session()->put('isAllowed','2');
+                $request->session()->put('testStart',true);
                 $user = User::where(['email' => $emailid])->first();
                 $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
                 $questions = Question::where('topic_id',$linkDetails->topic_id)->get();    
                 
                 return view('quiz.quizstart',compact('user','topics','questions'));
-            } else  if ($linkDetails && !$signInCheck) {
+            } else  if ($linkDetails && !$testStart ) {
                 return view('quiz.register',['tokenid'=>$token]);
             } else {
-                return abort(404);
+                return abort(404,'You do not have access , please contact support');
             }
         } else {
-            return abort(404);
+            return abort(404 ,'it seems you have enterd wrong url , or it may have been expired');
         }
     }
 
@@ -56,8 +58,9 @@ class FrntendQuizController extends Controller
            ]);
            $input = $request->all();
            $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
-          
-        $user =   User::firstOrCreate([
+           $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
+           if($check ) return Redirect::back()->withErrors(['email id or phone number already exists']);
+         User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'dob' => $input['dob'],
@@ -71,13 +74,17 @@ class FrntendQuizController extends Controller
             'linkId' => $linkDetails->id,
            ]);
            $quizDetails = Topic::find($linkDetails->topic_id)->description;
-             $desc = explode(',',$quizDetails);    
+             $desc = explode(',',$quizDetails); 
+             if(!$request->session()->has('isAllowed')){
+             $request->session()->put('isAllowed','1');  
+             } 
           return view('quiz.quizhome',['tokenid'=>$token,'data'=>$request->all(),'desc'=>$desc]);
           }
         }
 
     public function proceed(Request $request)
-    {
+    {   $isAccessible = $request->session()->get('isAllowed');
+        if($isAccessible !=='1') return response(['allowed'=>false]);
         $linkDetails = Generatelinks::where(['token' => $request->tokenid, 'expired' => 0])->first();
         if (!isset($linkDetails->startTime)) {
             $now = Carbon::now();
@@ -86,8 +93,34 @@ class FrntendQuizController extends Controller
         }
         $request->session()->put('tokenid',$request->tokenid);
         $request->session()->put('emailid',$request->student_email);
-        return redirect()->route('mcq_home',$request->tokenid);
+        return response(['allowed'=>true]);
     }
 
-    
+
+    public function submitTest(Request $request){
+        $signInCheck = $request->session()->has('tokenid');
+       if(!$signInCheck) return abort(404);
+        $token = $request->session()->get('tokenid');
+        $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
+            $emailid = $request->session()->get('emailid');
+            $user = User::where(['email' => $emailid])->first();
+            $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
+            $questions = Question::where('topic_id',$linkDetails->topic_id)->get();  
+            $rightQ = 0;
+            $wrongQ = 0; 
+            for($i=0;$i<count($questions);$i++){
+            if($answer = $request['optradio'.$i]){
+                $correctAns = $questions[$i]['answer'];
+                if($correctAns === strtoupper($answer)){
+                    $rightQ +=1; 
+                }else {
+                    $wrongQ +=1; 
+                }
+            }
+            }
+            $request->session()->flush();//remove all sessions data
+            $unAttemptedCount = count($questions) - ($rightQ + $wrongQ);
+            $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions)];  
+            return view('quiz.finish',compact('data','user'));      
+    }
 }

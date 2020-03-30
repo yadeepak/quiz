@@ -9,28 +9,28 @@
                         ]); ?>
 </script>
 <style>
-   .login-main-text{
-       color:#fff;
-       text-align: center;
-       margin-top: 50%;
-    margin-left: 50%;
-    transform: translate(-50%,-50%);
-   }
-   .main{
-       background: #fff;
-       padding: 69px;
-      
-   }
-
    .countstyle{
     padding:10px;
     border:1px solid;
     text-decoration:none;
     margin-left:5px;
     line-height:3.6;
+    cursor: pointer;
    }
-
-    </style>
+   .active{
+    background: #424242;
+    color: #fff;
+   }
+   .btn-outline-success{
+    width: 200px;
+    border-radius: 3px;
+    background: none;
+    border: 1px solid;
+   }
+   .btn-outline-success:hover{
+color: #fff;
+background: #424242;
+}    </style>
 @endsection
 
 @section('top_bar')
@@ -84,7 +84,7 @@
             <div class="">
             
                 <?php for($i=0;$i<count($questions);$i++){ ?>
-                    <a class="countstyle" style="" id="<?php echo $i; ?>no" onClick="showDiv(<?php echo $i; ?>);" ><?php echo $i+1; ?></a>
+                    <a class="countstyle active{{$i}}" style="" id="<?php echo $i; ?>no" onClick="showDiv(<?php echo $i; ?>);" ><?php echo $i+1; ?></a>
                 <?php
                     if ( (($i+1) % 5) == 0)
                     {
@@ -99,24 +99,28 @@
 
         <div class="col-md-9">
         <div class="main" id="ques">
+            <form action="{{route('submitTest')}}" method="post" >
+            {{csrf_field()}}
             <?php for($i=0;$i<count($questions);$i++){ ?>
-                <div class="quesdiv globalques qustion{{$i}}">
+                <div class="quesdiv globalques qustion{{$i}}" style="display: none">
                 <h4>Question No {{$i+1}} </h4><br>
                 <p>{{$questions[$i]->question}}</p>
                 <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}">{{$questions[$i]->a}}</label>
+                    <label><input type="radio" name="optradio{{$i}}" value="a">{{$questions[$i]->a}}</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}">{{$questions[$i]->b}}</label>
+                    <label><input type="radio" name="optradio{{$i}}" value="b">{{$questions[$i]->b}}</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}">{{$questions[$i]->c}}</label>
+                    <label><input type="radio" name="optradio{{$i}}" value="c">{{$questions[$i]->c}}</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}">{{$questions[$i]->d}}</label>
+                    <label><input type="radio" name="optradio{{$i}}" value="d">{{$questions[$i]->d}}</label>
                 </div>
                 </div>
             <?php } ?>
+            <button type="submit" class="btn btn-outline-success btn-lg pull-right submitForm" style="width: 200px;">Submit</button>
+            </form>
         </div>
         </div>
     </div>
@@ -126,13 +130,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-    alert(0);
     $('.globalques').hide();
     $('.qustion0').show();
+    $('.active0').addClass('active');
+
+    $('.submitForm')
 })
 function showDiv(id){
+    $('.countstyle').removeClass('active');
     $('.globalques').hide();
-    $('.qustion'+id).show();
+    $('.active'+id).addClass('active');
+    $('.qustion'+id).fadeIn();
 
 
     
@@ -168,4 +176,68 @@ function showDiv(id){
 @endsection
 
 @section('scripts')
+<script>
+
+    document.onkeydown = function() {   
+        console.log(event);
+         
+    switch (event.keyCode) { 
+        case 116 : //F5 button
+            event.returnValue = false;
+            event.keyCode = 0;
+            alert('If you refresh the page your data will be submitted.');
+            return false; 
+        case 82 : //R button
+            if (event.ctrlKey) { 
+                event.returnValue = false; 
+                event.keyCode = 0;  
+            alert('If you refresh the page your data will be submitted.');
+                return false; 
+            } 
+            case 123 : //f12 button
+                event.returnValue = false; 
+                event.keyCode = 0;  
+                return false; 
+            
+    }
+}
+window.onload = function() {
+    document.addEventListener("contextmenu", function(e){
+      e.preventDefault();
+    }, false);
+    document.addEventListener("keydown", function(e) {
+    //document.onkeydown = function(e) {
+      // "I" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+        disabledEvent(e);
+      }
+      // "J" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+        disabledEvent(e);
+      }
+      // "S" key + macOS
+      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+        disabledEvent(e);
+      }
+      // "U" key
+      if (e.ctrlKey && e.keyCode == 85) {
+        disabledEvent(e);
+      }
+      // "F12" key
+      if (event.keyCode == 123) {
+        disabledEvent(e);
+      }
+    }, false);
+    function disabledEvent(e){
+      if (e.stopPropagation){
+        e.stopPropagation();
+      } else if (window.event){
+        window.event.cancelBubble = true;
+      }
+      e.preventDefault();
+      return false;
+    }
+  };
+
+    </script>
 @endsection

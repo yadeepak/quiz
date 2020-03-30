@@ -124,6 +124,7 @@ Route::get('start_quiz/{id}', function($id){
  Route::get('mcq-quiz/{token}','FrntendQuizController@index')->name('mcq_home');
  Route::post('mcq-quiz/home','FrntendQuizController@registerSubmit')->name('register');
  Route::post('mcq-proceed', 'FrntendQuizController@proceed')->name('quizstart');
+ Route::post('mcq-quiz/submit', 'FrntendQuizController@submitTest')->name('submitTest');
 
 
 

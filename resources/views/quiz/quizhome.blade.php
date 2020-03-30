@@ -18,7 +18,7 @@
    }
    .main{
        background: #fff;
-       padding: 69px;
+       padding: 82px;
       
    }
 
@@ -77,11 +77,11 @@
             <h2>Welcome</h2>
             <h2>Start a Test</h2>
             <p>Note : read the notes right side of screen</p>
-            <form action="{{route('quizstart')}}" method="post">
+            <form action="{{route('quizstart')}}" method="post" class="onsubmit">
                     {{ csrf_field() }}
                     <input type="hidden" value={{$tokenid}} name="tokenid"/>
                     <input type="hidden" value="{{$data['email']}}" name="student_email"/>
-                    <input type="submit" class="btn btn-wave btn-lg w-25" value="Proceed" style="width: 286px;"/>
+                    <input type="submit" class="btn btn-wave btn-lg w-25" value="Proceed" style="width: 286px;" />
                 </form>
          </div>
       </div>
@@ -117,4 +117,23 @@
 @endsection
 
 @section('scripts')
+<script>
+$('.onsubmit').submit(function(e){
+    e.preventDefault();
+    let data = $(this).serialize();
+    $.ajax({
+        url:"{{route('quizstart')}}",
+        type:'post',
+        data:data,
+        success:function(data){
+            if(data.allowed){
+                var windowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no";
+window.open("{{route('mcq_home',$tokenid)}}", "Start Test", windowFeatures);
+            }
+         
+        }
+
+    });
+});
+</script>
 @endsection

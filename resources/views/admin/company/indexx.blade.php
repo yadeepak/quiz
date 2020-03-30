@@ -26,11 +26,11 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
-                  {!! Form::label('company_name', 'Company Name') !!}
+                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                  {!! Form::label('name', 'Company Name') !!}
                   <span class="required">*</span>
-                  {!! Form::text('company_name', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Name', 'required' => 'required']) !!}
-                  <small class="text-danger">{{ $errors->first('company_name') }}</small>
+                  {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Name', 'required' => 'required']) !!}
+                  <small class="text-danger">{{ $errors->first('name') }}</small>
                 </div>
                 <div class="form-group{{ $errors->has('company_website') ? ' has-error' : '' }}">
                   {!! Form::label('company_website', 'Company Website') !!}
@@ -38,16 +38,22 @@
                   {!! Form::text('company_website', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Website', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('company_website') }}</small>
                 </div>
+                <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+                  {!! Form::label('mobile', 'Company Mobile Number') !!}
+                  <span class="required">*</span>
+                  {!! Form::text('mobile', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Mobile Number', 'required' => 'required']) !!}
+                  <small class="text-danger">{{ $errors->first('mobile') }}</small>
+                </div>
                 <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                   {!! Form::label('city', 'City') !!}
                   {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Please Enter City']) !!}
                   <small class="text-danger">{{ $errors->first('city') }}</small>
                 </div>
 
-                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                  {!! Form::label('username', 'Username') !!}
-                  {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Username']) !!}
-                  <small class="text-danger">{{ $errors->first('username') }}</small>
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                  {!! Form::label('email', 'Email ID') !!}
+                  {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID']) !!}
+                  <small class="text-danger">{{ $errors->first('email') }}</small>
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -122,8 +128,7 @@
             <th>Company Name</th>
             <th>Address</th>
             <th>City</th>
-            <th>User Name</th>
-            <th>Password</th>
+            <th>Email ID</th>
             <th>Website</th>
             <th>Logo</th>
             <th>Actions</th>
@@ -138,11 +143,10 @@
                   {{$i}}
                   @php($i++)
                 </td>
-                <td>{{$comp->company_name}}</td>
+                <td>{{$comp->name}}</td>
                 <td title="{{$comp->address}}">{{str_limit($comp->address, 50)}}</td>
                 <td>{{$comp->city}}</td>
-                <td>{{$comp->username}}</td>
-                <td>{{str_limit($comp->password, 10)}}</td>
+                <td>{{$comp->email}}</td>
                 <td>{{$comp->company_website}}</td>
                 <td><img src="{{asset('/images/company/'.$comp->company_img)}}" width="100px" height="100px" class="img-responsive" alt="image"></td>
                 <td>
@@ -185,17 +189,23 @@
                       <div class="modal-body">
                         <div class="row">
                           <div class="col-md-6">
-                            <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
-                              {!! Form::label('company_name', 'Company Name') !!}
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                              {!! Form::label('name', 'Company Name') !!}
                               <span class="required">*</span>
-                              {!! Form::text('company_name', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Name', 'required' => 'required']) !!}
-                              <small class="text-danger">{{ $errors->first('company_name') }}</small>
+                              {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Name', 'required' => 'required']) !!}
+                              <small class="text-danger">{{ $errors->first('name') }}</small>
                             </div>
                             <div class="form-group{{ $errors->has('company_website') ? ' has-error' : '' }}">
                               {!! Form::label('company_website', 'Company Website') !!}
                               <span class="required">*</span>
                               {!! Form::text('company_website', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Website', 'required' => 'required']) !!}
                               <small class="text-danger">{{ $errors->first('company_website') }}</small>
+                            </div>
+                            <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+                              {!! Form::label('mobile', 'Company Mobile Number') !!}
+                              <span class="required">*</span>
+                              {!! Form::text('mobile', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Mobile Number', 'required' => 'required']) !!}
+                              <small class="text-danger">{{ $errors->first('mobile') }}</small>
                             </div>
                             <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                               {!! Form::label('city', 'City') !!}
@@ -204,9 +214,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                              {!! Form::label('username', 'User Name') !!}
-                              {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Username']) !!}
-                              <small class="text-danger">{{ $errors->first('username') }}</small>
+                              {!! Form::label('email', 'Email ID') !!}
+                              {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID']) !!}
+                              <small class="text-danger">{{ $errors->first('email') }}</small>
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">

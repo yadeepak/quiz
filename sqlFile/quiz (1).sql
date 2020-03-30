@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 29, 2020 at 06:55 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 30, 2020 at 08:47 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,7 +59,7 @@ CREATE TABLE `companies` (
   `company_website` varchar(191) NOT NULL,
   `username` varchar(191) NOT NULL,
   `password` varchar(191) NOT NULL,
-  `address` text DEFAULT NULL,
+  `address` text,
   `city` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -139,10 +139,10 @@ CREATE TABLE `faq` (
 CREATE TABLE `generatelinks` (
   `id` int(11) NOT NULL,
   `topic_id` int(11) DEFAULT NULL,
-  `token` text DEFAULT NULL,
+  `token` text,
   `endtime` int(11) DEFAULT NULL,
   `startTime` datetime DEFAULT NULL,
-  `expired` tinyint(1) NOT NULL DEFAULT 0,
+  `expired` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -236,8 +236,8 @@ CREATE TABLE `questions` (
   `c` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `d` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `answer` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code_snippet` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `answer_exp` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code_snippet` text COLLATE utf8mb4_unicode_ci,
+  `answer_exp` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `question_img` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -261,7 +261,7 @@ CREATE TABLE `sessions` (
   `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -277,13 +277,13 @@ CREATE TABLE `settings` (
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `favicon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `welcome_txt` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Quick Quiz',
-  `userquiz` tinyint(1) DEFAULT 0,
+  `userquiz` tinyint(1) DEFAULT '0',
   `w_email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency_symbol` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `google_login` tinyint(1) DEFAULT 0,
-  `fb_login` tinyint(1) DEFAULT 0,
-  `gitlab_login` tinyint(1) DEFAULT 0,
+  `google_login` tinyint(1) DEFAULT '0',
+  `fb_login` tinyint(1) DEFAULT '0',
+  `gitlab_login` tinyint(1) DEFAULT '0',
   `right_setting` tinyint(1) DEFAULT NULL,
   `element_setting` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -336,7 +336,7 @@ CREATE TABLE `tests` (
 CREATE TABLE `topics` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `per_q_mark` int(11) NOT NULL,
   `timer` int(11) DEFAULT NULL,
   `show_ans` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -378,10 +378,11 @@ CREATE TABLE `topic_user` (
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_website` text COLLATE utf8mb4_unicode_ci,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` char(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -392,20 +393,23 @@ CREATE TABLE `users` (
   `experience` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `college` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `linkId` int(255) NOT NULL
+  `linkId` int(255) DEFAULT NULL,
+  `company_img` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`, `dob`, `appearing`, `experience`, `college`, `gender`, `linkId`) VALUES
-(1, 'Admin', 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'NTAUMdy7jeDTbA2x6PYEfl1dCK3RRuxp2DxEC7owpHoS0BAwbyN8oCJaX25M', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL, 0),
-(3, 'Jhon Doe', 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46', NULL, NULL, NULL, NULL, NULL, 0),
-(4, 'prashant mishra', 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53', NULL, NULL, NULL, NULL, NULL, 0),
-(7, 'suraj mishra', 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53', NULL, NULL, NULL, NULL, NULL, 0),
-(11, 'Rajesh Kevat', 'rakesh@gmail.com', NULL, '8286297405', 'Room no.45, Vishalgadh soc. Ramnagar B near Ram Mandir', NULL, 'U', NULL, '2020-03-29 14:41:12', '2020-03-29 14:41:12', '1998-10-10', '2', '2', 'novus logic', 'rbtnMale', 0),
-(18, 'Deepak yadav', 'deep@gmail.com', NULL, '0845206242', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-29 16:34:52', '2020-03-29 16:34:52', '1999-03-12', '0', '0', 'asdas', 'rbtnMale', 2);
+INSERT INTO `users` (`id`, `name`, `company_website`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`, `dob`, `appearing`, `experience`, `college`, `gender`, `linkId`, `company_img`) VALUES
+(1, 'Admin', NULL, 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'NTAUMdy7jeDTbA2x6PYEfl1dCK3RRuxp2DxEC7owpHoS0BAwbyN8oCJaX25M', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(3, 'Jhon Doe', NULL, 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46', NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(4, 'prashant mishra', NULL, 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53', NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(7, 'suraj mishra', NULL, 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53', NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(11, 'Rajesh Kevat', NULL, 'rakesh@gmail.com', NULL, '8286297405', 'Room no.45, Vishalgadh soc. Ramnagar B near Ram Mandir', NULL, 'U', NULL, '2020-03-29 14:41:12', '2020-03-29 14:41:12', '1998-10-10', '2', '2', 'novus logic', 'rbtnMale', 0, NULL),
+(18, 'Deepak yadav', NULL, 'deep@gmail.com', NULL, '0845206242', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-29 16:34:52', '2020-03-29 16:34:52', '1999-03-12', '0', '0', 'asdas', 'rbtnMale', 2, NULL),
+(23, 'Mitesh Patel', NULL, 'miteshp1505@gmail.com', NULL, '8521478878', '1234,abc', NULL, 'U', NULL, '2020-03-30 16:56:05', '2020-03-30 16:56:05', '2000-02-22', '1', '2', 'abcd', 'on', 2, NULL),
+(24, 'Testing', 'abc.com', 'test123@gmail.com', '$2y$10$plhC.ZamnxRck/kldo20wuZu.hGGAo7mfVCWX8Un4SkXhxj9Wrh12', '8547896872', 'sfsdfsdfsd', 'Surat', 'C', NULL, '2020-03-30 18:16:53', '2020-03-30 18:16:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -607,7 +611,7 @@ ALTER TABLE `topic_user`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

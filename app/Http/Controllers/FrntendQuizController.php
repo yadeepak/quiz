@@ -6,9 +6,13 @@ use App\Generatelinks;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\User;
 use Session;
 use App\Topic;
+use App\Question;
+use App\User;
+use Illuminate\Support\Facades\DB;
+
+
 class FrntendQuizController extends Controller
 {
     //
@@ -17,9 +21,14 @@ class FrntendQuizController extends Controller
         if ($token) {
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $signInCheck = $request->session()->has('tokenid');
+            $emailid = $request->session()->get('emailid');
             if ($linkDetails && $signInCheck) {
 
-                return view('quiz.quizstart');
+                $user = User::where(['email' => $emailid])->first();
+                $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
+                $questions = Question::where('topic_id',$linkDetails->topic_id)->get();    
+                
+                return view('quiz.quizstart',compact('user','topics','questions'));
             } else  if ($linkDetails && !$signInCheck) {
                 return view('quiz.register',['tokenid'=>$token]);
             } else {
@@ -79,4 +88,6 @@ class FrntendQuizController extends Controller
         $request->session()->put('emailid',$request->student_email);
         return redirect()->route('mcq_home',$request->tokenid);
     }
+
+    
 }

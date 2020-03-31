@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Topic;
 use App\Company;
 use App\Answer;
+use App\User;
 class CompanyController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $company = Company::all();
+        $company = User::where('role','C')->get();
         return view('admin.company.indexx', compact('company'));
     }
 
@@ -37,11 +38,19 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+
+      // $request->validate([
+      //   'name' => 'required',
+      //   'email' => 'required|email',
+      //   'company_website' => 'required',
+      //   'mobile' => 'required',
+      // ]);
+
        $input = $request->all();
    
         $password =  bcrypt($request->password);
         $input['password'] = $password;
-     
+        $input['role'] = 'C';
       if ($file = $request->file('company_img')) {
 
         $name = 'company_'.time().$file->getClientOriginalName();
@@ -51,8 +60,13 @@ class CompanyController extends Controller
     }
 
        // $input = $request->all();
-           $quiz = Company::create($input);
-           
+       $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
+        if($check){ 
+         //return Redirect::back()->withErrors(['email id or phone number already exists']);
+          return 'abcd';
+        }else{
+          $quiz = User::create($input);
+        }   
        // $input['show_ans'] = $request->show_ans;
         //return Topic::create($input);
         return back()->with('added', 'Company has been added');
@@ -91,14 +105,15 @@ class CompanyController extends Controller
     {
        
 
-          $topic = Company::findOrFail($id);
+          $topic = User::findOrFail($id);
           
           $topic->company_website = $request->company_website;
-          $topic->username = $request->username;
+          $topic->email = $request->email;
+          $topic->mobile = $request->mobile;
           $topic->password = $request->password;
           $topic->city = $request->city;
           $topic->address = $request->address;
-          $topic->company_name = $request->company_name;
+          $topic->name = $request->name;
          // $topic->company_img = $request->company_img;
 
         
@@ -134,7 +149,7 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company = Company::findOrFail($id);
+        $company = User::findOrFail($id);
         $company->delete();
         return back()->with('deleted', 'Company has been deleted');
     }

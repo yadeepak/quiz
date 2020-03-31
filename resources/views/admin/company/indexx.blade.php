@@ -219,11 +219,20 @@
                               <small class="text-danger">{{ $errors->first('email') }}</small>
                             </div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                              {!! Form::label('password', 'Password') !!}
-                              {!! Form::text('password', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Password']) !!}
-                              <small class="text-danger">{{ $errors->first('password') }}</small>
-                            </div>
+                            <label for="">Change Password: </label>
+                              
+                               <input type="radio" value="1" name="changepass" id="ch1">&nbsp;Yes
+                               <input type="radio" value="0" name="changepass" checked id="ch2">&nbsp;No
+                               <br>
+                              <div id="pass" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                {!! Form::label('password', 'Password') !!}
+                                <span class="required">*</span>
+                               
+                                <input class="form-control" type="password" value="" placeholder="Enter new password" name="password">
+                                <small class="text-danger">{{ $errors->first('password') }}</small>
+                              </div>
+
+                            
 
                              
                        <!--    <label for="">Enable Show Answer: </label>
@@ -253,7 +262,12 @@
                               <small class="text-danger">{{ $errors->first('description') }}</small>
                             </div>
 
-                            <div class="form-group{{ $errors->has('company_img') ? ' has-error' : '' }}">
+                            <label for="">Change Image: </label>
+                              
+                              <input type="radio" value="1" name="changeimg" id="chimg1">&nbsp;Yes
+                              <input type="radio" value="0" name="changeimg" checked id="chimg2">&nbsp;No
+                              <br>
+                            <div id="chimg" class="form-group{{ $errors->has('company_img') ? ' has-error' : '' }}">
                                {!! Form::label('company_img', 'Update Image To Company') !!}
                                {!! Form::file('company_img') !!}
                               <small class="text-danger">{{ $errors->first('company_img') }}</small>
@@ -294,6 +308,23 @@
  
                   
                     $(document).ready(function(){
+                      $('#pass').css("display","none");
+                        $('#ch1').change(function(){
+                          $('#pass').css("display","block");
+                        });
+
+                        $('#ch2').change(function(){
+                          $('#pass').css("display","none");
+                        });
+
+                        $('#chimg').css("display","none");
+                        $('#chimg1').change(function(){
+                          $('#chimg').css("display","block");
+                        });
+
+                        $('#chimg2').change(function(){
+                          $('#chimg').css("display","none");
+                        }); 
 
                         $('.quizfp').change(function(){
 

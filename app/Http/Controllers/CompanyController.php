@@ -110,13 +110,17 @@ class CompanyController extends Controller
           $topic->company_website = $request->company_website;
           $topic->email = $request->email;
           $topic->mobile = $request->mobile;
-          $topic->password = $request->password;
+
+          if($request->changepass == '1'){
+          $topic->password =  bcrypt($request->password);
+          }
+
           $topic->city = $request->city;
           $topic->address = $request->address;
           $topic->name = $request->name;
          // $topic->company_img = $request->company_img;
 
-        
+          if($request->changeimg == '1'){
           if ($file = $request->file('company_img')) {
               
             $name = 'company_'.time().$file->getClientOriginalName();
@@ -130,6 +134,7 @@ class CompanyController extends Controller
            
           //  var_dump($name); exit();
 
+          }
         }
 
 

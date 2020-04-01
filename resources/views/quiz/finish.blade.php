@@ -30,7 +30,29 @@
    .btn-outline-success:hover{
 color: #fff;
 background: #424242;
-}    </style>
+}  
+
+#gree {
+
+background-color: #7CB342;    
+}
+
+#re {
+
+    background-color: #e53935;
+}
+
+#warn {
+
+    background-color : #F4511E;
+}
+
+.cent {
+
+    text-align: center;
+}
+
+  </style>
 @endsection
 
 @section('top_bar')
@@ -45,7 +67,7 @@ background: #424242;
       </div>
     </div> -->
     <div class="nav-bar">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="navbar-header">
@@ -77,16 +99,51 @@ background: #424242;
 @endsection
 
 @section('content')
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <div class="container">
-    <div class="row">
-        <h1>Total Questions - {{$data['total']}}</h1>
-        <h1>Right Questions - {{$data['rightQ']}}</h1>
-        <h1>Wrong Questions - {{$data['wrongQ']}}</h1>
-        <h1>UnAttempted Questions - {{$data['unAttemptedCount']}}</h1>
-          </div>
+    
+      
+<h4>Your Test Submitted Succesfully : </h4>
+<div class="row">
+    <div class="col-md-6">
+<div class="card text-white bg-primary mb-3">
+  <div class="card-header cent">Total Questions</div>
+  <div class="card-body">
+    <h3 class="card-title cent">Total Questions - {{$data['total']}}</h3>
+  </div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card text-white mb-3" id="gree">
+  <div class="card-header cent" class="tex"><font color="white">Right Questions</font></div>
+  <div class="card-body">
+    <h3 class="card-title cent"><font color="white">Right Questions - {{$data['rightQ']}}</font></h3>
+  </div>
+</div>
 </div>
 
-
+ 
+  <div class="col-md-6">
+<div class="card text-white mb-3" id="re">
+  <div class="card-header cent"><font color="white">Wrong Questions</font></div>
+  <div class="card-body">
+    <h3 class="card-title cent" ><font color="white">Wrong Questions - {{$data['wrongQ']}}</font></h3>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card text-white mb-3" id="warn">
+  <div class="card-header cent"><font color="white">UnAttempted Questions</font></div>
+  <div class="card-body">
+    <h3 class="card-title cent"><font color="white">UnAttempted Questions - {{$data['unAttemptedCount']}}</font></h3>
+</div>
+</div>
+</div>
+</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){

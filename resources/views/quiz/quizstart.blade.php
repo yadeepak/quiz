@@ -30,7 +30,24 @@
    .btn-outline-success:hover{
 color: #fff;
 background: #424242;
-}    </style>
+}  
+
+.questions {
+
+background-color: #B2EBF2;
+
+}
+
+.quesno {
+
+    color: #03A9F4; 
+}
+.mainque {
+
+    color: #29B6F6;
+    font-size: 16px;
+}
+  </style>
 @endsection
 
 @section('top_bar')
@@ -77,7 +94,8 @@ background: #424242;
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container questions">
+<br>
     <div class="row">
         <div class="col-md-3" style="border-right:1px solid;">
         
@@ -99,28 +117,37 @@ background: #424242;
 
         <div class="col-md-9">
         <div class="main" id="ques">
+        
             <form action="{{route('submitTest')}}" method="post" >
             {{csrf_field()}}
             <?php for($i=0;$i<count($questions);$i++){ ?>
                 <div class="quesdiv globalques qustion{{$i}}" style="display: none">
-                <h4>Question No {{$i+1}} </h4><br>
-                <p>{{$questions[$i]->question}}</p>
-                <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}" value="a">{{$questions[$i]->a}}</label>
+                <h4 class="quesno"><b>Question No .{{$i+1}} </b></h4><br>
+                <p class="mainque"><b>{{$questions[$i]->question}}</b></p>
+                <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="a">
+                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->a}}</label>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}" value="b">{{$questions[$i]->b}}</label>
+                <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="b">
+                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->b}}</label>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}" value="c">{{$questions[$i]->c}}</label>
+                <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="c">
+                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->c}}</label>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio{{$i}}" value="d">{{$questions[$i]->d}}</label>
+                <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="d">
+                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->d}}</label>
                 </div>
                 </div>
             <?php } ?>
-            <button type="submit" class="btn btn-outline-success btn-lg pull-right submitForm" style="width: 200px;">Submit</button>
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg pull-center submitForm" style="width: 200px;">Submit</button>
+            
+            <br></br><br>
             </form>
+           
         </div>
         </div>
     </div>
@@ -178,7 +205,7 @@ function showDiv(id){
 @section('scripts')
 <script>
 
-    document.onkeydown = function() {   
+document.onkeydown = function() {   
         console.log(event);
          
     switch (event.keyCode) { 
@@ -201,6 +228,9 @@ function showDiv(id){
             
     }
 }
+
+
+  
 window.onload = function() {
     document.addEventListener("contextmenu", function(e){
       e.preventDefault();

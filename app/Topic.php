@@ -17,10 +17,11 @@ class Topic extends Model
     public function answer(){
       return $this->hasOne('App\Answer');
     }
+    public function result() {
+      return $this->hasMany('App\Result','topic_id');
+    } 
     
     public function user() {
-      return $this->belongsToMany('App\User','topic_user')
-         ->withPivot('amount','transaction_id', 'status')
-        ->withTimestamps();
+      return $this->belongsToMany('App\User','topic_user');
     }
 }

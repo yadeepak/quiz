@@ -53,6 +53,10 @@ class AllReportController extends Controller
     public function show($id)
     {
         $topic = Topic::findOrFail($id);
+        $results = $topic->result;
+        $topic->load(['result.user' => function ($q) use (&$users) {
+            $users = $q->get();
+        }]);
         $answers = Answer::where('topic_id', $topic->id)->get();
         $students = User::where('id', '!=', Auth::id())->get();
         $c_que = Question::where('topic_id', $id)->count();
@@ -69,7 +73,7 @@ class AllReportController extends Controller
         $filtStudents = $filtStudents->unique();
         $filtStudents = $filtStudents->flatten();
 
-        return view('admin.all_reports.show', compact('filtStudents', 'answers', 'c_que', 'topic'));
+        return view('admin.all_reports.show', compact('results', 'users', 'c_que', 'topic'));
     }
 
     /**

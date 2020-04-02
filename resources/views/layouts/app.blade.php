@@ -13,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{$setting->welcome_txt}}</title>
+    <title>Dcodtech</title>
 
     <!-- Styles -->
     @yield('head')

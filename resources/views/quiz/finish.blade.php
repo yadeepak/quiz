@@ -50,6 +50,11 @@ background-color: #7CB342;
 .cent {
 
     text-align: center;
+  font-size: 27px;
+
+}
+h3.cent{
+  font-size: 65px;
 }
 
   </style>
@@ -100,45 +105,43 @@ background-color: #7CB342;
 
 @section('content')
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <div class="container">
     
       
-<h4>Your Test Submitted Succesfully : </h4>
+<h1 style="padding:30px 0px;" class="text-center">Your Test Submitted Succesfully.</h1>
 <div class="row">
     <div class="col-md-6">
-<div class="card text-white bg-primary mb-3">
+<div class="card text-white bg-primary mb-3" style="padding: 40px;background: #007ad5;">
   <div class="card-header cent">Total Questions</div>
   <div class="card-body">
-    <h3 class="card-title cent">Total Questions - {{$data['total']}}</h3>
+    <h3 class="card-title cent"> {{$data['total']}}</h3>
   </div>
 </div>
 </div>
 <div class="col-md-6">
-<div class="card text-white mb-3" id="gree">
+<div class="card text-white mb-3" id="gree" style="padding: 40px;">
   <div class="card-header cent" class="tex"><font color="white">Right Questions</font></div>
   <div class="card-body">
-    <h3 class="card-title cent"><font color="white">Right Questions - {{$data['rightQ']}}</font></h3>
+    <h3 class="card-title cent"><font color="white">{{$data['rightQ']}}</font></h3>
   </div>
 </div>
 </div>
 
  
   <div class="col-md-6">
-<div class="card text-white mb-3" id="re">
+<div class="card text-white mb-3" id="re" style="padding: 40px;">
   <div class="card-header cent"><font color="white">Wrong Questions</font></div>
   <div class="card-body">
-    <h3 class="card-title cent" ><font color="white">Wrong Questions - {{$data['wrongQ']}}</font></h3>
+    <h3 class="card-title cent" ><font color="white">{{$data['wrongQ']}}</font></h3>
 </div>
 </div>
 </div>
 <div class="col-md-6">
-<div class="card text-white mb-3" id="warn">
+<div class="card text-white mb-3" id="warn" style="padding: 40px;">
   <div class="card-header cent"><font color="white">UnAttempted Questions</font></div>
   <div class="card-body">
-    <h3 class="card-title cent"><font color="white">UnAttempted Questions - {{$data['unAttemptedCount']}}</font></h3>
+    <h3 class="card-title cent"><font color="white"> {{$data['unAttemptedCount']}}</font></h3>
 </div>
 </div>
 </div>

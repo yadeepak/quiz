@@ -125,20 +125,20 @@ background-color: #B2EBF2;
                 <h4 class="quesno"><b>Question No .{{$i+1}} </b></h4><br>
                 <p class="mainque"><b>{{$questions[$i]->question}}</b></p>
                 <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="a">
-                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->a}}</label>
+                <input type="radio" class="custom-control-input" id="a" name="optradio{{$i}}" value="a">
+                <label class="custom-control-label" for="a">{{$questions[$i]->a}}</label>
                 </div>
                 <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="b">
-                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->b}}</label>
+                <input type="radio" class="custom-control-input" id="b" name="optradio{{$i}}" value="b">
+                <label class="custom-control-label" for="b">{{$questions[$i]->b}}</label>
                 </div>
                 <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="c">
-                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->c}}</label>
+                <input type="radio" class="custom-control-input" id="c" name="optradio{{$i}}" value="c">
+                <label class="custom-control-label" for="c">{{$questions[$i]->c}}</label>
                 </div>
                 <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" name="optradio{{$i}}" value="d">
-                <label class="custom-control-label" for="defaultChecked2">{{$questions[$i]->d}}</label>
+                <input type="radio" class="custom-control-input" id="d" name="optradio{{$i}}" value="d">
+                <label class="custom-control-label" for="d">{{$questions[$i]->d}}</label>
                 </div>
                 </div>
             <?php } ?>

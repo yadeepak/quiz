@@ -52,7 +52,7 @@ class FrntendQuizController extends Controller
              'gender' => 'required',
              'experience' => 'required',
              'college' => 'required',
-             'mobile' => 'required',
+             'mobile' => 'required|max:10|min:10',
              'appearing' => 'required',
            ]);
            $input = $request->all();

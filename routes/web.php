@@ -67,12 +67,30 @@ Route::group(['middleware'=> 'isadmin'], function(){
   Route::delete('delete/sheet/quiz/{id}','TopicController@deleteperquizsheet')->name('del.per.quiz.sheet');
 
   Route::get('/admin', function(){
+    $role = Auth::user()->role;
+    if($role === 'C'){
+    $quizs = Topic::where('created_by',Auth::id())->get();
+    $user = 0;
+    $question = 0;
+    if($quizs){
+      foreach($quizs as $quiz){
+    $user += $quiz->student->count();
+    $quiz->load(['generatedLink.student' => function ($q) use (&$user) {
+      $user = $q->count();
+      }]);
+    $question +=$quiz->question->count();
 
+      }
+    }
+    $user_latest = '';
+    $quiz = $quizs->count();
+    }else{
     $user = User::where('role', '!=', 'A')->count();
+    
     $question = Question::count();
     $quiz = Topic::count();
     $user_latest = User::where('id', '!=', Auth::id())->orderBy('created_at', 'desc')->get();
-
+    }
     return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest'));
     //remove the answer line comment
     // return view('admin.dashboard', compact('user', 'question', 'answer', 'quiz', 'user_latest'));

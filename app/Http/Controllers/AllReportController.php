@@ -18,9 +18,31 @@ class AllReportController extends Controller
      */
     public function index()
     {
+       
+        if(Auth::user()->role === 'C'){
+            $topics = Topic::where('created_by',Auth::id())->get();
+            $topics->load(['question' => function ($q) use (&$questions) {
+                $questions = $q->get();
+            }]);
+            if($topics){
+                $students = array();
+          $topics->load(['generatedLink.student'=>function($q) use (&$stu){
+               $stu = $q->count();}]);
+            array_push($students,$stu);
+          }
+        
+    } else {
         $topics = Topic::all();
         $questions = Question::all();
-        return view('admin.all_reports.index', compact('topics', 'questions'));
+        $students = array();
+         $topics->load(['student' => function ($q) use (&$student) {
+            $student = $q->count();
+        }]);
+        array_push($students,$student);
+       // dd($students);
+    }
+        
+        return view('admin.all_reports.index', compact('topics', 'questions','students'));
     }
 
     /**

@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function is_admin() {
       if (Auth::check()) {
-        if (Auth::user()->role == 'A') {
+        if (Auth::user()->role == 'A' || Auth::user()->role == 'C') {
           return true;
         }
         return false;

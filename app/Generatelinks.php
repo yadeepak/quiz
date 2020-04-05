@@ -23,4 +23,9 @@ class Generatelinks extends Model
          ->withPivot('amount','transaction_id', 'status')
         ->withTimestamps();
     }
+
+    public function student(){
+      return $this->hasMany('App\User','linkId','id');
+    }
+
 }

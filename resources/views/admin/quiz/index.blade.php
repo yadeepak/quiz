@@ -104,6 +104,7 @@
             <th>Description</th>
             <th>Per Question Mark</th>
             <th>Time</th>
+            <th>Created By</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -120,6 +121,7 @@
                 <td title="{{$topic->description}}">{{str_limit($topic->description, 50)}}</td>
                 <td>{{$topic->per_q_mark}}</td>
                 <td>{{$topic->timer}} mins</td>
+                <td>{{$topic->creator}}</td>
                 <td>
                   <!-- Edit Button -->
                   <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$topic->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>

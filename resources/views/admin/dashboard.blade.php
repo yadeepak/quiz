@@ -84,6 +84,8 @@
         </div>
       </div>
       <div class="col-md-5">
+      @if(Auth::user()->role === 'A')
+
         <div class="box box-danger">
           <div class="box-header with-border">
             <h4 class="box-title">Latest Students</h4>
@@ -114,6 +116,8 @@
        
           <!-- /.box-footer -->
         </div>
+        @endif
+
       </div>
     </div>
   </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Topic;
 use App\Answer;
+use Illuminate\Support\Facades\Auth;
+
 class TopicController extends Controller
 {
     /**
@@ -14,7 +16,11 @@ class TopicController extends Controller
      */
     public function index()
     {
+      if(Auth::user()->role === 'C'){
+        $topics = Topic::where('created_by',Auth::id())->get();
+      } else {
         $topics = Topic::all();
+      }
         return view('admin.quiz.index', compact('topics'));
     }
 
@@ -63,6 +69,8 @@ class TopicController extends Controller
         }else{
           $input['show_ans'] = "0";
         }
+        $input['created_by'] = Auth::id();
+        $input['creator'] = Auth::user()->name;
 
        // $input = $request->all();
            $quiz = Topic::create($input);

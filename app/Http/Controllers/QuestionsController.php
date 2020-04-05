@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Topic;
 use App\Question;
-
+use Illuminate\Support\Facades\Auth;
 class QuestionsController extends Controller
 {
     /**
@@ -15,8 +15,15 @@ class QuestionsController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->role === 'C'){
+        $topics = Topic::where('created_by',Auth::id())->get();
+        $topics->load(['question' => function ($q) use (&$questions) {
+            $questions = $q->get();
+        }]);
+    }else {
         $topics = Topic::all();
         $questions = Question::all();
+    }
         return view('admin.questions.index', compact('questions', 'topics'));
     }
 

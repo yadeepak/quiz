@@ -26,6 +26,7 @@
                   <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
+                  <li>Total students for this Quiz <i class="fa fa-long-arrow-right"></i></li>
                 </ul>
               </div>
               <div class="col-xs-6">
@@ -50,10 +51,15 @@
                   <li>
                     {{$topic->timer}} minutes
                   </li>
+                  <li>
+                    {{$students[$key]??0}}
+                  </li>
                 </ul>
               </div>
             </div>
+            @if(Auth::user()->role === 'A')
             <a href="{{route('all_reports.show', $topic->id)}}" class="btn btn-wave">Show Report</a>
+        @endif
           </div>
         </div>
       @endforeach

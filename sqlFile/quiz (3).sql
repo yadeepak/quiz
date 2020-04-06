@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 01, 2020 at 01:55 PM
+-- Generation Time: Apr 06, 2020 at 08:59 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -249,7 +249,8 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `topic_id`, `question`, `a`, `b`, `c`, `d`, `answer`, `code_snippet`, `answer_exp`, `created_at`, `updated_at`, `question_img`, `question_video_link`) VALUES
-(1, 1, 'full form of corona', 'co', 'covid-19', 'covid', '19', 'B', 'gvghv', 'see on google', '2020-03-22 23:47:23', '2020-03-22 23:47:23', NULL, NULL);
+(1, 1, 'full form of corona', 'co', 'covid-19', 'covid', '19', 'B', 'gvghv', 'see on google', '2020-03-22 23:47:23', '2020-03-22 23:47:23', NULL, NULL),
+(2, 2, 'helkkdf', 'a', 'b', 'c', 'd', 'D', NULL, NULL, '2020-04-04 13:28:25', '2020-04-04 13:28:25', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -275,7 +276,11 @@ CREATE TABLE `results` (
 
 INSERT INTO `results` (`id`, `user_id`, `topic_id`, `totalQ`, `rightQ`, `wrongQ`, `unattemptedQ`, `created_at`, `updated_at`) VALUES
 (1, 18, 1, 33, 4, 4, 4, '2020-04-01 08:33:27', '0000-00-00 00:00:00'),
-(2, 23, 1, 33, 4, 4, 4, '2020-04-01 08:33:33', '0000-00-00 00:00:00');
+(2, 23, 1, 33, 4, 4, 4, '2020-04-01 08:33:33', '0000-00-00 00:00:00'),
+(3, 27, 1, 1, 1, 0, 0, '2020-04-02 19:17:55', '2020-04-02 19:17:55'),
+(4, 28, 1, 1, 0, 1, 0, '2020-04-02 19:27:07', '2020-04-02 19:27:07'),
+(5, 29, 1, 1, 0, 1, 0, '2020-04-02 19:28:35', '2020-04-02 19:28:35'),
+(6, 30, 1, 1, 0, 1, 0, '2020-04-02 19:40:02', '2020-04-02 19:40:02');
 
 -- --------------------------------------------------------
 
@@ -367,6 +372,8 @@ CREATE TABLE `topics` (
   `timer` int(11) DEFAULT NULL,
   `show_ans` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `amount` float DEFAULT NULL,
+  `creator` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` int(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -375,8 +382,10 @@ CREATE TABLE `topics` (
 -- Dumping data for table `topics`
 --
 
-INSERT INTO `topics` (`id`, `title`, `description`, `per_q_mark`, `timer`, `show_ans`, `amount`, `created_at`, `updated_at`) VALUES
-(1, 'New Topic', 'Demo', 5, 10, '0', NULL, '2020-03-27 13:51:30', '2020-03-27 13:51:30');
+INSERT INTO `topics` (`id`, `title`, `description`, `per_q_mark`, `timer`, `show_ans`, `amount`, `creator`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'New Topic', 'Demo', 5, 10, '0', NULL, NULL, 31, '2020-03-27 13:51:30', '2020-03-27 13:51:30'),
+(2, 'round2', NULL, 3, NULL, '0', NULL, NULL, 1, '2020-04-04 13:27:17', '2020-04-04 13:27:17'),
+(3, 'new', NULL, 33, NULL, '0', NULL, NULL, 31, '2020-04-04 15:33:46', '2020-04-04 15:33:46');
 
 -- --------------------------------------------------------
 
@@ -428,7 +437,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `company_website`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`, `dob`, `appearing`, `experience`, `college`, `gender`, `linkId`, `company_img`) VALUES
-(1, 'Admin', NULL, 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'ScLs20oaJ8m7yfY8dOMDFy2OOmh8VTRnzJoFrqZ3THmmEh2aHu4YGcaDfQ2z', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(1, 'Admin', NULL, 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'eD7TvrVh5W5WM6bOiho8TaeG4EDY8GG1JZ3RbRnLT5CyvxThidFALvkdSReP', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL, 0, NULL),
 (3, 'Jhon Doe', NULL, 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46', NULL, NULL, NULL, NULL, NULL, 0, NULL),
 (4, 'prashant mishra', NULL, 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53', NULL, NULL, NULL, NULL, NULL, 0, NULL),
 (7, 'suraj mishra', NULL, 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53', NULL, NULL, NULL, NULL, NULL, 0, NULL),
@@ -436,7 +445,12 @@ INSERT INTO `users` (`id`, `name`, `company_website`, `email`, `password`, `mobi
 (18, 'Deepak yadav', NULL, 'deep@gmail.com', NULL, '0845206242', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-29 16:34:52', '2020-03-29 16:34:52', '1999-03-12', '0', '0', 'asdas', 'rbtnMale', 2, NULL),
 (23, 'Mitesh Patel', NULL, 'miteshp1505@gmail.com', NULL, '8521478878', '1234,abc', NULL, 'U', NULL, '2020-03-30 16:56:05', '2020-03-30 16:56:05', '2000-02-22', '1', '2', 'abcd', 'on', 2, NULL),
 (24, 'Testing', 'abc.com', 'test123@gmail.com', '$2y$10$plhC.ZamnxRck/kldo20wuZu.hGGAo7mfVCWX8Un4SkXhxj9Wrh12', '8547896872', 'sfsdfsdfsd', 'Surat', 'C', NULL, '2020-03-30 18:16:53', '2020-03-30 18:16:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(26, 'Deepak yadav', NULL, 'gaurajjv@codalyze.com', NULL, '0845', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-31 10:43:19', '2020-03-31 10:43:19', '2020-03-10', '0', '0', 'asdas', 'on', 2, NULL);
+(26, 'Deepak yadav', NULL, 'gaurajjv@codalyze.com', NULL, '0845', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-31 10:43:19', '2020-03-31 10:43:19', '2020-03-10', '0', '0', 'asdas', 'on', 2, NULL),
+(27, 'Deepak yadav', NULL, 'adssmin@gmail.com', NULL, '084520625', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:16:23', '2020-04-02 19:16:23', '2020-04-08', '0', '0', 'asdas', 'on', 2, NULL),
+(28, 'Deepak yadav', NULL, 'sdfadmin@gmail.com', NULL, '084520626', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:26:56', '2020-04-02 19:26:56', '2020-04-15', '0', '0', 'asdas', 'on', 2, NULL),
+(29, 'Deepak yadav', NULL, 'gasadurav@codalyze.com', NULL, '084520624344425', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:28:28', '2020-04-02 19:28:28', '2020-04-08', '0', '0', 'asdas', 'on', 2, NULL),
+(30, 'Deepak yadav', NULL, 'deep7xrd@gmail.com', NULL, '08452062425789', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:39:57', '2020-04-02 19:39:57', '2020-04-03', '0', '0', 'asdas', 'on', 2, NULL),
+(31, 'Abc', 'wwee', 'gaurav@codalyze.com', '$2y$10$XiPF.l55EFDbTT5vNYkQH.6JLaWA654vbdqQphIkahJAaEO2GCjy6', '08452062425', '04 , jai mata di chwal , agasan road\r\nmhatre gate nagar', 'Diva', 'C', 'VRTty2o21PxahKBsvVByDz16mm2keCvvC2kmPF3lnvZPq17H8W9S2bWUPxft', '2020-04-04 12:46:45', '2020-04-04 12:46:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -614,13 +628,13 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -638,7 +652,7 @@ ALTER TABLE `social_icons`
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `topic_user`
@@ -650,7 +664,7 @@ ALTER TABLE `topic_user`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

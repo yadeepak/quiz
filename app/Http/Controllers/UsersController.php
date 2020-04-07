@@ -98,8 +98,8 @@ class UsersController extends Controller
         $request->validate([
           'name' => 'required|string|max:255',
           'email' => 'required|string|email',
-          'password' => 'required|string|min:6',
-          'mobile' => 'unique:users',
+         // 'password' => 'required|string|min:6',
+        //'mobile' => 'unique:users',
         ]);
 
         $input = $request->all();
@@ -133,8 +133,69 @@ class UsersController extends Controller
             'city' => $input['city'],
           ]);
         }
+        else if (Auth::user()->role == 'C') {
 
-        return back()->with('updated', 'Student has been updated');
+          
+          $user->company_website = $request->company_website;
+          $user->email = $request->email;
+          $user->mobile = $request->mobile;
+
+          if($request->changepass == '1'){
+          $user->password =  bcrypt($request->password);
+          }
+
+          $user->city = $request->city;
+          $user->address = $request->address;
+          $user->name = $request->name;
+          
+          if($request->changeimg == '1'){
+          if ($file = $request->file('company_img')) {
+              
+            $name = 'company_'.time().$file->getClientOriginalName();
+           
+            if($request->company_img != null) {
+            
+               $file->move('images/company/', $name);
+               $user->company_img = $name;
+            }
+          }
+        }
+                     $user->save();
+
+          //return back()->with('updated','Company updated !');
+          
+
+          // if($input['password'] !== null) {
+             
+          //   $user->update([
+          //     'name' => $input['name'],
+          //     'email' => $input['email'],
+          //     'password' => bcrypt($input['password']),
+          //     'mobile' => $input['mobile'],
+          //     'address' => $input['address'],
+          //     'city' => $input['city'],
+          //     'company_website' => $input['company_website'],
+          //   ]);
+          // }
+
+          // else {
+
+              
+          //   $user->update([
+          //     'name' => $input['name'],
+          //     'email' => $input['email'],
+          //    // 'password' => bcrypt($input['password']),
+          //     'mobile' => $input['mobile'],
+          //     'address' => $input['address'],
+          //     'city' => $input['city'],
+          //     'company_website' => $input['company_website'],
+          //   ]);
+            
+          // }
+    
+        }
+
+        return back()->with('updated', 'Your Profile has been updated');
     }
 
     /**

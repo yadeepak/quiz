@@ -20,7 +20,7 @@
       <div class="login-page">
         <div class="logo">
           @if ($setting)
-            <a href="{{url('/')}}" title="{{$setting->welcome_txt}}">Dcodetech</a>
+            <a href="{{url('/')}}" title="{{$setting->welcome_txt}}"></a>
           @endif
         </div>
         <h4 class="user-register-heading text-center">Login</h4>

@@ -46,7 +46,6 @@ $setting = App\Setting::first();
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
         @if ($setting)
-        <img src="{{asset('/images/logo/'.$setting->logo)}}" class="ad-logo img-responsive" alt="{{$setting->welcome_txt}}">
         @endif
       </span>
     </a>

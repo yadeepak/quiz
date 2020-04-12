@@ -48,9 +48,6 @@ class TopicController extends Controller
           'title' => 'required|string',
           'per_q_mark' => 'required',
           'minpercentage' => 'required',
-          
-          
-          
         ]);
 
         if(isset($request->quiz_price)){
@@ -70,9 +67,9 @@ class TopicController extends Controller
         }else{
           $input['show_ans'] = "0";
         }
+        $input['round'] = $request->round;
         $input['created_by'] = Auth::id();
         $input['creator'] = Auth::user()->name;
-
        // $input = $request->all();
            $quiz = Topic::create($input);
            
@@ -133,6 +130,7 @@ class TopicController extends Controller
           $topic->per_q_mark = $request->per_q_mark;
           $topic->timer = $request->timer;
           $topic->minpercentage = $request->minpercentage;
+          $topic->round = $request->round;
 
           if(isset($request->show_ans)){
             $topic->show_ans = 1;

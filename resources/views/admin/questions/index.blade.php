@@ -26,6 +26,7 @@
                   <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
+                  <li>Round <i class="fa fa-long-arrow-right"></i></li>
                 </ul>
               </div>
               <div class="col-xs-6">
@@ -49,6 +50,9 @@
                   </li>
                   <li>
                     {{$topic->timer}} minutes
+                  </li>
+                  <li>
+                    {{$topic->round}}
                   </li>
                 </ul>
               </div>

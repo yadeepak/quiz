@@ -46,9 +46,7 @@ Route::get('/faqs',function(){
 })->name('faq.get');
 
 Route::get('/home', function(){
-  $topics = Topic::all();
-  $questions = Question::all();
-  return view('home', compact('topics', 'questions'));
+  return view('home');
 });
 
 Route::get('/redirect', function () {

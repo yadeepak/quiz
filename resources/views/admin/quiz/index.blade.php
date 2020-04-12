@@ -42,6 +42,18 @@
                   {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
                   <small class="text-danger">{{ $errors->first('timer') }}</small>
                 </div>
+
+                <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
+                    {!! Form::label('round', 'Correct Answer') !!}
+                    {!! Form::select('round', array('1'=>'Round 1', '2'=>'Round 2'),null, ['class' => 'form-control','placeholder'=>'']) !!}
+                </div>
+
+
+                <!-- <label for="round">Rounds:</label>
+                 <select name="round" id="round" class="form-control">
+                  <option value="1">Round 1</option>
+                  <option value="2">Round 2</option>
+                </select>  -->
 <!-- 
                 <label for="married_status">Quiz Price:</label>
                 {{-- <select name="married_status" id="ms" class="form-control">
@@ -192,7 +204,11 @@
                               {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
                               <small class="text-danger">{{ $errors->first('timer') }}</small>
                             </div>
-
+                            
+                            <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
+                                {!! Form::label('round', 'Correct Answer') !!}
+                                {!! Form::select('round', array('1'=>'Round 1', '2'=>'Round 2'),null, ['class' => 'form-control','placeholder'=>'']) !!}
+                            </div>
                              
                            <!-- <label for="">Enable Show Answer: </label>
                            <input {{ $topic->show_ans ==1 ? "checked" : "" }} type="checkbox" class="toggle-input" name="show_ans" id="toggle{{ $topic->id }}">

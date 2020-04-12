@@ -76,12 +76,23 @@
                 
               </div>
               <div class="col-md-6">
+                <div class="form-group{{ $errors->has('minpercentage') ? ' has-error' : '' }}">
+                  {!! Form::label('minpercentage', 'Minimum Passing Percentage ') !!}
+                  {!! Form::number('minpercentage', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Min. Passing Percentage', 'rows' => '8']) !!}
+                  <small class="text-danger">{{ $errors->first('minpercentage') }}</small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                   {!! Form::label('description', 'Description') !!}
                   {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Description', 'rows' => '8']) !!}
                   <small class="text-danger">{{ $errors->first('description') }}</small>
                 </div>
               </div>
+
+             
+
             </div>
           </div>
           <div class="modal-footer">
@@ -104,6 +115,7 @@
             <th>Description</th>
             <th>Per Question Mark</th>
             <th>Time</th>
+            <th>Minimum Percentage</th>
             <th>Created By</th>
             <th>Actions</th>
           </tr>
@@ -121,6 +133,7 @@
                 <td title="{{$topic->description}}">{{str_limit($topic->description, 50)}}</td>
                 <td>{{$topic->per_q_mark}}</td>
                 <td>{{$topic->timer}} mins</td>
+                <td>{{$topic->minpercentage}} %</td>
                 <td>{{$topic->creator}}</td>
                 <td>
                   <!-- Edit Button -->
@@ -200,6 +213,15 @@
                
                              
                             </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group{{ $errors->has('minpercentage') ? ' has-error' : '' }}">
+                            {!! Form::label('minpercentage', 'Minimum Passing Percentage ') !!}
+                            {!! Form::number('minpercentage', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Min. Passing Percentage', 'rows' => '8']) !!}
+                            <small class="text-danger">{{ $errors->first('minpercentage') }}</small>
+                          </div>
+                        </div>
+
 
                           <div class="col-md-6">
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">

@@ -110,8 +110,18 @@ h3.cent{
     
       
 <h1 style="padding:30px 0px;" class="text-center">Your Test Submitted Succesfully.</h1>
+<div class="row my-3">
+    <div class="col-md-12">
+<div class="card text-white bg-primary mb-3" style="padding: 40px;background: #514e4e;">
+  <div class="card-header cent">Result - {{$data['pass']?'Pass':'Fail'}}</div>
+  <div class="card-body">
+    <h3 class="card-title cent">{{$data['percentage']}}%</h3>
+  </div>
+</div>
+</div>
+</div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
 <div class="card text-white bg-primary mb-3" style="padding: 40px;background: #007ad5;">
   <div class="card-header cent">Total Questions</div>
   <div class="card-body">
@@ -119,7 +129,7 @@ h3.cent{
   </div>
 </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-3">
 <div class="card text-white mb-3" id="gree" style="padding: 40px;">
   <div class="card-header cent" class="tex"><font color="white">Right Questions</font></div>
   <div class="card-body">
@@ -129,7 +139,7 @@ h3.cent{
 </div>
 
  
-  <div class="col-md-6">
+  <div class="col-md-3">
 <div class="card text-white mb-3" id="re" style="padding: 40px;">
   <div class="card-header cent"><font color="white">Wrong Questions</font></div>
   <div class="card-body">
@@ -137,7 +147,7 @@ h3.cent{
 </div>
 </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-3">
 <div class="card text-white mb-3" id="warn" style="padding: 40px;">
   <div class="card-header cent"><font color="white">UnAttempted Questions</font></div>
   <div class="card-body">

@@ -107,6 +107,7 @@ class FrntendQuizController extends Controller
             $questions = Question::where('topic_id',$linkDetails->topic_id)->get();  
             $rightQ = 0;
             $wrongQ = 0; 
+            $count = count($questions)*$topics['per_q_mark'];
             for($i=0;$i<count($questions);$i++){
             if($answer = $request['optradio'.$i]){
                 $correctAns = $questions[$i]['answer'];
@@ -117,6 +118,14 @@ class FrntendQuizController extends Controller
                 }
             }
             }
+            $passingPercentage = $topics['minpercentage'];
+            $pass = true;
+            $marksObtained = $rightQ*$topics['per_q_mark'];
+            $studentPercentage = ($marksObtained*100)/$count;
+            $studentPercentage = round($studentPercentage , 2);
+            if($passingPercentage > $studentPercentage){
+                $pass = false;
+            }
             $unAttemptedCount = count($questions) - ($rightQ + $wrongQ);
             Result::create([
                 'rightQ'=>$rightQ,
@@ -125,9 +134,12 @@ class FrntendQuizController extends Controller
                 'totalQ'=>count($questions),
                 'user_id'=> $user->id,
                 'topic_id'=> $linkDetails->topic_id,
+                'percentage'=> $studentPercentage,
+                'passed'=> $pass,
             ]);
-            $request->session()->flush();//remove all sessions data
-            $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions)];  
+           // $request->session()->flush();//remove all sessions data
+            $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions),
+                'pass'=>$pass,'percentage'=>$studentPercentage];  
             return view('quiz.finish',compact('data','user'));      
     }
 }

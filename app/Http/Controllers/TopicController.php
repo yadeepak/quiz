@@ -47,6 +47,7 @@ class TopicController extends Controller
         $request->validate([
           'title' => 'required|string',
           'per_q_mark' => 'required',
+          'minpercentage' => 'required',
           
           
           
@@ -114,7 +115,8 @@ class TopicController extends Controller
         $request->validate([
 
           'title' => 'required|string',
-          'per_q_mark' => 'required'
+          'per_q_mark' => 'required',
+          'minpercentage' => 'required'
           
         ]);
 
@@ -130,6 +132,7 @@ class TopicController extends Controller
           $topic->description = $request->description;
           $topic->per_q_mark = $request->per_q_mark;
           $topic->timer = $request->timer;
+          $topic->minpercentage = $request->minpercentage;
 
           if(isset($request->show_ans)){
             $topic->show_ans = 1;

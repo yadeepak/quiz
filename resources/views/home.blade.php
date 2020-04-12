@@ -27,40 +27,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
               <!-- Right Side Of Navbar -->
               <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @guest
-               <!--   <li><a href="{{ route('login') }}" title="Login">Login</a></li>
-                  <li><a href="{{ route('register') }}" title="Register">Register</a></li>  -->
 
-                @else
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                      {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      @if ($auth->role == 'A')
-                        <li><a href="{{url('/admin')}}" title="Dashboard">Dashboard</a></li>
-                      @elseif ($auth->role == 'S')
-                        <li><a href="{{url('/admin/my_reports')}}" title="Dashboard">Dashboard</a></li>
-                      @endif
-                      <li>
-                        <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        Logout
-                      </a>
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                      </form>
-                      </li>
-                    </ul>
-                  </li>
-                 
-                  <li><a href="{{ route('faq.get') }}">FAQ</a></li>
-                @endguest
-                  <!-- <li><a href="{{url('pages/how-it-works')}}">How it works</a></li>
-                  <li><a href="{{url('pages/about-us')}}">About us</a></li> -->
-              </ul>
             </div>
           </div>
         </div>

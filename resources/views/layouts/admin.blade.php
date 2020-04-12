@@ -175,6 +175,10 @@ $setting = App\Setting::first();
       <div class="alert alert-danger sessionmodal">
         {{session('deleted')}}
       </div>
+    @elseif (Session::has('error'))
+      <div class="alert alert-danger sessionmodal">
+        {{session('error')}}
+      </div>
     @endif
     <!-- Content Header (Page header) -->
     <section class="content-header">

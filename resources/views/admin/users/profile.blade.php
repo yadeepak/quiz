@@ -49,12 +49,6 @@
                   <small class="text-danger">{{ $errors->first('password') }}</small>
                   <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
-                <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                  {!! Form::label('role', 'Role') !!}
-                  <span class="required">*</span>
-                  {!! Form::select('role', ['S' => 'Student', 'A'=>'Administrator'], null, ['class' => 'form-control select2', 'required' => 'required']) !!}
-                  <small class="text-danger">{{ $errors->first('role') }}</small>
-                </div>
               </div>
               <div class="col-md-6 margin-bottom">
                 <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
@@ -80,7 +74,7 @@
           {!! Form::close() !!}
         </div>
       </div>
-    @elseif ($auth->role == 'S')
+    @elseif ($auth->role == 'C')
       <div class="box">
         <div class="box-body">
           {!! Form::model($auth, ['method' => 'PATCH', 'action' => ['UsersController@update', $auth->id]]) !!}
@@ -100,7 +94,7 @@
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                   {!! Form::label('password', 'Password') !!}
-                  {!! Form::password('password', ['class' => 'form-control', 'required' => 'required', 'placeholder'=>'Change Your Password','id'=>'password-field']) !!}
+                  {!! Form::password('password', ['class' => 'form-control',  'placeholder'=>'Change Your Password','id'=>'password-field']) !!}
                   <small class="text-danger">{{ $errors->first('password') }}</small>
                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>

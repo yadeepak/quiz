@@ -94,25 +94,27 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
         $request->validate([
           'name' => 'required|string|max:255',
           'email' => 'required|string|email',
-          'password' => 'required|string|min:6',
-          'mobile' => 'unique:users',
+          'mobile' => 'required',
         ]);
 
         $input = $request->all();
-
-         // if(isset($request->changepass))
-         //    {
-         //       DB::table('users')->where('id', $user->id)->update(['password' => Hash::make($request->password)]);
-         //    }
-         //    else
-         //    {
-         //      $input['password'] = $user->password;
-         //    }
-
+          $update = [
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'mobile' => $input['mobile'],
+            'address' => $input['address'],
+            'city' => $input['city'],
+          ];
+          $checkIn = User::Where('email',$input['email'])->whereNotIn('id',[$id])->count();
+                                if($checkIn){
+                                  return back()->with('error', 'Email id already exist');
+                                }
+          if($request->password){
+            $update['password'] = bcrypt($input['password']);
+          }
         if (Auth::user()->role == 'A') {
           $user->update([
             'name' => $input['name'],
@@ -121,20 +123,12 @@ class UsersController extends Controller
             'mobile' => $input['mobile'],
             'address' => $input['address'],
             'city' => $input['city'],
-            'role' => $input['role'],
           ]);
-        } else if (Auth::user()->role == 'S') {
-          $user->update([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => bcrypt($input['password']),
-            'mobile' => $input['mobile'],
-            'address' => $input['address'],
-            'city' => $input['city'],
-          ]);
+        } else if (Auth::user()->role == 'C') {
+          $user->update($update);
         }
 
-        return back()->with('updated', 'Student has been updated');
+        return back()->with('updated', 'Data has been updated');
     }
 
     /**

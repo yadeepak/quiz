@@ -13,7 +13,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>Dcodtech</title>
+    <title>Job Dcodetech</title>
 
     <!-- Styles -->
     @yield('head')

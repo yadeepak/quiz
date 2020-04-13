@@ -10,7 +10,7 @@ $setting = App\Setting::first();
   <!--[if IE]>
   <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
   <![endif]-->
-  <title>Quiz Admin Panel</title>
+  <title>Admin Panel</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -200,7 +200,7 @@ $setting = App\Setting::first();
         
         {{-- $copyright --}}
 
-        &copy; <?php echo date("Y"); ?> Troislogic. All Rights Reserved.
+        &copy; <?php echo date("Y"); ?> DcodeTech. All Rights Reserved.
 
     </strong>
   </footer>

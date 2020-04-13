@@ -18,7 +18,7 @@ class AllReportController extends Controller
      */
     public function index()
     {
-       
+        $passedStudents = array();  
         if(Auth::user()->role === 'C'){
             $topics = Topic::where('created_by',Auth::id())->get();
             $topics->load(['question' => function ($q) use (&$questions) {
@@ -27,8 +27,10 @@ class AllReportController extends Controller
             if($topics){
                 $students = array();
           $topics->load(['generatedLink.student'=>function($q) use (&$stu){
-               $stu = $q->count();}]);
-            array_push($students,$stu);
+               $stu = $q->count();            
+            }]);
+         
+        array_push($students,$stu);
           }
         
     } else {
@@ -41,8 +43,13 @@ class AllReportController extends Controller
         array_push($students,$student);
        // dd($students);
     }
-        
-        return view('admin.all_reports.index', compact('topics', 'questions','students'));
+    $topics->load(['result'=>function($q) use (&$passedStudent){
+        $passedStudent = $q->where('passed',1)->count();
+     
+     }]);
+     array_push($passedStudents,$passedStudent);
+
+        return view('admin.all_reports.index', compact('topics', 'questions','students','passedStudents'));
     }
 
     /**

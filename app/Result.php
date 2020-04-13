@@ -8,7 +8,7 @@ class Result extends Model
 {
     //
     protected $fillable = [
-        'topic_id', 'user_id', 'rightQ', 'wrongQ', 'unattemptedQ','totalQ'
+        'topic_id', 'user_id', 'rightQ', 'wrongQ', 'unattemptedQ','totalQ','percentage','passed',
       ];
   
       public function user(){

@@ -150,7 +150,7 @@ class FrntendQuizController extends Controller
                 'percentage'=> $studentPercentage,
                 'passed'=> $pass,
             ]);
-           // $request->session()->flush();//remove all sessions data
+            $request->session()->flush();//remove all sessions data
             $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions),
                 'pass'=>$pass,'percentage'=>$studentPercentage];  
             return view('quiz.finish',compact('data','user'));      

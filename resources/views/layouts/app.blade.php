@@ -29,7 +29,7 @@
     @php
      $ct = App\copyrighttext::where('id','=',1)->first();
     @endphp
-   <div style="padding:15px;color: #FFF;background-color:#424242; position: fixed; width: 100%; bottom: 0;">
+   <!-- <div style="padding:15px;color: #FFF;background-color:#424242; position: fixed; width: 100%; bottom: 0;">
         <div class="container" >
             <div class="row">
                 <div class="col-md-6">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')

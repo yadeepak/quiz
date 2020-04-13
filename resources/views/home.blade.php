@@ -8,26 +8,32 @@
         'csrfToken' => csrf_token(),
     ]); ?>
   </script>
+  <style>
+  .title {
+
+    margin-top : 300px;
+
+  }
+  </style>
 @endsection
 
 @section('top_bar')
-  <nav class="navbar navbar-default navbar-static-top">
+  <!-- <nav class="navbar navbar-default navbar-static-top"> 
     <div class="nav-bar">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
             <div class="navbar-header">
-              <!-- Branding Image -->
+            
               @if($setting)
-                <!-- <a class="tt" title="DcodeTech" href="{{url('/')}}"><h4 class="heading">DcodeTech</h4></a> -->
-                <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
+                 <a class="tt" title="DcodeTech" href="{{url('/')}}"><h4 class="heading">DcodeTech</h4></a>
+               <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" /> 
                 
               @endif
             </div>
           </div>
           <div class="col-md-6">
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-              <!-- Right Side Of Navbar -->
               <ul class="nav navbar-nav navbar-right">
 
             </div>
@@ -35,7 +41,7 @@
         </div>
       </div>
     </div>
-  </nav>
+  </nav>  -->
 @endsection
 
 @section('content')
@@ -43,7 +49,7 @@
   @if ($auth)
     <div class="quiz-main-block">
       <div class="row">
-
+    
       </div>
     </div>
   @endif
@@ -51,9 +57,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="home-main-block">
+
+           
               @if ($setting)
             <!--    <h1 class="main-block-heading text-center">{{$setting->welcome_txt}}</h1> -->
+           
               @endif
+              <h1 class="title">Welcome to DcodeTech Industrial Training.</h1>
             <!--      <blockquote>
                 Please <a href="{{ route('login') }}">Login</a> To Start Quiz >>>  
                 </blockquote>-->

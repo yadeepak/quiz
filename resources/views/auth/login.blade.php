@@ -23,7 +23,9 @@
             <a href="{{url('/')}}" title="{{$setting->welcome_txt}}"></a>
           @endif
         </div>
-        <h4 class="user-register-heading text-center">Login</h4>
+        
+        <h4 class="user-register-heading text-center"><img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" /></h4>
+        
         <div class="row">
           @php
             $fb_status = App\Setting::select('fb_login')->where('id','=',1)->first();

@@ -79,7 +79,7 @@ h3.cent{
                         <!-- Branding Image -->
                         @if($setting)
                         <a class="tt" title="DcodeTech" href="{{url('/')}}">
-                            <h4 class="heading">DcodeTech</h4>
+                        <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
                         </a>
                         @endif
                     </div>
@@ -90,9 +90,9 @@ h3.cent{
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
                             
-                  <li><a href="#" >{{$user['name']}}</a></li>
-                  <li><a href="#" >{{$user['email']}}</a></li>
-                  <li><a href="#" >{{$user['mobile']}}</a></li>
+                  <li><a href="#" ><span style="color:blue">{{$user['name']}}</span></a></li>
+                  <li><a href="#" ><span style="color:blue">{{$user['email']}}</span></a></li>
+                  <li><a href="#" ><span style="color:blue">{{$user['mobile']}}</span></a></li>
                          
                         </ul>
                     </div>

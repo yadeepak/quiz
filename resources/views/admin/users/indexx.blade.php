@@ -57,7 +57,7 @@
                     <small class="text-danger">{{ $errors->first('name') }}</small>
                   </div>
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    {!! Form::label('email', 'Email address') !!}
+                    {!! Form::label('email', 'Email Address') !!}
                     <span class="required">*</span>
                     {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'eg: info@examlpe.com', 'required' => 'required']) !!}
                     <small class="text-danger">{{ $errors->first('email') }}</small>

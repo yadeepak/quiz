@@ -19,7 +19,9 @@
             <div class="navbar-header">
               <!-- Branding Image -->
               @if($setting)
-                <a class="tt" title="DcodeTech" href="{{url('/')}}"><h4 class="heading">DcodeTech</h4></a>
+                <!-- <a class="tt" title="DcodeTech" href="{{url('/')}}"><h4 class="heading">DcodeTech</h4></a> -->
+                <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
+                
               @endif
             </div>
           </div>

@@ -21,6 +21,8 @@
             <th>Quiz</th>
             <th>Right Questions</th>
             <th>Total Questions</th>
+            <th>Percentage</th>
+            <th>Result</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +40,12 @@
                 </td>
                 <td>
                 {{$results[$key]['totalQ']}}
+                </td>
+                <td>
+                {{$results[$key]['percentage']??0}}%
+                </td>
+                <td>
+                {{$results[$key]['passed']?'Pass':'Fail'}}
                 </td>
                
               </tr>

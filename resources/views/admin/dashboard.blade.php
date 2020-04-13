@@ -88,7 +88,7 @@
 
         <div class="box box-danger">
           <div class="box-header with-border">
-            <h4 class="box-title">Latest Students</h4>
+            <h4 class="box-title">Latest Companies</h4>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -111,7 +111,7 @@
           <!-- /.box-body -->
          
           <div class="box-footer text-center">
-            <a href="{{url('admin/users')}}" class="uppercase">View All Students</a>
+            <a href="{{url('admin/company')}}" class="uppercase">View All Companies</a>
           </div>
        
           <!-- /.box-footer -->

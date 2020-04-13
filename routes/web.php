@@ -87,7 +87,7 @@ Route::group(['middleware'=> 'isadmin'], function(){
     
     $question = Question::count();
     $quiz = Topic::count();
-    $user_latest = User::where('id', '!=', Auth::id())->orderBy('created_at', 'desc')->get();
+    $user_latest = User::where('role',  'C')->orderBy('created_at', 'desc')->get();
     }
     return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest'));
     //remove the answer line comment

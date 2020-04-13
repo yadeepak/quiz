@@ -44,7 +44,7 @@
                         <!-- Branding Image -->
                         @if($setting)
                         <a class="tt" title="DcodeTech" href="{{url('/')}}">
-                            <h4 class="heading">DcodeTech</h4>
+                        <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
                         </a>
                         @endif
                     </div>
@@ -55,9 +55,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
                             
-                  <li><a href="#" >{{$data['name']}}</a></li>
-                  <li><a href="#" >{{$data['email']}}</a></li>
-                  <li><a href="#" >{{$data['mobile']}}</a></li>
+                  <li><a href="#" ><span style="color:blue">{{$data['name']}}</span></a></li>
+                  <li><a href="#" ><span style="color:blue">{{$data['email']}}</span></a></li>
+                  <li><a href="#" ><span style="color:blue">{{$data['mobile']}}</span></a></li>
                          
                         </ul>
                     </div>

@@ -45,6 +45,8 @@ class FrntendQuizController extends Controller
 
        $token = $request->tokenid;
        if($token){
+
+        if(
          $request->validate([
              'name' => 'required',
              'dob' => 'required',
@@ -54,31 +56,42 @@ class FrntendQuizController extends Controller
              'college' => 'required',
              'mobile' => 'required|max:10|min:10',
              'appearing' => 'required',
-           ]);
-           $input = $request->all();
-           $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
-           $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
-           if($check ) return Redirect::back()->withErrors(['email id or phone number already exists']);
-         User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'dob' => $input['dob'],
-            'gender' => $input['gender'],
-            'college' => $input['college'],
-            'experience' => $input['experience'],
-            'appearing' => $input['appearing'],
-            'mobile' => $input['mobile'],
-            'address' => $input['address'],
-            'role' => "U",
-            'linkId' => $linkDetails->id,
-           ]);
-           $quizDetails = Topic::find($linkDetails->topic_id)->description;
-             $desc = explode(',',$quizDetails); 
-             if(!$request->session()->has('isAllowed')){
-             $request->session()->put('isAllowed','1');  
-             } 
-          return view('quiz.quizhome',['tokenid'=>$token,'data'=>$request->all(),'desc'=>$desc]);
-          }
+           ])) {
+
+            $input = $request->all();
+            $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
+            $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
+            if($check ) return Redirect::back()->withErrors(['email id or phone number already exists']);
+          User::create([
+             'name' => $input['name'],
+             'email' => $input['email'],
+             'dob' => $input['dob'],
+             'gender' => $input['gender'],
+             'college' => $input['college'],
+             'experience' => $input['experience'],
+             'appearing' => $input['appearing'],
+             'mobile' => $input['mobile'],
+             'address' => $input['address'],
+             'role' => "U",
+             'linkId' => $linkDetails->id,
+            ]);
+            $quizDetails = Topic::find($linkDetails->topic_id)->description;
+              $desc = explode(',',$quizDetails); 
+              if(!$request->session()->has('isAllowed')){
+              $request->session()->put('isAllowed','1');  
+              } 
+           return view('quiz.quizhome',['tokenid'=>$token,'data'=>$request->all(),'desc'=>$desc]);
+ 
+
+
+           }
+
+           else{
+            return Redirect::back()->withInput(Input::all());
+
+           }
+
+                    }
         }
 
     public function proceed(Request $request)

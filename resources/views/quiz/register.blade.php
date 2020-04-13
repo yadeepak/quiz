@@ -49,7 +49,7 @@
                         <!-- Branding Image -->
                         @if($setting)
                         <a class="tt" title="DcodeTech" href="{{url('/')}}">
-                            <h4 class="heading">DcodeTech</h4>
+                        <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
                         </a>
                         @endif
                     </div>
@@ -94,25 +94,25 @@
 
 <div class="form-group col-md-6">
       <label for="name">Full Name</label>
-      <input type="text" name="name" class="form-control" id="name" placeholder="Full Name">
+      <input type="text" name="name" class="form-control" id="name" placeholder="Full Name" value="{{ old('name')}}" >
     </div>
 
 
     <div class="form-group col-md-6">
       <label for="dob">DOB</label>
-      <input type="date" name="dob" class="form-control" id="dob" placeholder="DOB">
+      <input type="date" name="dob" class="form-control" id="dob" placeholder="DOB" value="{{ old('dob')}}" />
     </div>
 
 
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ old('email')}}" />
     </div>
 
     <div class="form-group col-md-6">
       <label for="dob">Gender</label><br>
-      <label class="radio-inline"><input type="radio" name="gender" >Male</label>
-<label class="radio-inline"><input type="radio" name="gender">Female</label>    </div>  
+      <label class="radio-inline"><input type="radio" name="gender" value="male" {{ (old("gender") == 'male') ? "checked" : '' }} />Male</label>
+<label class="radio-inline"><input type="radio" name="gender" value="female" {{ (old("gender") == 'female') ? "checked" : '' }} />Female</label>    </div>  
 </div>
     
     
@@ -120,19 +120,19 @@
 
   <div class="form-group">
     <label for="mobile">Mobile</label>
-    <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Mobile">
+    <input type="number" name="mobile" class="form-control" required id="mobile" placeholder="Mobile" value="{{ old('mobile')}}"  />
   </div>
 
   <div class="form-group">
     <label for="inputAddress">Address</label>
-    <input type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <input type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 Main St" value="{{ old('address') }}" />
   </div>
 
 
   
     <div class="form-group">
       <label for="college">College</label>
-      <input type="text" name="college" placeholder="College" class="form-control" id="inputZip">
+      <input type="text" name="college" placeholder="College" class="form-control" id="inputZip" value="{{ old('college')}}" />
     </div>
   
 
@@ -142,24 +142,24 @@
     <div class="form-group">
       <label for="experience">experience:</label>
       <select name="experience" id="" class="form-control">
-      <option value="0">Select Experience</option>
-                      <option value="1">Fresher</option>
-                      <option value="2">1 yr</option>
-                      <option value="3">2 yr</option>
-                      <option value="4">3 yr</option>
-                      <option value="5">4 yr</option>
-                      <option value="6">5 yr</option>
-                      <option value="7">&gt; 6 yr</option>
+                     <option value="0" {{ (old("experience") == '0') ? "selected" : '' }}>Select Experience</option>
+                      <option value="1" {{ (old("experience") == '1') ? "selected" : '' }}>Fresher</option>
+                      <option value="2" {{ (old("experience") == '2') ? "selected" : '' }}>1 yr</option>
+                      <option value="3" {{ (old("experience") == '3') ? "selected" : '' }}>2 yr</option>
+                      <option value="4" {{ (old("experience") == '4') ? "selected" : '' }}>3 yr</option>
+                      <option value="5" {{ (old("experience") == '5') ? "selected" : '' }}>4 yr</option>
+                      <option value="6" {{ (old("experience") == '6') ? "selected" : '' }}>5 yr</option>
+                      <option value="7" {{ (old("experience") == '7') ? "selected" : '' }}>&gt; 6 yr</option>
       </select>
     </div>  
 
     <div class="form-group">
       <label for="appearing">Appearing For:</label>
-      <select name="appearing" id="appearing" class="form-control">
-      <option value="0">Select Appearing For</option>
-       <option value="1">junior software Devloper</option>
-      <option value="2">Associate Software Devloper</option>
-       <option value="3">Senior Software Devloper</option>
+      <select name="appearing" id="" class="form-control" value="{{ old('appearing')}}">
+      <option value="0" {{ (old("appearing") == '0') ? "selected" : '' }}>Select Appearing For</option>
+       <option value="1" {{ (old("appearing") == '1') ? "selected" : '' }}>junior software Devloper</option>
+      <option value="2" {{ (old("appearing") == '2') ? "selected" : '' }}>Associate Software Devloper</option>
+       <option value="3" {{ (old("appearing") == '3') ? "selected" : '' }}>Senior Software Devloper</option>
       </select>
     </div>  
 

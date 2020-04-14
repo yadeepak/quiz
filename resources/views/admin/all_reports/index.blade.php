@@ -26,6 +26,7 @@
                   <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
+                  <li>Created By <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total students for this Quiz <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total students Passed <i class="fa fa-long-arrow-right"></i></li>
                 </ul>
@@ -51,6 +52,9 @@
                   </li>
                   <li>
                     {{$topic->timer}} minutes
+                  </li>
+                  <li>
+                    {{$topic->creator}}
                   </li>
                   <li>
                     {{$students[$key]??0}}

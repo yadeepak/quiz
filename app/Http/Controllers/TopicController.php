@@ -34,7 +34,7 @@ class TopicController extends Controller
         //
     }
 
-    /**
+    /**Topic
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -75,7 +75,7 @@ class TopicController extends Controller
            
        // $input['show_ans'] = $request->show_ans;
         //return Topic::create($input);
-        return back()->with('added', 'Topic has been added');
+        return back()->with('added', 'Quiz has been added');
     }
 
     /**
@@ -149,7 +149,7 @@ class TopicController extends Controller
 
           $topic->save();
 
-          return back()->with('updated','Topic updated !');
+          return back()->with('updated','Quiz updated !');
     }
 
     /**
@@ -162,7 +162,7 @@ class TopicController extends Controller
     {
         $topic = Topic::findOrFail($id);
         $topic->delete();
-        return back()->with('deleted', 'Topic has been deleted');
+        return back()->with('deleted', 'Quiz has been deleted');
     }
 
     public function deleteperquizsheet($id)

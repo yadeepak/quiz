@@ -46,6 +46,12 @@ Route::get('/faqs',function(){
 })->name('faq.get');
 
 Route::get('/home', function(){
+  if(Auth::user()){
+  $role = Auth::user()->role;
+  if($role === 'C'|| $role === 'A'){
+  return redirect('/admin');
+  }
+}
   return view('home');
 });
 

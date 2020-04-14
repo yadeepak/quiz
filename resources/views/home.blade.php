@@ -46,14 +46,7 @@
 
 @section('content')
 <div class="container">
-  @if ($auth)
-    <div class="quiz-main-block">
-      <div class="row">
-    
-      </div>
-    </div>
-  @endif
-  @if (!$auth)
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="home-main-block">
@@ -70,7 +63,6 @@
             </div>
         </div>
     </div>
-  @endif
 </div>
 
 

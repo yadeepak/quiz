@@ -82,7 +82,7 @@
                 </div>-danger">{{ $errors->first('answer_ex') }}</small>
                 </div> -->
               </div>
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="extras-block">
                   <h4 class="extras-heading">Video And Image For Question</h4>
                   <div class="row">
@@ -104,7 +104,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="modal-footer">
@@ -289,7 +289,7 @@
                                 <small class="text-danger">{{ $errors->first('answer_ex') }}</small>
                             </div> -->
                           </div>
-                          <div class="col-md-12">
+                          <!-- <div class="col-md-12">
                             <div class="extras-block">
                               <h4 class="extras-heading">Images And Video For Question</h4>
                               <div class="row">
@@ -311,7 +311,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                       <div class="modal-footer">

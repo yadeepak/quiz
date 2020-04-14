@@ -10,7 +10,6 @@ use App\Question;
 use App\User;
 use Exception;
 use App\Result;
-
 class FrntendQuizController extends Controller
 {
     //
@@ -61,7 +60,7 @@ class FrntendQuizController extends Controller
             $input = $request->all();
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
-            if($check ) return Redirect::back()->withErrors(['email id or phone number already exists']);
+            if($check ) return Redirect::back()->withInput($input)->withErrors(['email id or phone number already exists']);
           User::create([
              'name' => $input['name'],
              'email' => $input['email'],
@@ -149,6 +148,7 @@ class FrntendQuizController extends Controller
                 'topic_id'=> $linkDetails->topic_id,
                 'percentage'=> $studentPercentage,
                 'passed'=> $pass,
+                'token'=> $token,
             ]);
             $request->session()->flush();//remove all sessions data
             $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions),

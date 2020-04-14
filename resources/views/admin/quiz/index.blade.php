@@ -44,8 +44,8 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
-                    {!! Form::label('round', 'Correct Answer') !!}
-                    {!! Form::select('round', array('1'=>'Round 1', '2'=>'Round 2'),null, ['class' => 'form-control','placeholder'=>'']) !!}
+                    {!! Form::label('round', 'Select Round') !!}
+                    {!! Form::select('round', array('1'=>'Round 1', '2'=>'Round 2'),1, ['class' => 'form-control','placeholder'=>'']) !!}
                 </div>
 
 
@@ -129,6 +129,7 @@
             <th>Time</th>
             <th>Minimum Percentage</th>
             <th>Created By</th>
+            <th>Round</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -147,6 +148,7 @@
                 <td>{{$topic->timer}} mins</td>
                 <td>{{$topic->minpercentage}} %</td>
                 <td>{{$topic->creator}}</td>
+                <td>{{$topic->round}}</td>
                 <td>
                   <!-- Edit Button -->
                   <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$topic->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>
@@ -206,7 +208,7 @@
                             </div>
                             
                             <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
-                                {!! Form::label('round', 'Correct Answer') !!}
+                                {!! Form::label('round', 'Select Round') !!}
                                 {!! Form::select('round', array('1'=>'Round 1', '2'=>'Round 2'),null, ['class' => 'form-control','placeholder'=>'']) !!}
                             </div>
                              

@@ -18,36 +18,44 @@ class AllReportController extends Controller
      */
     public function index()
     {
-        $passedStudents = array();  
         if(Auth::user()->role === 'C'){
             $topics = Topic::where('created_by',Auth::id())->get();
             $topics->load(['question' => function ($q) use (&$questions) {
                 $questions = $q->get();
             }]);
             if($topics){
+        $passedStudents = array();  
                 $students = array();
-          $topics->load(['generatedLink.student'=>function($q) use (&$stu){
-               $stu = $q->count();            
+        foreach($topics as $key =>$topic){
+
+          $topic->load(['generatedLink.student'=>function($q) use (&$students){
+            array_push($students,$q->count());
+
             }]);
-         
-        array_push($students,$stu);
+            $topic->load(['result'=>function($q) use (&$passedStudents){
+                array_push($passedStudents,$q->where('passed',1)->count());
+             }]);
+            }
           }
         
     } else {
         $topics = Topic::all();
         $questions = Question::all();
         $students = array();
-         $topics->load(['student' => function ($q) use (&$student) {
-            $student = $q->count();
+        $passedStudents = array();  
+        foreach($topics as $key =>$topic){
+         $topic->load(['result.user' => function ($q) use (&$students) {
+            array_push($students,$q->count());
+            
         }]);
-        array_push($students,$student);
-       // dd($students);
+
+        $topic->load(['result'=>function($q) use (&$passedStudents){
+            array_push($passedStudents,$q->where('passed',1)->count());
+         }]);
     }
-    $topics->load(['result'=>function($q) use (&$passedStudent){
-        $passedStudent = $q->where('passed',1)->count();
-     
-     }]);
-     array_push($passedStudents,$passedStudent);
+         // dd($passedStudents);
+    }
+  
 
         return view('admin.all_reports.index', compact('topics', 'questions','students','passedStudents'));
     }

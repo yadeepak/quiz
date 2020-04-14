@@ -58,7 +58,6 @@
               </div>
             </div>
             <a href="{{route('questions.show', $topic->id)}}" class="btn btn-wave">Add Questions</a>
-            <a data-target="#deleteans{{ $topic->id }}" data-toggle="modal" class="btn btn-danger">Delete Answer Sheet</a>
           </div>
 
           <div id="deleteans{{ $topic->id }}" class="delete-modal modal fade" role="dialog">

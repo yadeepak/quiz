@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 12, 2020 at 09:31 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 16, 2020 at 01:20 PM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -295,7 +295,9 @@ INSERT INTO `results` (`id`, `user_id`, `topic_id`, `totalQ`, `rightQ`, `wrongQ`
 (11, 32, 1, 6, 4, 2, 0, NULL, NULL, '2020-04-12 19:25:41', '2020-04-12 19:25:41'),
 (12, 32, 1, 6, 4, 2, 0, NULL, NULL, '2020-04-12 19:27:01', '2020-04-12 19:27:01'),
 (13, 32, 1, 6, 4, 2, 0, NULL, NULL, '2020-04-12 19:27:05', '2020-04-12 19:27:05'),
-(14, 32, 1, 6, 4, 2, 0, NULL, NULL, '2020-04-12 19:27:12', '2020-04-12 19:27:12');
+(14, 32, 1, 6, 4, 2, 0, NULL, NULL, '2020-04-12 19:27:12', '2020-04-12 19:27:12'),
+(15, 33, 1, 6, 1, 0, 5, NULL, NULL, '2020-04-13 02:02:42', '2020-04-13 02:02:42'),
+(16, 33, 1, 6, 3, 3, 0, NULL, NULL, '2020-04-13 02:04:18', '2020-04-13 02:04:18');
 
 -- --------------------------------------------------------
 
@@ -445,29 +447,33 @@ CREATE TABLE `users` (
   `college` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `linkId` int(255) DEFAULT NULL,
-  `company_img` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `company_img` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_type` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `company_website`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`, `dob`, `appearing`, `experience`, `college`, `gender`, `linkId`, `company_img`) VALUES
-(1, 'Admin', NULL, 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'rsXXi4Xi4OVDpvPbTAdMufI0eo2qmNqHFak9AlmfpH2AuKVM17XIMjYk2kLS', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(3, 'Jhon Doe', NULL, 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46', NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(4, 'prashant mishra', NULL, 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53', NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(7, 'suraj mishra', NULL, 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53', NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(11, 'Rajesh Kevat', NULL, 'rakesh@gmail.com', NULL, '8286297405', 'Room no.45, Vishalgadh soc. Ramnagar B near Ram Mandir', NULL, 'U', NULL, '2020-03-29 14:41:12', '2020-03-29 14:41:12', '1998-10-10', '2', '2', 'novus logic', 'rbtnMale', 0, NULL),
-(18, 'Deepak yadav', NULL, 'deep@gmail.com', NULL, '0845206242', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-29 16:34:52', '2020-03-29 16:34:52', '1999-03-12', '0', '0', 'asdas', 'rbtnMale', 2, NULL),
-(23, 'Mitesh Patel', NULL, 'miteshp1505@gmail.com', NULL, '8521478878', '1234,abc', NULL, 'U', NULL, '2020-03-30 16:56:05', '2020-03-30 16:56:05', '2000-02-22', '1', '2', 'abcd', 'on', 2, NULL),
-(24, 'Testing', 'abc.com', 'test123@gmail.com', '$2y$10$plhC.ZamnxRck/kldo20wuZu.hGGAo7mfVCWX8Un4SkXhxj9Wrh12', '8547896872', 'sfsdfsdfsd', 'Surat', 'C', NULL, '2020-03-30 18:16:53', '2020-03-30 18:16:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(26, 'Deepak yadav', NULL, 'gaurajjv@codalyze.com', NULL, '0845', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-31 10:43:19', '2020-03-31 10:43:19', '2020-03-10', '0', '0', 'asdas', 'on', 2, NULL),
-(27, 'Deepak yadav', NULL, 'adssmin@gmail.com', NULL, '084520625', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:16:23', '2020-04-02 19:16:23', '2020-04-08', '0', '0', 'asdas', 'on', 2, NULL),
-(28, 'Deepak yadav', NULL, 'sdfadmin@gmail.com', NULL, '084520626', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:26:56', '2020-04-02 19:26:56', '2020-04-15', '0', '0', 'asdas', 'on', 2, NULL),
-(29, 'Deepak yadav', NULL, 'gasadurav@codalyze.com', NULL, '084520624344425', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:28:28', '2020-04-02 19:28:28', '2020-04-08', '0', '0', 'asdas', 'on', 2, NULL),
-(30, 'Deepak yadav', NULL, 'deep7xrd@gmail.com', NULL, '08452062425789', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:39:57', '2020-04-02 19:39:57', '2020-04-03', '0', '0', 'asdas', 'on', 2, NULL),
-(31, 'Abc', 'wwee', 'gaurav@codalyze.com', '$2y$10$XiPF.l55EFDbTT5vNYkQH.6JLaWA654vbdqQphIkahJAaEO2GCjy6', '084520624', '04 , jai mata di chwal , agasan road\r\nmhatre gate nagar', 'Diva', 'C', '2gH3aR4PCMTnpg324mRjZWjkUtKK2rqRvNPYUyzs4EwXuab8ZxQDxllxffmE', '2020-04-04 12:46:45', '2020-04-12 13:31:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 'Deepak yadav', NULL, 'admin@gmail.com', NULL, '1452062425', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-12 19:14:43', '2020-04-12 19:14:43', '2020-04-15', '0', '0', 'asdas', 'on', 2, NULL);
+INSERT INTO `users` (`id`, `name`, `company_website`, `email`, `password`, `mobile`, `address`, `city`, `role`, `remember_token`, `created_at`, `updated_at`, `dob`, `appearing`, `experience`, `college`, `gender`, `linkId`, `company_img`, `company_type`) VALUES
+(1, 'Admin', NULL, 'admin@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', NULL, NULL, NULL, 'A', 'sG4X1EZmCoK6ovxjoyIDFZ1QHN59nZiwPo2QKkowSLNAWiekmPLRFpVyDvPu', '2017-12-10 17:16:00', '2019-02-12 15:07:00', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(3, 'Jhon Doe', NULL, 'jhon@info.com', '$2y$10$4Y7TLx24XucQirs4RIH2UO0ormaEj1VoP9D3nhsoOialwV.frXrvO', '123456789', 'ujjain', 'Bhilwara', 'S', 'ExJlSfbEdtoGb96sCOoJ2i49f0BoCHRK397hd2KyYdfup0Pr19D9vNoJw6ve', '2017-12-10 17:19:47', '2019-02-18 13:56:46', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(4, 'prashant mishra', NULL, 'prashantmishra98@outlook.com', '$2y$10$FcB.H3d2WUioyggeiN857ObluIImftMHRbcIXYMVhS/jLYiSmSCJu', '7666292622', 'ghatkopar west', 'mumbai', 'S', 'mAJGdG0ak0TGzOD02qwsMHfIrskn8p4YRWiZSncmlKG7k40XxXOXcFGB5e5w', '2020-03-22 23:32:34', '2020-03-22 23:35:53', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(7, 'suraj mishra', NULL, 'p.mishra8652081136@gmail.com', '$2y$10$EqG18UdUt9AeXJp/bXGQGe3fl2JfOU1R8PH3KHZLO882eg8TEgcwW', NULL, NULL, NULL, 'S', 'LSzMfxyhXmLho4xQCtWnBDllAvxiSPfNIVw6uezzx5tMuDelwmGwutpqVNJa', '2020-03-23 03:07:53', '2020-03-23 03:07:53', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(11, 'Rajesh Kevat', NULL, 'rakesh@gmail.com', NULL, '8286297405', 'Room no.45, Vishalgadh soc. Ramnagar B near Ram Mandir', NULL, 'U', NULL, '2020-03-29 14:41:12', '2020-03-29 14:41:12', '1998-10-10', '2', '2', 'novus logic', 'rbtnMale', 0, NULL, NULL),
+(18, 'Deepak yadav', NULL, 'deep@gmail.com', NULL, '0845206242', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-29 16:34:52', '2020-03-29 16:34:52', '1999-03-12', '0', '0', 'asdas', 'rbtnMale', 2, NULL, NULL),
+(23, 'Mitesh Patel', NULL, 'miteshp1505@gmail.com', NULL, '8521478878', '1234,abc', NULL, 'U', NULL, '2020-03-30 16:56:05', '2020-03-30 16:56:05', '2000-02-22', '1', '2', 'abcd', 'on', 2, NULL, NULL),
+(24, 'Testing', 'abc.com', 'test123@gmail.com', '$2y$10$plhC.ZamnxRck/kldo20wuZu.hGGAo7mfVCWX8Un4SkXhxj9Wrh12', '8547896872', 'sfsdfsdfsd', 'Surat', 'C', NULL, '2020-03-30 18:16:53', '2020-03-30 18:16:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'interntype'),
+(26, 'Deepak yadav', NULL, 'gaurajjv@codalyze.com', NULL, '0845', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-03-31 10:43:19', '2020-03-31 10:43:19', '2020-03-10', '0', '0', 'asdas', 'on', 2, NULL, NULL),
+(27, 'Deepak yadav', NULL, 'adssmin@gmail.com', NULL, '084520625', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:16:23', '2020-04-02 19:16:23', '2020-04-08', '0', '0', 'asdas', 'on', 2, NULL, NULL),
+(28, 'Deepak yadav', NULL, 'sdfadmin@gmail.com', NULL, '084520626', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:26:56', '2020-04-02 19:26:56', '2020-04-15', '0', '0', 'asdas', 'on', 2, NULL, NULL),
+(29, 'Deepak yadav', NULL, 'gasadurav@codalyze.com', NULL, '084520624344425', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:28:28', '2020-04-02 19:28:28', '2020-04-08', '0', '0', 'asdas', 'on', 2, NULL, NULL),
+(30, 'Deepak yadav', NULL, 'deep7xrd@gmail.com', NULL, '08452062425789', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-02 19:39:57', '2020-04-02 19:39:57', '2020-04-03', '0', '0', 'asdas', 'on', 2, NULL, NULL),
+(31, 'Abc', 'wwee', 'gaurav@codalyze.com', '$2y$10$XiPF.l55EFDbTT5vNYkQH.6JLaWA654vbdqQphIkahJAaEO2GCjy6', '084520624', '04 , jai mata di chwal , agasan road\r\nmhatre gate nagar', 'Diva', 'C', '2gH3aR4PCMTnpg324mRjZWjkUtKK2rqRvNPYUyzs4EwXuab8ZxQDxllxffmE', '2020-04-04 12:46:45', '2020-04-12 13:31:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'fulltype'),
+(32, 'Deepak yadav', NULL, 'admin@gmail.com', NULL, '1452062425', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-12 19:14:43', '2020-04-12 19:14:43', '2020-04-15', '0', '0', 'asdas', 'on', 2, NULL, ''),
+(33, 'prashant mishra', NULL, 'prashantmishra@outlook.com', NULL, '9876509872', 'ghatkopar', NULL, 'U', NULL, '2020-04-13 02:02:06', '2020-04-13 02:02:06', '1998-04-07', '1', '3', 'Shri ram College', 'on', 2, NULL, ''),
+(34, 'IBM', 'ibm.com', 'ibm@gmail.com', '$2y$10$ID9H7AeWKkTFH9GvwsFnIO2CuY4yC/ZU6Hhfm4Dy6XeOLhN7edd0q', '9080706050', 'los angeles', 'america', 'C', NULL, '2020-04-16 10:21:37', '2020-04-16 10:21:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'fulltype'),
+(35, 'Apple', 'apple.com', 'apple@gmail.com', '$2y$10$ua5DfGK.KtZQdImiONR8VufcROS999.w8AgwFEyxLB5nDlhProvNu', '5676548754', 'Seatele', 'nyc', 'C', NULL, '2020-04-16 10:48:15', '2020-04-16 10:48:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'interntype');
 
 --
 -- Indexes for dumped tables
@@ -651,7 +657,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -681,7 +687,7 @@ ALTER TABLE `topic_user`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

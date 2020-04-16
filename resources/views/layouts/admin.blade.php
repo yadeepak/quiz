@@ -106,6 +106,7 @@ $setting = App\Setting::first();
           <li class="{{$questions}}"><a href="{{url('admin/questions')}}" title="Questions"><i class="fa fa-question-circle-o"></i> <span>Questions</span></a></li>  
           <li class=""><a href="{{url('admin/glink')}}" title="Link Generate"><i class="fa fa-gears"></i> <span>Generate Link</span></a></li>       
           <li class=""><a href="{{url('/admin/company')}}" title="Companies"><i class="fa fa-circle"></i> <span>Companies</span></a></li>
+          <li class=""><a href="{{url('/admin/interncompany')}}" title="Intern Companies"><i class="fa fa-building"></i> <span>Intern Companies</span></a></li>
           <li class="{{$users}}"><a href="{{url('/admin/users')}}" title="Students"><i class="fa fa-users"></i> <span>Students</span></a></li>
           <li class="{{$all_re}}"><a href="{{url('/admin/all_reports')}}" title="Student Report"><i class="fa fa-file-text-o"></i> <span>Student Report</span></a></li>
         <!--  <li class="{{$top_re}}"><a href="{{url('/admin/top_report')}}" title="Top Student Report"><i class="fa fa-user"></i> <span>Top Student Report</span></a></li>   -->

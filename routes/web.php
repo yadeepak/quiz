@@ -113,6 +113,7 @@ Route::group(['middleware'=> 'isadmin'], function(){
   Route::resource('/admin/answers', 'AnswersController');
   Route::resource('/admin/settings', 'SettingController');
   Route::resource('/admin/company', 'CompanyController');
+  Route::resource('/admin/interncompany', 'InternCompanyController');
 
 
   Route::post('/admin/users/destroy', 'DestroyAllController@AllUsersDestroy');

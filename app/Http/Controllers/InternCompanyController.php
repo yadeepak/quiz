@@ -7,7 +7,7 @@ use App\Topic;
 use App\Company;
 use App\Answer;
 use App\User;
-class CompanyController extends Controller
+class InternCompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +18,11 @@ class CompanyController extends Controller
     {
         $company = User::select('*')
         ->where('role', '=', 'C')
-        ->where('company_type', '=', 'fulltype')
+        ->where('company_type', '=', 'interntype')
         ->get();
-        return view('admin.company.indexx', compact('company'));
+        return view('admin.interncompany.indexx', compact('company'));
     }
 
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +54,7 @@ class CompanyController extends Controller
         $password =  bcrypt($request->password);
         $input['password'] = $password;
         $input['role'] = 'C';
-        $input['company_type'] = 'fulltype';
+        $input['company_type'] = 'interntype';
       if ($file = $request->file('company_img')) {
 
         $name = 'company_'.time().$file->getClientOriginalName();

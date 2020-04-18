@@ -18,6 +18,7 @@ class FrntendQuizController extends Controller
        // $request->session()->flush();
         if ($token) {
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
+            $round = $linkDetails->topic->round;
             $signInCheck = $request->session()->has('tokenid');
             $testStart = $request->session()->has('testStart');
             $emailid = $request->session()->get('emailid');
@@ -28,9 +29,9 @@ class FrntendQuizController extends Controller
                 $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
                 $questions = Question::where('topic_id',$linkDetails->topic_id)->get();    
                 
-                return view('quiz.quizstart',compact('user','topics','questions'));
+                return view('quiz.quizstart',compact('user','topics','questions','round'));
             } else  if ($linkDetails && !$testStart ) {
-                return view('quiz.register',['tokenid'=>$token]);
+                return view('quiz.register',['tokenid'=>$token,'round'=>$round]);
             } else {
                 return abort(404,'You do not have access , please contact support');
             }
@@ -43,25 +44,45 @@ class FrntendQuizController extends Controller
     { 
 
        $token = $request->tokenid;
+       $round = $request->round;
+       $validate = [
+        'name' => 'required',
+        'dob' => 'required',
+        'email' => 'required|email',
+        'gender' => 'required',
+        'experience' => 'required',
+        'college' => 'required',
+        'mobile' => 'required|max:10|min:10',
+        'appearing' => 'required',
+       ];
+       if($round==="2"){
+           $validate = [
+            'email' => 'required|email',
+           ];
+       }
        if($token){
-
-        if(
-         $request->validate([
-             'name' => 'required',
-             'dob' => 'required',
-             'email' => 'required|email',
-             'gender' => 'required',
-             'experience' => 'required',
-             'college' => 'required',
-             'mobile' => 'required|max:10|min:10',
-             'appearing' => 'required',
-           ])) {
+        if($request->validate($validate)) {
 
             $input = $request->all();
+            $input['linkId'] = 'dummy'; //to do not  match in round 1
+            if($round==="2"){
+                $input = User::where('email' , $request->email)->first();
+                if(!$input){
+                return abort(404,'You do not have access to this page or this page may have expired');
+                }
+                $isAppeared = $input->result??0;
+                if(!$isAppeared || $isAppeared->passed === 0){
+                    return abort(404,'It seems you could not clear first round.');
+                }
+                //dd('hello2');
+            }else{
+                $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
+                if($check ) return Redirect::back()->withInput($input)->withErrors(['email id or phone number already exists']);    
+            }
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
-            $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
-            if($check ) return Redirect::back()->withInput($input)->withErrors(['email id or phone number already exists']);
-          User::create([
+            $input = User::where('email' , $request->email)->latest()->first();
+            if($linkDetails->id != $input->linkId){
+             User::create([
              'name' => $input['name'],
              'email' => $input['email'],
              'dob' => $input['dob'],
@@ -74,12 +95,13 @@ class FrntendQuizController extends Controller
              'role' => "U",
              'linkId' => $linkDetails->id,
             ]);
+            }
             $quizDetails = Topic::find($linkDetails->topic_id)->description;
               $desc = explode(',',$quizDetails); 
               if(!$request->session()->has('isAllowed')){
               $request->session()->put('isAllowed','1');  
               } 
-           return view('quiz.quizhome',['tokenid'=>$token,'data'=>$request->all(),'desc'=>$desc]);
+           return view('quiz.quizhome',['tokenid'=>$token,'data'=>$input,'desc'=>$desc]);
  
 
 
@@ -155,4 +177,6 @@ class FrntendQuizController extends Controller
                 'pass'=>$pass,'percentage'=>$studentPercentage];  
             return view('quiz.finish',compact('data','user'));      
     }
+
+
 }

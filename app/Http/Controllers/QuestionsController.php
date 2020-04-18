@@ -73,16 +73,23 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-          'topic_id' => 'required',
-          'question' => 'required',
-          'a' => 'required',
-          'b' => 'required',
-          'c' => 'required',
-          'd' => 'required',
-          'answer' => 'required',
-          'question_img' => 'image'
-        ]);
+        $topic = Topic::findOrFail($request->topic_id);
+        if($topic->round == '2'){
+            $request->validate([
+                'topic_id' => 'required',
+                'question' => 'required',
+            ]);
+        } else {
+            $request->validate([
+                'topic_id' => 'required',
+                'question' => 'required',
+                'a' => 'required',
+                'b' => 'required',
+                'c' => 'required',
+                'd' => 'required',
+                'answer' => 'required',
+              ]);
+        }
 
         $input = $request->all();
 

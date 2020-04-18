@@ -48,4 +48,7 @@ class User extends Authenticatable
       }
       return false;
     }
+    public function result() {
+      return $this->hasOne('App\Result');
+    }
 }

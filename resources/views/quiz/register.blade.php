@@ -75,9 +75,10 @@
 {!! Form::open(['method' => 'POST', 'action' => 'FrntendQuizController@registerSubmit']) !!}
 {{csrf_field()}}
 <input type="hidden" value={{$tokenid}} name="tokenid" />
+<input type="hidden" value={{$round}} name="round" />
         <div class="auto-style1">
             <div class="row">
-                <h3 style=" color:slategrey;align-content:center " class="auto-style3">Welcome To DcodeTech</h3>
+                <h3 style=" color:slategrey;align-content:center " class="auto-style3">Welcome To {{$round===2?'Next Round':'DcodeTech'}}</h3>
                 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -86,12 +87,12 @@
             @endforeach
         </ul>
     </div>
+    </div>
 @endif
 
-
+@if($round===1)
 
 <div class="form-row">
-
 <div class="form-group col-md-6">
       <label for="name">Full Name</label>
       <input type="text" name="name" class="form-control" id="name" placeholder="Full Name" value="{{ old('name')}}" >
@@ -163,8 +164,12 @@
       </select>
     </div>  
 
-  
-
+  @endif
+@if($round===2)
+<div class="form-group" style="padding: 20px 0">
+      <input type="text" name="email" class="form-control p-2" id="email" placeholder="Enter your email id" value="{{ old('email')}}" >
+    </div>
+@endif
   
         
             

@@ -33,39 +33,43 @@
                   {!! Form::textarea('question', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Question', 'rows'=>'8', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('question') }}</small>
                 </div>
-                <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
+                @if($topic->round == '1')
+                <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }} round1">
                     {!! Form::label('answer', 'Correct Answer') !!}
                     <span class="required">*</span>
                     {!! Form::select('answer', array('A'=>'A', 'B'=>'B', 'C'=>'C', 'D'=>'D'),null, ['class' => 'form-control select2', 'required' => 'required', 'placeholder'=>'']) !!}
                     <small class="text-danger">{{ $errors->first('answer') }}</small>
                 </div>
+                @endif
               </div>
+              @if($topic->round == '1')
               <div class="col-md-4">
-                <div class="form-group{{ $errors->has('a') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('a') ? ' has-error' : '' }} round1">
                   {!! Form::label('a', 'A - Option') !!}
                   <span class="required">*</span>
                   {!! Form::text('a', null, ['class' => 'form-control', 'placeholder' => 'Please Enter A Option', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('a') }}</small>
                 </div>
-                <div class="form-group{{ $errors->has('b') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('b') ? ' has-error' : '' }} round1">
                   {!! Form::label('b', 'B - Option') !!}
                   <span class="required">*</span>
                   {!! Form::text('b', null, ['class' => 'form-control', 'placeholder' => 'Please Enter B Option', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('b') }}</small>
                 </div>
-                <div class="form-group{{ $errors->has('c') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('c') ? ' has-error' : '' }} round1">
                   {!! Form::label('c', 'C - Option') !!}
                   <span class="required">*</span>
                   {!! Form::text('c', null, ['class' => 'form-control', 'placeholder' => 'Please Enter C Option', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('c') }}</small>
                 </div>
-                <div class="form-group{{ $errors->has('d') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('d') ? ' has-error' : '' }} round1">
                   {!! Form::label('d', 'D - Option') !!}
                   <span class="required">*</span>
                   {!! Form::text('d', null, ['class' => 'form-control', 'placeholder' => 'Please Enter D Option', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('d') }}</small>
                 </div>
               </div>
+              @endif
               <div class="col-md-4">
                 <div class="form-group{{ $errors->has('code_snippet') ? ' has-error' : '' }}">
                     {!! Form::label('code_snippet', 'Code Snippets') !!}
@@ -155,15 +159,14 @@
           <tr>
             <th>#</th>
             <th>Questions</th>
+            @if($topic == '1')
             <th>A - Option</th>
             <th>B - Option</th>
             <th>C - Option</th>
             <th>D - Option</th>
             <th>Correct Answer</th>
+            @endif
             <th>Code Snippet</th>
-            <th>Answer Explanation</th>
-            <th>Image</th>
-            <th>Video Link</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -178,25 +181,19 @@
                   {{$key+1}}
                 </td>
                 <td>{{$question->question}}</td>
+                @if($topic == '1')
                 <td>{{$question->a}}</td>
                 <td>{{$question->b}}</td>
                 <td>{{$question->c}}</td>
                 <td>{{$question->d}}</td>
                 <td>{{$question->$answer}}</td>
+                @endif
                 <td>
                   <pre>
                     {{{$question->code_snippet}}}
                   </pre>
                 </td>
-                <td>
-                  {{$question->answer_exp}}
-                </td>
-                <td>
-                  <img src="{{asset('/images/questions/'.$question->question_img)}}" class="img-responsive" alt="image">
-                </td>
-                <td>
-                  {{$question->question_video_link}}
-                </td>
+              
                 <td>
                   <!-- Edit Button -->
                   <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$question->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>
@@ -244,13 +241,17 @@
                               {!! Form::textarea('question', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Question', 'rows'=>'8', 'required' => 'required']) !!}
                               <small class="text-danger">{{ $errors->first('question') }}</small>
                             </div>
+                @if($topic->round == '1')
+
                             <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
                                 {!! Form::label('answer', 'Correct Answer') !!}
                                 <span class="required">*</span>
                                 {!! Form::select('answer', array('A'=>'A', 'B'=>'B', 'C'=>'C', 'D'=>'D'),null, ['class' => 'form-control select2', 'required' => 'required', 'placeholder'=>'']) !!}
                                 <small class="text-danger">{{ $errors->first('answer') }}</small>
                             </div>
+                            @endif
                           </div>
+                @if($topic->round == '1')
                           <div class="col-md-4">
                             <div class="form-group{{ $errors->has('a') ? ' has-error' : '' }}">
                               {!! Form::label('a', 'A - Option') !!}
@@ -277,6 +278,7 @@
                               <small class="text-danger">{{ $errors->first('d') }}</small>
                             </div>
                           </div>
+                          @endif
                           <div class="col-md-4">
                             <div class="form-group{{ $errors->has('code_snippet') ? ' has-error' : '' }}">
                                 {!! Form::label('code_snippet', 'Code Snippets') !!}

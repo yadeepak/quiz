@@ -27,5 +27,8 @@ class Generatelinks extends Model
     public function student(){
       return $this->hasMany('App\User','linkId','id');
     }
+    public function topic(){
+      return $this->belongsTo('App\Topic');
+    }
 
 }

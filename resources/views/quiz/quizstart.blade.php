@@ -120,7 +120,7 @@ background-color: #B2EBF2;
                 <div class="quesdiv globalques qustion{{$i}}" style="display: none">
                 <h4 class="quesno"><b>Question No .{{$i+1}} </b></h4><br>
                 <p class="mainque"><b>{{$questions[$i]->question}}</b></p>
-                
+                @if($round==1)
                 <div class="custom-control custom-radio">
                 <input type="radio" class="custom-control-input" id="a" name="optradio{{$i}}" value="a">
                 <label class="custom-control-label" for="a">{{$questions[$i]->a}}</label>
@@ -137,6 +137,9 @@ background-color: #B2EBF2;
                 <input type="radio" class="custom-control-input" id="d" name="optradio{{$i}}" value="d">
                 <label class="custom-control-label" for="d">{{$questions[$i]->d}}</label>
                 </div>
+                @elseif($round==2)
+                <textarea class="form-control" rows="8" name="code{{$i}}"></textarea>
+                @endif
                 </div>
             <?php } ?>
             <br>
@@ -157,8 +160,6 @@ $(document).ready(function(){
     $('.globalques').hide();
     $('.qustion0').show();
     $('.active0').addClass('active');
-
-    $('.submitForm')
 })
 function showDiv(id){
     $('.countstyle').removeClass('active');
@@ -166,81 +167,70 @@ function showDiv(id){
     $('.active'+id).addClass('active');
     $('.qustion'+id).fadeIn();
 
-</script>
-
-<script>
-
-document.onkeydown = function() {            
-    switch (event.keyCode) { 
-        case 116 : //F5 button
-            event.returnValue = false;
-            event.keyCode = 0;
-            alert('If you refresh the page your data will be submitted.');
-            return false; 
-        case 82 : //R button
-            if (event.ctrlKey) { 
-                event.returnValue = false; 
-                event.keyCode = 0;  
-            alert('If you refresh the page your data will be submitted.');
-                return false; 
-            } 
-            case 123 : //f12 button
-                event.returnValue = false; 
-                event.keyCode = 0;  
-                return false; 
-            
-    }
 }
+
+// document.onkeydown = function() {            
+//     switch (event.keyCode) { 
+//         case 116 : //F5 button
+//             event.returnValue = false;
+//             event.keyCode = 0;
+//             alert('If you refresh the page your data will be submitted.');
+//             return false; 
+//         case 82 : //R button
+//             if (event.ctrlKey) { 
+//                 event.returnValue = false; 
+//                 event.keyCode = 0;  
+//             alert('If you refresh the page your data will be submitted.');
+//                 return false; 
+//             } 
+//             case 123 : //f12 button
+//                 event.returnValue = false; 
+//                 event.keyCode = 0;  
+//                 return false; 
+            
+//     }
+// }
 
 
   
-window.onload = function() {
-    document.addEventListener("contextmenu", function(e){
-      e.preventDefault();
-    }, false);
-    document.addEventListener("keydown", function(e) {
-    //document.onkeydown = function(e) {
-      // "I" key
-      if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-        disabledEvent(e);
-      }
-      // "J" key
-      if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-        disabledEvent(e);
-      }
-      // "S" key + macOS
-      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-        disabledEvent(e);
-      }
-      // "U" key
-      if (e.ctrlKey && e.keyCode == 85) {
-        disabledEvent(e);
-      }
-      // "F12" key
-      if (event.keyCode == 123) {
-        disabledEvent(e);
-      }
-    }, false);
-    function disabledEvent(e){
-      if (e.stopPropagation){
-        e.stopPropagation();
-      } else if (window.event){
-        window.event.cancelBubble = true;
-      }
-      e.preventDefault();
-      return false;
-    }
-  };
+// window.onload = function() {
+//     document.addEventListener("contextmenu", function(e){
+//       e.preventDefault();
+//     }, false);
+//     document.addEventListener("keydown", function(e) {
+//     //document.onkeydown = function(e) {
+//       // "I" key
+//       if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+//         disabledEvent(e);
+//       }
+//       // "J" key
+//       if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+//         disabledEvent(e);
+//       }
+//       // "S" key + macOS
+//       if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+//         disabledEvent(e);
+//       }
+//       // "U" key
+//       if (e.ctrlKey && e.keyCode == 85) {
+//         disabledEvent(e);
+//       }
+//       // "F12" key
+//       if (event.keyCode == 123) {
+//         disabledEvent(e);
+//       }
+//     }, false);
+//     function disabledEvent(e){
+//       if (e.stopPropagation){
+//         e.stopPropagation();
+//       } else if (window.event){
+//         window.event.cancelBubble = true;
+//       }
+//       e.preventDefault();
+//       return false;
+//     }
+//   };
 
-    </script>
-
-
-@endsection
-
-@section('scripts')
-
-
-<script>
 var counter = {};
 window.addEventListener("load", function(){
 var timing = document.getElementById("timer").value;
@@ -259,13 +249,7 @@ if(counter.end <= 0) {
 clearInterval(counter.ticker);
 counter.end = 0;
 //alert("chincholi");
-
-function submitform(){
-
-document.getElementById("form").submit();
-}
-
-
+submitform(); 
 }
 
 var secs = counter.end;
@@ -274,13 +258,16 @@ secs -= mins * 60;
 
 counter.min.innerHTML = mins + " Min. ";
 counter.sec.innerHTML = secs + " Sec. ";
-submitform(); 
+
 }, 1000);
-
 }
+}
+);
 
+function submitform(){
 
-});
+document.getElementById("form").submit();
+}
 
 </script>
 

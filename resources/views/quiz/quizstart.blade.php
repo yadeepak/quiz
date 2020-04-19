@@ -54,15 +54,6 @@ background-color: #B2EBF2;
 
 @section('top_bar')
 <nav class="navbar navbar-default navbar-static-top">
-    <!-- <div class="logo-main-block">
-      <div class="container">
-        @if ($setting)
-          <a href="{{ url('/') }}" title="{{$setting->welcome_txt}}">
-            <img src="{{asset('/images/logo/'. $setting->logo)}}" class="img-responsive" alt="{{$setting->welcome_txt}}">
-          </a>
-        @endif
-      </div>
-    </div> -->
     <div class="nav-bar">
         <div class="container-fluid">
             <div class="row">
@@ -100,11 +91,11 @@ background-color: #B2EBF2;
 <br>
     <div class="row">
         <div class="col-md-3" style="border-right:1px solid;">
-       
+        <input type="hidden" class="custom-control-input" id="timer" name="timer" value="{{$topics['timer']}}">
             <div class="">
             
                 <?php for($i=0;$i<count($questions);$i++) { ?>
-                    <a class="countstyle active{{$i}}" style="" id="<?php echo $i; ?>no" onClick="showDiv(<?php echo $i; ?>);" ><?php echo $i+1; ?></a>
+                    <a class="countstyle active{{$i}}" id="<?php echo $i; ?>no" onClick="showDiv(<?php echo $i; ?>);" ><?php echo $i+1; ?></a>
                 <?php
                     if ( (($i+1) % 5) == 0)
                     {
@@ -124,8 +115,7 @@ background-color: #B2EBF2;
         <div class="main" id="ques">
         
             <form action="{{route('submitTest')}}" method="post" id="form" >
-            {{csrf_field()}}
-           
+            {{csrf_field()}}      
             <?php for($i=0;$i<count($questions);$i++){ ?>
                 <div class="quesdiv globalques qustion{{$i}}" style="display: none">
                 <h4 class="quesno"><b>Question No .{{$i+1}} </b></h4><br>
@@ -133,8 +123,6 @@ background-color: #B2EBF2;
                 
                 <div class="custom-control custom-radio">
                 <input type="radio" class="custom-control-input" id="a" name="optradio{{$i}}" value="a">
-                <input type="hidden" class="custom-control-input" id="timer" name="timer" value="{{$topics['timer']}}">
-
                 <label class="custom-control-label" for="a">{{$questions[$i]->a}}</label>
                 </div>
                 <div class="custom-control custom-radio">
@@ -178,42 +166,11 @@ function showDiv(id){
     $('.active'+id).addClass('active');
     $('.qustion'+id).fadeIn();
 
-
-    
-    // var questionArray = <?php echo json_encode($questions); ?>;
-    // var html = '';
-    // for(var i=0;i<questionArray.length;i++){
-    //     if(i==id){
-    //         html += '<h4>Question No '+(i+1)+'</h4><br>'
-    //         +'<p>'+questionArray[i].question+'</p>' 
-    //         +'<div class="radio">'
-    //         +'<label><input type="radio" name="optradio">'+questionArray[i].a+'</label>'
-    //         +'</div>'
-    //         +'<div class="radio">'
-    //         +'<label><input type="radio" name="optradio">'+questionArray[i].b+'</label>'
-    //         +'</div>'
-    //         +'<div class="radio">'
-    //         +'<label><input type="radio" name="optradio">'+questionArray[i].c+'</label>'
-    //         +'</div>'
-    //         +'<div class="radio">'
-    //         +'<label><input type="radio" name="optradio">'+questionArray[i].d+'</label>'
-    //         +'</div>' ;
-
-    //         $('#ques').html(html);
-    //     }
-    //     console.log(questionArray[i].question); 
-    // }
-
-    
-}
-
 </script>
 
 <script>
 
-document.onkeydown = function() {   
-        console.log(event);
-         
+document.onkeydown = function() {            
     switch (event.keyCode) { 
         case 116 : //F5 button
             event.returnValue = false;

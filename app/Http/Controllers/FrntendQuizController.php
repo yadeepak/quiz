@@ -80,8 +80,11 @@ class FrntendQuizController extends Controller
                 if($check ) return Redirect::back()->withInput($input)->withErrors(['email id or phone number already exists']);    
             }
             $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
-            $input = User::where('email' , $request->email)->latest()->first();
-            if($linkDetails->id != $input->linkId){
+            $resp = User::where('email' , $request->email)->latest()->first();
+            if($resp){
+                $input = $resp;
+            }
+            if($linkDetails->id != $input['linkId']){
              User::create([
              'name' => $input['name'],
              'email' => $input['email'],

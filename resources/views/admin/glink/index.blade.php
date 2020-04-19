@@ -63,6 +63,7 @@
             <th>Quiz Title</th>
             <th>Link</th>
             <th>End Time</th>
+            <th>Expire</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -78,6 +79,7 @@
                 <td>{{$glink->title}}</td>
                 <td>{{url('mcq-quiz')}}/{{$glink->token}}</td>
                 <td>{{$glink->endtime}} mins</td>
+                <td>{{$glink->expired==1?'Expired':'Not Expired'}} </td>
                 <td>
                   <!-- Edit Button -->
                   <!-- <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$glink->id}}EditModal"><i class="fa fa-edit"></i> Edit</a> -->

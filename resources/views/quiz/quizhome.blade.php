@@ -74,9 +74,9 @@
         <div class="col-md-6">
         <div class="sidenav">
          <div class="login-main-text">
-            <h2>Welcome</h2>
+            <h2>Welcome , {{$data['name']}}</h2>
             <h2>Start a Test</h2>
-            <p>Note : read the notes right side of screen</p>
+            <p>Please read the notes right side of screen</p>
             <form action="{{route('quizstart')}}" method="post" class="onsubmit">
                     {{ csrf_field() }}
                     <input type="hidden" value={{$tokenid}} name="tokenid"/>
@@ -96,6 +96,8 @@
                 @foreach($desc as $description)
                 <li>{{$description}}</li>
                 @endforeach
+             @else
+             <li>random questions</li>
              @endif
              </ul>
             </div>

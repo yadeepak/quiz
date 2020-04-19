@@ -116,7 +116,6 @@
               <th>Mobile No.</th>
               <th>City</th>
               <th>Address</th>
-              <th>User Role</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -134,7 +133,6 @@
                   <td>{{$user->mobile}}</td>
                   <td>{{$user->city}}</td>
                   <td>{{$user->address}}</td>
-                  <td>{{$user->role == 'S' ? 'Student' : '-'}}</td>
                   <td>
                     <!-- Edit Button -->
                  <!--   <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$user->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>   -->

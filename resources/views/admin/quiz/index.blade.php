@@ -97,8 +97,8 @@
 
               <div class="col-md-6">
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                  {!! Form::label('description', 'Description') !!}
-                  {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Description', 'rows' => '8']) !!}
+                  {!! Form::label('description', 'topics covered in this quiz') !!}
+                  {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'javascript , html , mathematic, etc.', 'rows' => '8']) !!}
                   <small class="text-danger">{{ $errors->first('description') }}</small>
                 </div>
               </div>
@@ -124,7 +124,7 @@
           <tr>
             <th>#</th>
             <th>Quiz Title</th>
-            <th>Description</th>
+            <th>Topics Covered</th>
             <th>Per Question Mark</th>
             <th>Time</th>
             <th>Minimum Percentage</th>
@@ -243,8 +243,8 @@
 
                           <div class="col-md-6">
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                              {!! Form::label('description', 'Description') !!}
-                              {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Description']) !!}
+                              {!! Form::label('description', 'topics covered in this quiz') !!}
+                              {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'javascript , html , mathematic, etc.']) !!}
                               <small class="text-danger">{{ $errors->first('description') }}</small>
                             </div>
                           </div>

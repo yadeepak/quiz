@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Generatelinks;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
+
 class ExpireLink extends Command
 {
     /**
@@ -34,6 +36,7 @@ class ExpireLink extends Command
     /**
      * Execute the console command.
      *
+ 
      * @return mixed
      */
     public function handle()
@@ -48,6 +51,7 @@ class ExpireLink extends Command
                 $iff = Carbon::parse($now)->greaterThanOrEqualTo($startDateTime); // true
                 $diff_in_minutes = $now->diffInMinutes($startDateTime);
                 if($iff && $diff_in_minutes >= $expireInMinutes){
+                    Log::info('expiring link id: '.$activeLink->id);
                    $update =  Generatelinks::find($activeLink->id);
                    $update->expired = 1;
                    $update->save();

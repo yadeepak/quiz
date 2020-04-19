@@ -18,7 +18,7 @@ class CompanyController extends Controller
     {
         $company = User::select('*')
         ->where('role', '=', 'C')
-        ->where('company_type', '=', 'fulltype')
+        ->where('company_type', '=', 'fulltime')
         ->get();
         return view('admin.company.indexx', compact('company'));
     }
@@ -55,7 +55,7 @@ class CompanyController extends Controller
         $password =  bcrypt($request->password);
         $input['password'] = $password;
         $input['role'] = 'C';
-        $input['company_type'] = 'fulltype';
+        $input['company_type'] = 'fulltime';
       if ($file = $request->file('company_img')) {
 
         $name = 'company_'.time().$file->getClientOriginalName();

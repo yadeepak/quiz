@@ -64,7 +64,7 @@ background-color: #B2EBF2;
       </div>
     </div> -->
     <div class="nav-bar">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="navbar-header">
@@ -81,7 +81,7 @@ background-color: #B2EBF2;
                         <!-- Right Side Of Navbar -->
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
-                            
+                  <li class="textcolor"><a href="#" ><span style="color:red"><span id="min" style="font-size:19px"></span><span id="sec" style="font-size:17px"> </span></span></a></li>
                   <li class="textcolor"><a href="#" ><span style="color:blue">{{$user['name']}}</span></a></li>
                   <li class="textcolor"><a href="#" ><span style="color:blue">{{$user['email']}}</span></a></li>
                   <li class="textcolor"><a href="#" ><span style="color:blue">{{$user['mobile']}}</span></a></li>
@@ -100,10 +100,10 @@ background-color: #B2EBF2;
 <br>
     <div class="row">
         <div class="col-md-3" style="border-right:1px solid;">
-        
+       
             <div class="">
             
-                <?php for($i=0;$i<count($questions);$i++){ ?>
+                <?php for($i=0;$i<count($questions);$i++) { ?>
                     <a class="countstyle active{{$i}}" style="" id="<?php echo $i; ?>no" onClick="showDiv(<?php echo $i; ?>);" ><?php echo $i+1; ?></a>
                 <?php
                     if ( (($i+1) % 5) == 0)
@@ -117,17 +117,24 @@ background-color: #B2EBF2;
 
         </div>
 
+
+       
+
         <div class="col-md-9">
         <div class="main" id="ques">
         
-            <form action="{{route('submitTest')}}" method="post" >
+            <form action="{{route('submitTest')}}" method="post" id="form" >
             {{csrf_field()}}
+           
             <?php for($i=0;$i<count($questions);$i++){ ?>
                 <div class="quesdiv globalques qustion{{$i}}" style="display: none">
                 <h4 class="quesno"><b>Question No .{{$i+1}} </b></h4><br>
                 <p class="mainque"><b>{{$questions[$i]->question}}</b></p>
+                
                 <div class="custom-control custom-radio">
                 <input type="radio" class="custom-control-input" id="a" name="optradio{{$i}}" value="a">
+                <input type="hidden" class="custom-control-input" id="timer" name="timer" value="{{$topics['timer']}}">
+
                 <label class="custom-control-label" for="a">{{$questions[$i]->a}}</label>
                 </div>
                 <div class="custom-control custom-radio">
@@ -202,9 +209,6 @@ function showDiv(id){
 
 </script>
 
-@endsection
-
-@section('scripts')
 <script>
 
 document.onkeydown = function() {   
@@ -272,4 +276,55 @@ window.onload = function() {
   };
 
     </script>
+
+
+@endsection
+
+@section('scripts')
+
+
+<script>
+var counter = {};
+window.addEventListener("load", function(){
+var timing = document.getElementById("timer").value;
+counter.end = timing * 60;
+
+counter.min = document.getElementById("min");
+counter.sec = document.getElementById("sec");
+
+if(counter.end > 0) {
+
+counter.ticker = setInterval(function() {
+
+counter.end--;
+if(counter.end <= 0) {
+
+clearInterval(counter.ticker);
+counter.end = 0;
+//alert("chincholi");
+
+function submitform(){
+
+document.getElementById("form").submit();
+}
+
+
+}
+
+var secs = counter.end;
+var mins = Math.floor(secs/ 60);
+secs -= mins * 60;
+
+counter.min.innerHTML = mins + " Min. ";
+counter.sec.innerHTML = secs + " Sec. ";
+submitform(); 
+}, 1000);
+
+}
+
+
+});
+
+</script>
+
 @endsection

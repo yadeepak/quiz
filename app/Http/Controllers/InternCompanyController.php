@@ -15,10 +15,10 @@ class InternCompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         $company = User::select('*')
         ->where('role', '=', 'C')
-        ->where('company_type', '=', 'interntype')
+        ->where('company_type', '=', 'internship')
         ->get();
         return view('admin.interncompany.indexx', compact('company'));
     }
@@ -54,7 +54,7 @@ class InternCompanyController extends Controller
         $password =  bcrypt($request->password);
         $input['password'] = $password;
         $input['role'] = 'C';
-        $input['company_type'] = 'interntype';
+        $input['company_type'] = 'internship';
       if ($file = $request->file('company_img')) {
 
         $name = 'company_'.time().$file->getClientOriginalName();

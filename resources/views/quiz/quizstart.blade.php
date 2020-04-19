@@ -43,10 +43,40 @@ background-color: #B2EBF2;
     color: #03A9F4; 
 }
 .mainque {
-
+    margin-top: 10px;
     color: #29B6F6;
-    font-size: 16px;
+    font-size: 20px;
 }
+
+div.radio-holder {
+  padding: 5px;
+  
+}
+
+input[type="radio"] {
+ display:none;
+}
+input[type="radio"]:checked+label {
+  border-bottom: 2px solid #222222;
+  color: red;
+  font-size: 18px;
+  padding-bottom: 0px;
+  
+}
+
+label {
+
+    cursor:pointer;
+
+}
+
+.pad {
+
+margin-top : 10px;
+
+} 
+
+
 
 
   </style>
@@ -109,33 +139,39 @@ background-color: #B2EBF2;
         </div>
 
 
-       
+        <?php // var_dump($questions); exit(); ?>
 
         <div class="col-md-9">
         <div class="main" id="ques">
         
-            <form action="{{route('submitTest')}}" method="post" id="form" >
+            <form action="{{route('submitTest')}}" method="post" id="form">
             {{csrf_field()}}      
             <?php for($i=0;$i<count($questions);$i++){ ?>
                 <div class="quesdiv globalques qustion{{$i}}" style="display: none">
-                <h4 class="quesno"><b>Question No .{{$i+1}} </b></h4><br>
-                <p class="mainque"><b>{{$questions[$i]->question}}</b></p>
+                <h4 class="quesno"><b>Question No . </b></h4><br>
+                <h1 class="mainque"><b>{{$i+1}} :- {{$questions[$i]->question}}</b></h1>
                 @if($round==1)
-                <div class="custom-control custom-radio">
+
+                <div class="custom-control custom-radio radio-holder">
                 <input type="radio" class="custom-control-input" id="a" name="optradio{{$i}}" value="a">
-                <label class="custom-control-label" for="a">{{$questions[$i]->a}}</label>
+                
+                <label class="custom-control-label pad" for="a"><i class="fa fa-check"></i> {{$questions[$i]->a}}</label>
+
                 </div>
-                <div class="custom-control custom-radio">
+                    
+                <div class="custom-control custom-radio radio-holder">
                 <input type="radio" class="custom-control-input" id="b" name="optradio{{$i}}" value="b">
-                <label class="custom-control-label" for="b">{{$questions[$i]->b}}</label>
+                <label class="custom-control-label pad" for="b"><i class="fa fa-check"></i> {{$questions[$i]->b}}</label>
                 </div>
-                <div class="custom-control custom-radio">
+                
+                <div class="custom-control custom-radio radio-holder">
                 <input type="radio" class="custom-control-input" id="c" name="optradio{{$i}}" value="c">
-                <label class="custom-control-label" for="c">{{$questions[$i]->c}}</label>
+                <label class="custom-control-label pad" for="c"><i class="fa fa-check"></i> {{$questions[$i]->c}}</label>
                 </div>
-                <div class="custom-control custom-radio">
+                
+                <div class="custom-control custom-radio radio-holder">
                 <input type="radio" class="custom-control-input" id="d" name="optradio{{$i}}" value="d">
-                <label class="custom-control-label" for="d">{{$questions[$i]->d}}</label>
+                <label class="custom-control-label pad" for="d"><i class="fa fa-check"></i> {{$questions[$i]->d}}</label>
                 </div>
                 @elseif($round==2)
                 <textarea class="form-control" rows="8" name="code{{$i}}"></textarea>
@@ -160,6 +196,24 @@ $(document).ready(function(){
     $('.globalques').hide();
     $('.qustion0').show();
     $('.active0').addClass('active');
+
+
+   
+  $("label").click(function(e){
+    e.preventDefault();
+    $check = $(this).prev();
+    if($check.prop('checked'))
+      $check.prop( "checked", false );
+    else 
+      $check.prop( "checked", true );
+      
+    //console.log($check.prop("checked"));
+  });
+
+
+
+
+
 })
 function showDiv(id){
     $('.countstyle').removeClass('active');
@@ -168,6 +222,8 @@ function showDiv(id){
     $('.qustion'+id).fadeIn();
 
 }
+
+ 
 
 // document.onkeydown = function() {            
 //     switch (event.keyCode) { 
@@ -244,11 +300,24 @@ if(counter.end > 0) {
 counter.ticker = setInterval(function() {
 
 counter.end--;
+
+
+if(counter.end <= 300) {
+
+
+setInterval(blinker, 1000);
+
+
+
+}
+
+
+
+
 if(counter.end <= 0) {
 
 clearInterval(counter.ticker);
 counter.end = 0;
-//alert("chincholi");
 submitform(); 
 }
 
@@ -268,6 +337,20 @@ function submitform(){
 
 document.getElementById("form").submit();
 }
+
+
+
+function blinker() {
+
+$('#min').fadeOut(500);
+$('#min').fadeIn(500);
+
+$('#sec').fadeOut(500);
+$('#sec').fadeIn(500);
+}
+
+
+
 
 </script>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2020 at 11:41 AM
+-- Generation Time: Apr 19, 2020 at 12:43 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -158,7 +158,7 @@ INSERT INTO `generatelinks` (`id`, `topic_id`, `token`, `endtime`, `startTime`, 
 (5, 6, '3ffa25e9', 35, '2020-04-14 17:15:50', 1, '2020-04-14 11:25:47', '2020-04-19 07:29:38'),
 (6, 7, '8202ce87', 60, '2020-04-14 20:58:36', 1, '2020-04-14 15:27:44', '2020-04-19 07:29:38'),
 (7, 8, '0bcc2216', 30, '2020-04-14 21:01:29', 1, '2020-04-14 15:30:57', '2020-04-19 07:29:38'),
-(8, 9, '6f94a838', 60, NULL, 0, '2020-04-18 19:59:32', '2020-04-18 19:59:32');
+(8, 9, '6f94a838', 60, '2020-04-19 15:45:55', 0, '2020-04-18 19:59:32', '2020-04-19 10:15:55');
 
 -- --------------------------------------------------------
 
@@ -266,7 +266,8 @@ INSERT INTO `questions` (`id`, `topic_id`, `question`, `a`, `b`, `c`, `d`, `answ
 (9, 6, 'select one out of 4', 'A', 'B', 'C', 'D', 'A', NULL, NULL, '2020-04-14 11:24:25', '2020-04-14 11:24:25', NULL, NULL),
 (10, 7, 'Select options from below list.', 'pm', 'am', 'ant', 'post', 'D', NULL, NULL, '2020-04-14 15:27:07', '2020-04-14 15:27:07', NULL, NULL),
 (11, 8, 'what is the real number', '1', '1.0', 'e', '0', 'A', NULL, NULL, '2020-04-14 15:30:22', '2020-04-14 15:30:22', NULL, NULL),
-(12, 9, 'write a code to display', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-18 18:23:34', '2020-04-18 18:23:34', NULL, NULL);
+(12, 9, 'write a code to display', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-18 18:23:34', '2020-04-18 18:23:34', NULL, NULL),
+(13, 9, 'write a code to display integeres', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-18 18:23:34', '2020-04-18 18:23:34', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -410,7 +411,8 @@ INSERT INTO `topics` (`id`, `title`, `description`, `per_q_mark`, `timer`, `show
 (6, 'Aptitude', NULL, 5, 32, '0', NULL, 'Admin', 1, 40, 1, '2020-04-14 11:16:44', '2020-04-14 11:16:44'),
 (7, 'company quiz', NULL, 5, 25, '0', NULL, 'Abc', 1, 40, 31, '2020-04-14 15:25:28', '2020-04-14 15:25:28'),
 (8, 'quiz  2', NULL, 5, 30, '0', NULL, 'Abc', 1, 35, 31, '2020-04-14 15:29:35', '2020-04-14 15:29:35'),
-(9, 'When to use + and Number() with string numbers?', 'ewf', 4, 544, '0', NULL, 'Admin', 2, 44, 1, '2020-04-18 17:29:06', '2020-04-18 17:29:06');
+(9, 'When to use + and Number() with string numbers?', 'ewf', 4, 544, '0', NULL, 'Admin', 2, 44, 1, '2020-04-18 17:29:06', '2020-04-18 17:29:06'),
+(10, 'Quiz 2 round 2', 'ewf', 4, 50, '0', NULL, 'Admin', 2, 44, 1, '2020-04-18 17:29:06', '2020-04-18 17:29:06');
 
 -- --------------------------------------------------------
 
@@ -475,7 +477,8 @@ INSERT INTO `users` (`id`, `name`, `company_website`, `company_type`, `email`, `
 (43, 'Deepak yadav', NULL, NULL, 'gaurav12@codalyze.com', NULL, '0845206244', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-18 20:44:53', '2020-04-18 20:44:53', '2020-04-22', '0', '0', 'asdas', 'male', 8, NULL),
 (46, 'Deepak yadav', NULL, NULL, 'ga4urav@codalyze.com', NULL, '0845206213', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-19 05:54:28', '2020-04-19 05:54:28', '2020-04-16', '0', '0', 'asdas', 'male', 7, NULL),
 (47, 'Deepak yadav', NULL, NULL, 'admi12n@gmail.com', NULL, '1234567890', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-19 09:01:05', '2020-04-19 09:01:05', '2020-04-16', '0', '0', 'asdas', 'male', 4, NULL),
-(48, 'Deepak yadav', NULL, NULL, 'gaura123v@codalyze.com', NULL, '1234567891', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-19 09:02:47', '2020-04-19 09:02:47', '2020-04-16', '0', '0', 'asdas', 'male', 4, NULL);
+(48, 'Deepak yadav', NULL, NULL, 'gaura123v@codalyze.com', NULL, '1234567891', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-19 09:02:47', '2020-04-19 09:02:47', '2020-04-16', '0', '0', 'asdas', 'male', 4, NULL),
+(49, 'Deepak yadav', NULL, NULL, 'gaura123v@codalyze.com', NULL, '1234567891', '04 , jai mata di chwal , agasan road, mhatre gate nagar', NULL, 'U', NULL, '2020-04-19 10:15:30', '2020-04-19 10:15:30', '2020-04-16', '0', '0', 'asdas', 'male', 8, NULL);
 
 --
 -- Indexes for dumped tables
@@ -651,7 +654,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `results`
@@ -675,7 +678,7 @@ ALTER TABLE `social_icons`
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `topic_user`
@@ -687,7 +690,7 @@ ALTER TABLE `topic_user`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

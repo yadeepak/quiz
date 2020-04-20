@@ -7,6 +7,7 @@ use App\Answer;
 use App\copyrighttext;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -267,3 +268,8 @@ Route::post('/admin/moresettings/socialicons/insert','SocialController@store')->
 
 
 
+  Route::get('/foo', function () {
+    $exitCode = Artisan::call('delete:files');
+
+    //
+});

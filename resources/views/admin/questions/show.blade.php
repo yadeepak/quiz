@@ -159,7 +159,7 @@
           <tr>
             <th>#</th>
             <th>Questions</th>
-            @if($topic == '1')
+            @if($topic->round== '1')
             <th>A - Option</th>
             <th>B - Option</th>
             <th>C - Option</th>
@@ -171,6 +171,7 @@
           </tr>
         </thead>
         <tbody>
+          
           @if ($questions)
             @foreach ($questions as $key => $question)
               @php
@@ -181,7 +182,7 @@
                   {{$key+1}}
                 </td>
                 <td>{{$question->question}}</td>
-                @if($topic == '1')
+                @if($topic->round== '1')
                 <td>{{$question->a}}</td>
                 <td>{{$question->b}}</td>
                 <td>{{$question->c}}</td>

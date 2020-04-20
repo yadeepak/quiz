@@ -265,9 +265,6 @@ $setting = App\Setting::first();
         'csvHtml5',
         'excelHtml5',
         'colvis',
-      ],
-      columnDefs: [
-        { targets: [7,8,9,10], visible: false},
       ]
     });
 

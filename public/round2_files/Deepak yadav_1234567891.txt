@@ -1,0 +1,15 @@
+1) write a code to display
+
+Answer: 
+
+if(){
+}else{
+}
+
+2) write a code to display integeres
+
+Answer: 
+
+for(){
+}
+

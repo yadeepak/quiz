@@ -134,8 +134,12 @@ Route::get('/admin/profile', function(){
   }
 });
 Route::get('/admin/my_reports', 'MyReportsController@index')->name('my_report');
-
 Route::get('/admin/my_reports/{my_reports}', 'MyReportsController@show')->name('my_report_show');
+
+Route::get('/admin/downloadtxt/{filename}', 'AllReportController@downloadtxt')->name('downloadtxt');
+Route::post('/admin/ajaxchange', 'AllReportController@ajaxchangevalue')->name('ajaxchange');
+
+
 
 
 

@@ -139,7 +139,7 @@ class FrntendQuizController extends Controller
         $token = $request->session()->get('tokenid');
         $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $emailid = $request->session()->get('emailid');
-            $user = User::where(['email' => $emailid])->lastest()->first();
+            $user = User::where(['email' => $emailid])->latest()->first();
             $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
 
             if($topics['round'] == 2){

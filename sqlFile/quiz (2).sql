@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 19, 2020 at 12:43 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 20, 2020 at 07:12 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,7 +59,7 @@ CREATE TABLE `companies` (
   `company_website` varchar(191) NOT NULL,
   `username` varchar(191) NOT NULL,
   `password` varchar(191) NOT NULL,
-  `address` text DEFAULT NULL,
+  `address` text,
   `city` varchar(191) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -139,10 +139,10 @@ CREATE TABLE `faq` (
 CREATE TABLE `generatelinks` (
   `id` int(11) NOT NULL,
   `topic_id` int(11) DEFAULT NULL,
-  `token` text DEFAULT NULL,
+  `token` text,
   `endtime` int(11) DEFAULT NULL,
   `startTime` datetime DEFAULT NULL,
-  `expired` tinyint(1) NOT NULL DEFAULT 0,
+  `expired` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -242,8 +242,8 @@ CREATE TABLE `questions` (
   `c` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `d` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `answer` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code_snippet` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `answer_exp` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code_snippet` text COLLATE utf8mb4_unicode_ci,
+  `answer_exp` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `question_img` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -286,7 +286,8 @@ CREATE TABLE `results` (
   `unattemptedQ` int(100) NOT NULL,
   `percentage` int(100) DEFAULT NULL,
   `passed` tinyint(1) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `filename` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -294,15 +295,21 @@ CREATE TABLE `results` (
 -- Dumping data for table `results`
 --
 
-INSERT INTO `results` (`id`, `user_id`, `topic_id`, `token`, `totalQ`, `rightQ`, `wrongQ`, `unattemptedQ`, `percentage`, `passed`, `created_at`, `updated_at`) VALUES
-(19, 37, 5, '5c09b72a', 5, 1, 0, 4, 20, 0, '2020-04-14 11:41:41', '2020-04-14 11:27:55'),
-(20, 38, 5, '5c09b72a', 5, 1, 4, 0, 20, 0, '2020-04-14 11:41:44', '2020-04-14 11:32:45'),
-(21, 39, 6, '3ffa25e9', 4, 2, 2, 0, 50, 1, '2020-04-14 11:46:08', '2020-04-14 11:46:08'),
-(22, 40, 7, '8202ce87', 1, 1, 0, 0, 100, 1, '2020-04-14 15:28:40', '2020-04-14 15:28:40'),
-(23, 41, 8, '0bcc2216', 1, 1, 0, 0, 100, 1, '2020-04-14 15:31:36', '2020-04-14 15:31:36'),
-(24, 42, 8, '0bcc2216', 1, 0, 1, 0, 0, 0, '2020-04-14 15:32:07', '2020-04-14 15:32:07'),
-(25, 46, 8, '0bcc2216', 1, 1, 0, 0, 100, 1, '2020-04-19 06:58:49', '2020-04-19 06:58:49'),
-(26, 48, 5, '5c09b72a', 5, 3, 2, 0, 60, 1, '2020-04-19 09:08:50', '2020-04-19 09:08:50');
+INSERT INTO `results` (`id`, `user_id`, `topic_id`, `token`, `totalQ`, `rightQ`, `wrongQ`, `unattemptedQ`, `percentage`, `passed`, `filename`, `created_at`, `updated_at`) VALUES
+(19, 37, 5, '5c09b72a', 5, 1, 0, 4, 20, 0, NULL, '2020-04-14 11:41:41', '2020-04-14 11:27:55'),
+(20, 38, 5, '5c09b72a', 5, 1, 4, 0, 20, 0, NULL, '2020-04-14 11:41:44', '2020-04-14 11:32:45'),
+(21, 39, 6, '3ffa25e9', 4, 2, 2, 0, 50, 1, NULL, '2020-04-14 11:46:08', '2020-04-14 11:46:08'),
+(22, 40, 7, '8202ce87', 1, 1, 0, 0, 100, 1, NULL, '2020-04-14 15:28:40', '2020-04-14 15:28:40'),
+(23, 41, 8, '0bcc2216', 1, 1, 0, 0, 100, 1, NULL, '2020-04-14 15:31:36', '2020-04-14 15:31:36'),
+(24, 42, 8, '0bcc2216', 1, 0, 1, 0, 0, 0, NULL, '2020-04-14 15:32:07', '2020-04-14 15:32:07'),
+(25, 46, 8, '0bcc2216', 1, 1, 0, 0, 100, 1, NULL, '2020-04-19 06:58:49', '2020-04-19 06:58:49'),
+(26, 48, 5, '5c09b72a', 5, 3, 2, 0, 60, 1, NULL, '2020-04-19 09:08:50', '2020-04-19 09:08:50'),
+(27, 48, 9, '6f94a838', 2, 0, 0, 2, 0, NULL, NULL, '2020-04-19 19:13:15', '2020-04-19 17:29:37'),
+(28, 48, 9, '6f94a838', 2, 0, 0, 2, 0, 0, NULL, '2020-04-19 17:40:07', '2020-04-19 17:40:07'),
+(29, 48, 9, '6f94a838', 2, 0, 0, 2, 0, 0, NULL, '2020-04-19 17:43:26', '2020-04-19 17:43:26'),
+(30, 48, 9, '6f94a838', 2, 0, 0, 2, 0, 0, NULL, '2020-04-19 17:51:49', '2020-04-19 17:51:49'),
+(31, 48, 9, '6f94a838', 2, 0, 0, 2, 0, 0, NULL, '2020-04-19 17:57:52', '2020-04-19 17:57:52'),
+(32, 48, 9, '6f94a838', 2, 0, 0, 0, 0, NULL, NULL, '2020-04-19 18:47:06', '2020-04-19 18:47:06');
 
 -- --------------------------------------------------------
 
@@ -314,7 +321,7 @@ CREATE TABLE `sessions` (
   `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -330,13 +337,13 @@ CREATE TABLE `settings` (
   `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `favicon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `welcome_txt` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Quick Quiz',
-  `userquiz` tinyint(1) DEFAULT 0,
+  `userquiz` tinyint(1) DEFAULT '0',
   `w_email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `currency_symbol` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `google_login` tinyint(1) DEFAULT 0,
-  `fb_login` tinyint(1) DEFAULT 0,
-  `gitlab_login` tinyint(1) DEFAULT 0,
+  `google_login` tinyint(1) DEFAULT '0',
+  `fb_login` tinyint(1) DEFAULT '0',
+  `gitlab_login` tinyint(1) DEFAULT '0',
   `right_setting` tinyint(1) DEFAULT NULL,
   `element_setting` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -389,7 +396,7 @@ CREATE TABLE `tests` (
 CREATE TABLE `topics` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `per_q_mark` int(11) NOT NULL,
   `timer` int(11) DEFAULT NULL,
   `show_ans` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -440,12 +447,12 @@ CREATE TABLE `topic_user` (
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_website` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_website` text COLLATE utf8mb4_unicode_ci,
   `company_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` char(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -457,7 +464,7 @@ CREATE TABLE `users` (
   `college` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `linkId` int(255) DEFAULT NULL,
-  `company_img` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `company_img` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -660,7 +667,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `settings`

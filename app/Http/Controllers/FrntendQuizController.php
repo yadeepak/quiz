@@ -84,8 +84,10 @@ class FrntendQuizController extends Controller
             if($resp){
                 $input = $resp;
             }
-            if($linkDetails->id != $input['linkId']){
-             User::create([
+            if($linkDetails->id == $input['linkId']){
+                return abort(404,'You already have appeared for this test.');
+            }
+            User::create([
              'name' => $input['name'],
              'email' => $input['email'],
              'dob' => $input['dob'],
@@ -98,17 +100,15 @@ class FrntendQuizController extends Controller
              'role' => "U",
              'linkId' => $linkDetails->id,
             ]);
-            }
+            
             $quizDetails = Topic::find($linkDetails->topic_id)->description;
               $desc = explode(',',$quizDetails); 
               if(!$request->session()->has('isAllowed')){
               $request->session()->put('isAllowed','1');  
               } 
            return view('quiz.quizhome',['tokenid'=>$token,'data'=>$input,'desc'=>$desc]);
- 
-
-
-           }
+            
+        }
 
            else{
             return Redirect::back()->withInput(Input::all());
@@ -135,26 +135,42 @@ class FrntendQuizController extends Controller
 
     public function submitTest(Request $request){
         $signInCheck = $request->session()->has('tokenid');
-       if(!$signInCheck) return abort(404);
+        if(!$signInCheck) return abort(404);
         $token = $request->session()->get('tokenid');
         $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $emailid = $request->session()->get('emailid');
-            $user = User::where(['email' => $emailid])->first();
+            $user = User::where(['email' => $emailid])->lastest()->first();
             $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
+
+            if($topics['round'] == 2){
+                $filedbname = $user['name'].'_'.$user['mobile'].'.txt';
+                $filename = public_path().'/round2_files/'.$user['name'].'_'.$user['mobile'].'.txt';
+                $myfile = fopen($filename, "x") or die("Unable to open file!");
+            }
+
             $questions = Question::where('topic_id',$linkDetails->topic_id)->get();  
             $rightQ = 0;
             $wrongQ = 0; 
             $count = count($questions)*$topics['per_q_mark'];
             for($i=0;$i<count($questions);$i++){
-            if($answer = $request['optradio'.$i]){
-                $correctAns = $questions[$i]['answer'];
-                if($correctAns === strtoupper($answer)){
-                    $rightQ +=1; 
-                }else {
-                    $wrongQ +=1; 
+                if($answer = $request['optradio'.$i]){
+                    $correctAns = $questions[$i]['answer'];
+                    if($correctAns === strtoupper($answer)){
+                        $rightQ +=1; 
+                    }else {
+                        $wrongQ +=1; 
+                    }
                 }
+
+                if($answer = $request['code'.$i]){
+                    $txt = ($i+1).") ".$questions[$i]['question']."\n\nAnswer: \n\n";
+                    $txt .= $answer."\n\n";
+                    fwrite($myfile, $txt);
+                }
+
             }
-            }
+
+            if($topics['round'] == 1){
             $passingPercentage = $topics['minpercentage'];
             $pass = true;
             $marksObtained = $rightQ*$topics['per_q_mark'];
@@ -164,20 +180,41 @@ class FrntendQuizController extends Controller
                 $pass = false;
             }
             $unAttemptedCount = count($questions) - ($rightQ + $wrongQ);
-            Result::create([
-                'rightQ'=>$rightQ,
-                'wrongQ'=>$wrongQ,
-                'unattemptedQ'=>$unAttemptedCount,
-                'totalQ'=>count($questions),
-                'user_id'=> $user->id,
-                'topic_id'=> $linkDetails->topic_id,
-                'percentage'=> $studentPercentage,
-                'passed'=> $pass,
-                'token'=> $token,
-            ]);
+
+                $values = [
+                    'rightQ'=>$rightQ,
+                    'wrongQ'=>$wrongQ,
+                    'unattemptedQ'=>$unAttemptedCount,
+                    'totalQ'=>count($questions),
+                    'user_id'=> $user->id,
+                    'topic_id'=> $linkDetails->topic_id,
+                    'percentage'=> $studentPercentage,
+                    'passed'=> $pass,
+                    'token'=> $token,
+                ];
+                $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions),
+                'pass'=>$pass,'percentage'=>$studentPercentage,'round'=>1];  
+            }
+
+            if($topics['round'] == 2){
+                
+                $values = [
+                    'rightQ'=>0,
+                    'wrongQ'=>0,
+                    'unattemptedQ'=>0,
+                    'totalQ'=>count($questions),
+                    'user_id'=> $user->id,
+                    'topic_id'=> $linkDetails->topic_id,
+                    'percentage'=> 0,
+                    'token'=> $token,
+                    'filename'=> $filedbname
+                ];
+                $data = ['round'=>2];
+            }
+
+            Result::create($values);
             $request->session()->flush();//remove all sessions data
-            $data = ['rightQ'=>$rightQ,'wrongQ'=>$wrongQ,'unAttemptedCount'=>$unAttemptedCount,'total'=>count($questions),
-                'pass'=>$pass,'percentage'=>$studentPercentage];  
+            
             return view('quiz.finish',compact('data','user'));      
     }
 

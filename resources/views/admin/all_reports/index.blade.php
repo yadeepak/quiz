@@ -27,8 +27,9 @@
                   <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
                   <li>Created By <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total students for this Quiz <i class="fa fa-long-arrow-right"></i></li>
+                  <li>Total students <i class="fa fa-long-arrow-right"></i></li>
                   <li>Total students Passed <i class="fa fa-long-arrow-right"></i></li>
+                  <li>Round <i class="fa fa-long-arrow-right"></i></li>
                 </ul>
               </div>
               <div class="col-xs-6">
@@ -61,6 +62,9 @@
                   </li>
                   <li>
                     {{$passedStudents[$key]??0}}
+                  </li>
+                  <li>
+                    {{$topic->round}}
                   </li>
                 </ul>
               </div>

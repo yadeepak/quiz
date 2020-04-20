@@ -91,9 +91,11 @@ class AllReportController extends Controller
     {
         $topic = Topic::findOrFail($id);
         $results = $topic->result;
+        
         $topic->load(['result.user' => function ($q) use (&$users) {
             $users = $q->get();
         }]);
+        
         $answers = Answer::where('topic_id', $topic->id)->get();
         $students = User::where('id', '!=', Auth::id())->get();
         $c_que = Question::where('topic_id', $id)->count();

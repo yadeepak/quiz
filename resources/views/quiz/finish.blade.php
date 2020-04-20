@@ -108,8 +108,11 @@ h3.cent{
 
 <div class="container">
     
-      
+<?php 
+  if($data['round'] == 1 ){
+?>      
 <h1 style="padding:30px 0px;" class="text-center">Your Test Submitted Succesfully.</h1>
+
 <div class="row my-3">
     <div class="col-md-12">
 <div class="card text-white bg-primary mb-3" style="padding: 40px;background: #514e4e;">
@@ -156,6 +159,13 @@ h3.cent{
 </div>
 </div>
 </div>
+
+<?php }
+if($data['round'] == 2 )
+{ ?>
+  <h1 style="padding:30px 0px;" class="text-center">Your Test Submitted Succesfully.</h1>
+<?php } ?>
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>

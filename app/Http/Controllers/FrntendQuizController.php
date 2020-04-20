@@ -23,7 +23,7 @@ class FrntendQuizController extends Controller
             $testStart = $request->session()->has('testStart');
             $emailid = $request->session()->get('emailid');
             if ($linkDetails && $signInCheck ) {
-              //  $request->session()->put('isAllowed','2');
+                $request->session()->put('isAllowed','2');
                 $request->session()->put('testStart',true);
                 $user = User::where(['email' => $emailid])->first();
                 $topics = Topic::where(['id' => $linkDetails->topic_id])->first();

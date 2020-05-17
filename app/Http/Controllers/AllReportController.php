@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Topic;
 use App\Answer;
 use App\Question;
+use App\Result;
 
 class AllReportController extends Controller
 {
@@ -124,6 +126,25 @@ class AllReportController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function downloadtxt($filename){
+        $file = public_path().'/round2_files/'.$filename;
+        $headers = array(
+            'Content-Type:application/txt',
+        );
+        return response()->download($file,$filename,$headers);
+    }
+
+    public function ajaxchangevalue(Request $request){
+        $id = $request['id'];
+        $value = $request['value'];
+        $update = Result::where('id', $id)->update(['passed'=>$value]);
+        if($update){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     /**

@@ -52,20 +52,33 @@
                 {{$results[$key]['percentage']??0}}%
                 </td>
                 <?php }else { ?>
-                <td> <a> {{$results[$key]['filename']}} </a> </td>
+                <td> <a href="{{ route('downloadtxt', $results[$key]['filename']) }}"> {{$results[$key]['filename']}} </a> </td>
                 <?php } ?>
                 
                 <td>
-                {{$results[$key]['passed']?'Pass':$results[$key]['passed']===NULL?'Not Declared':'Fail'}}
+                
+                <?php if($results[$key]['passed'] === 1){
+                  echo 'Pass';
+                }else if($results[$key]['passed'] === 0){
+                  echo 'Fail';
+                }else{
+                  echo 'Not Declared';
+                }
+                ?>
+
+              
+
+                {{--$results[$key]['passed']?'Pass':$results[$key]['passed']===NULL?'Not Declared':'Fail'--}}
                 </td>
 
                 <?php if($topic->round == 2){ ?>
                 <td>
                     <select name="passfail" id="passfail" class="form-control">
                       <option>Select</option>
-                      <option value=1>Pass</option>
-                      <option value=0>Fail</option>
+                      <option value=1 data-id="{{$results[$key]['id']}}">Pass</option>
+                      <option value=0 data-id="{{$results[$key]['id']}}">Fail</option>
                     </select>
+                    {{csrf_field()}}
                 </td>
                 <?php }else {} ?>
                
@@ -79,21 +92,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>
-
-$(document).ready(function(){
-  $('#passfail').on('change', function() {
+  $(document).ready(function(){
+    $(document).on("change","#passfail",function(){
+    var token = $("input[name=_token]").val();
     var value = this.value;
-    alert(dataid);
-    // $.ajax({
-    //  url: '/postajax',
-    //  type: 'POST',
-    //  data: { id:deleteid },
-    //  success: function(response){
-    //     console.log('working');
-    //  }
-    // });
+    var id = $(this).find(':selected').attr('data-id');
+    $.ajax({
+     url: '{{route('ajaxchange')}}',
+     type: 'POST',
+     data: { id:id,value:value,_token:token },
+     success: function(response){
+        console.log(response);
+        location.reload();
+     }
+    });
   });
 });
+
 
 </script>
 @endsection

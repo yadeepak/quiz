@@ -1,233 +1,249 @@
 @extends('layouts.app')
 
 @section('head')
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
-  <!-- Admin Theme style -->
-  <link rel="stylesheet" href="{{asset('css/AdminLTE.css')}}">
-  <link rel="stylesheet" href="{{asset('css/skin-black.css')}}">
-   <link rel="stylesheet" href="{{asset('css/fontawesome-iconpicker.min.css')}}">
-  <!-- Select 2 -->
-  <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
-  <!-- DataTable -->
-  <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{asset('frontend/css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/animate.css')}}">
+    
+    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/magnific-popup.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/aos.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/ionicons.min.css')}}">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap-datepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/jquery.timepicker.css')}}">
+
+    
+    <link rel="stylesheet" href="{{asset('frontend/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/icomoon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
   <script>
     window.Laravel =  <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
   </script>
-  <style>
-  
 
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
-body{
-  background: #f2f2f2;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.search {
-  padding-top: 24px;
-  width: 100%;
-  position: relative;
-  display: flex;
-}
-
-.searchdiv {
-
-height : 80px;
-background-color : #488CDF;
-
-}
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 36px;
-  
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/*Resize the wrap to see the search bar change!*/
-.wrap{
-  width: 80%;
-  height: 60%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
- 
-
-
-  </style>
 @endsection
 
 @section('top_bar')
 
-<nav class="navbar navbar-default navbar-fixed-top" style="background-image: linear-gradient(#6F81E5, #3591DC);" >
-    <div class="container" style="height:65px;">
-        <div class="navbar-header">
-            <a class="navbar-brand navbar-link smooth-scroll" href="#"><img src="{{asset('/images/logo/logosmall.png')}}" width="80" height="40px"></a>
-            <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="/"><img src="{{asset('/images/logo/logosmall.png')}}" ></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+			  <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+			  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Company
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Register</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Login</a>
         </div>
-            <ul class="nav navbar-nav navbar-right">
-               <li class="dropdown"><a data-toggle="dropdown" aria-expanded="true" href="#" class="dropdown-toggle"><span style="color:white">Company</span> <span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li role="presentation"><a href="/sites">Registration</a></li>
-                        <li role="presentation"><a href="/forms">Login</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a data-toggle="dropdown" aria-expanded="true" href="#" class="dropdown-toggle"><span style="color:white">Internship </span><span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li role="presentation"><a href="/sites">Registration</a></li>
-                        <li role="presentation"><a href="/forms">Login</a></li>
-                    </ul>
-                </li>
-                <li role="presentation"><a href="#features" class="smooth-scroll"><span style="color:white">Internship Job </span></a></li>
-               
-                <li role="presentation"><a href="#"><span style="color:white">Job</a></span></li>
+	  </li>
+	  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Internship
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Register</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Login</a>
+        </div>
+      </li>
+	          <li class="nav-item"><a href="#" class="nav-link">Job</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Internship Job</a></li>
             </ul>
-        </div>
-    </div>
-</nav>
+	      </div>
+	    </div>
+	  </nav>
 
 @endsection
 
 @section('content')
-<div class="container">
+
+<div class="hero-wrap js-fullheight">
+      <div class="overlay"></div>
+      <div class="container-fluid px-0">
+      	<div class="row d-md-flex no-gutters slider-text align-items-end js-fullheight justify-content-end">
+	      	<img class="one-third align-self-end order-md-last img-fluid" src="{{asset('frontend/images/undraw_work_time_lhoj.svg')}}" alt="">
+	        <div class="one-forth d-flex align-items-center ftco-animate js-fullheight">
+	        	<div class="text mt-5">
+	            <h1 class="mb-5">Search the your right job</h1>
+							<div class="ftco-search">
+								<div class="row">
+			            <div class="col-md-12 nav-link-wrap">
+
+				            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				              <a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Find a Job</a>
 
 
-<div class="wrap">
-  <div class="searchdiv">
-   <div class="search">
-      <input type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
-</div>
+				            </div>
+				          </div>
+				          <div class="col-md-12 tab-wrap">
+				            
+				            <div class="tab-content p-4" id="v-pills-tabContent">
 
-   <br>
-   <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="small-box" style="background-color:white">
-              <div class="inner">
-                <h3 style="color:black">43</h3>
-                <p style="color:black">Total Students</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-user fa-fw"></i>
-              </div>
-              <a href="{{url('/admin/users')}}" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="small-box" style="background-color:white">
-              <div class="inner">
-                <h3 style="color:black">4</h3>
-                <p style="color:black">Total Questions</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-briefcase fa-fw"></i>
-              </div>
-              <a href="{{url('/admin/questions')}}" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
+				              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+				              	<form action="#" class="search-job">
+				              		<div class="row no-gutters">
+				              			<div class="col-md mr-md-2">
+				              				<div class="form-group">
+					              				<div class="form-field">
+					              					<div class="icon"><span class="icon-briefcase"></span></div>
+									                <input type="text" class="form-control" placeholder="eg. Garphic. Web Developer">
+									              </div>
+								              </div>
+				              			</div>
+				              			<div class="col-md mr-md-2">
+				              				<div class="form-group">
+				              					<div class="form-field">
+					              					<div class="select-wrap">
+							                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+							                      <select name="" id="" class="form-control">
+							                      	<option value="">Category</option>
+							                      	<option value="">Full Time</option>
+							                        <option value="">Part Time</option>
+							                        <option value="">Freelance</option>
+							                        <option value="">Internship</option>
+							                      </select>
+							                    </div>
+									              </div>
+								              </div>
+				              			</div>
+				              			<div class="col-md mr-md-2">
+				              				<div class="form-group">
+				              					<div class="form-field">
+					              					<div class="icon"><span class="icon-map-marker"></span></div>
+									                <input type="text" class="form-control" placeholder="Location">
+									              </div>
+								              </div>
+				              			</div>
+				              			<div class="col-md">
+				              				<div class="form-group">
+				              					<div class="form-field">
+								                	<button type="submit" class="form-control btn btn-secondary">Search</button>
+									              </div>
+								              </div>
+				              			</div>
+				              		</div>
+				              	</form>
+				              </div>
 
-          <div class="col-md-3">
-            <div class="small-box" style="background-color:white">
-              <div class="inner">
-                <h3 style="color:black">4</h3>
-                <p style="color:black">Total Questions</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-question  fa-fw"></i>
-              </div>
-              <a href="{{url('/admin/questions')}}" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="small-box" style="background-color:white">
-              <div class="inner">
-                <h3 style="color:black">3</h3>
-                <p style="color:black">Total Quiz</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-cog fa-fw"></i>
-              </div>
-              <a href="{{url('/admin/topics')}}" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-         
-          <div class="col-md-12">
-            <div class="small-box" style="background-color:white">
-              <div class="inner">
-                <h3 style="text-align:center; color:black">3</h3>
-                <p style="text-align:center; color:black">All Intership's</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-book fa-fw"></i>
-              </div>
-              <a href="{{url('/admin/topics')}}" class="small-box-footer">
-                View All Intership <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>  
-
-
-
-</div>
-
-
-             
-        
-        </div>
+				              <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
+				              	<form action="#" class="search-job">
+				              		<div class="row">
+				              			<div class="col-md">
+				              				<div class="form-group">
+					              				<div class="form-field">
+					              					<div class="icon"><span class="icon-user"></span></div>
+									                <input type="text" class="form-control" placeholder="eg. Adam Scott">
+									              </div>
+								              </div>
+				              			</div>
+				              			<div class="col-md">
+				              				<div class="form-group">
+				              					<div class="form-field">
+					              					<div class="select-wrap">
+							                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+							                      <select name="" id="" class="form-control">
+							                      	<option value="">Category</option>
+							                      	<option value="">Full Time</option>
+							                        <option value="">Part Time</option>
+							                        <option value="">Freelance</option>
+							                        <option value="">Internship</option>
+							                        <option value="">Temporary</option>
+							                      </select>
+							                    </div>
+									              </div>
+								              </div>
+				              			</div>
+				              			<div class="col-md">
+				              				<div class="form-group">
+				              					<div class="form-field">
+					              					<div class="icon"><span class="icon-map-marker"></span></div>
+									                <input type="text" class="form-control" placeholder="Location">
+									              </div>
+								              </div>
+				              			</div>
+				              			<div class="col-md">
+				              				<div class="form-group">
+				              					<div class="form-field">
+									                <button type="submit" class="form-control btn btn-secondary">Search</button>
+									              </div>
+								              </div>
+				              			</div>
+				              		</div>
+				              	</form>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+			        </div>
+	          </div>
+	        </div>
+	    	</div>
       </div>
-</div>
+    </div>
+
+    <section class="ftco-section services-section bg-primary">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-resume"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Search Millions of Jobs</h3>
+                <!-- <p>A small river named Duden flows by their place and supplies.</p> -->
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-collaboration"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Easy To Manage Jobs</h3>
+                <!-- <p>A small river named Duden flows by their place and supplies.</p> -->
+              </div>
+            </div>    
+          </div>
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-promotions"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Top Careers</h3>
+                <!-- <p>A small river named Duden flows by their place and supplies.</p> -->
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon"><span class="flaticon-employee"></span></div>
+              <div class="media-body">
+                <h3 class="heading mb-3">Search Suitable Job</h3>
+                <!-- <p>A small river named Duden flows by their place and supplies.</p> -->
+              </div>
+            </div>      
+		  </div>
+		 
+		</div>
+		<div class="d-flex justify-content-center ftco-animate mt-5 mb-0">
+		  <button class="btn btn-secondary "> View All Internship/Fulltime Jobs</button>
+		  </div>
+      </div>
+    </section>
 
 
-
-</div>
 
 
 @endsection
@@ -282,7 +298,20 @@ background-color : #488CDF;
 });
      // end all controller is disable
  </script>
-
-
+ 
 @endif
+<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery-migrate-3.0.1.min.js')}}"></script>
+  <script src="{{asset('frontend/js/popper.min.js')}}"></script>
+  <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery.easing.1.3.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery.waypoints.min.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery.stellar.min.js')}}"></script>
+  <script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{asset('frontend/js/aos.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery.animateNumber.min.js')}}"></script>
+  <script src="{{asset('frontend/js/scrollax.min.js')}}"></script>
+  <script src="{{asset('frontend/js/main.js')}}"></script>
+
 @endsection

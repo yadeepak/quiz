@@ -20,7 +20,7 @@
 
 </head>
 <body>
-    <div id="app" style="position: relative;">
+    <div id="app" style="position: relative">
         @yield('top_bar')
         @yield('content')
         <br>

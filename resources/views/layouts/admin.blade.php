@@ -44,9 +44,10 @@ $setting = App\Setting::first();
     <!-- Logo -->
     <a href="{{url('/')}}" class="logo" title="{{$setting->welcome_txt}}">
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">
+      <span class="logo-sm">
         @if ($setting)
         @endif
+        <img src="{{asset('/images/logo/logosmall.png')}}" height="30px" width="100px" alt="logo" />
       </span>
     </a>
     <!-- Header Navbar -->

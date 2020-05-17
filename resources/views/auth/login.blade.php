@@ -7,24 +7,31 @@
         'csrfToken' => csrf_token(),
     ]); ?>
   </script>
+  <style>
+   
+  </style>
 @endsection
 
 @section('content')
-  <div class="">
-    <div class="container">
+  <div class="back" style="background-image: linear-gradient(#6F81E5, #3591DC);">
+    <div class="container" style="height:600px">
       @if (Session::has('error'))
         <div class="alert alert-danger sessionmodal">
           {{session('error')}}
         </div>
       @endif
+      <h3 style="text-align:center; margin-top:50px; color: white"><b>Let's get started now !</b></h3>
+                
       <div class="login-page">
         <div class="logo">
           @if ($setting)
             <a href="{{url('/')}}" title="{{$setting->welcome_txt}}"></a>
+            <div class="user-register-heading text-center">
+        <h4><img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" /></h4>
+        </div>
           @endif
         </div>
-        
-        <h4 class="user-register-heading text-center"><img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" /></h4>
+
         
         <div class="row">
           @php
@@ -87,7 +94,7 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-wave">
+            <button type="submit" class="btn btn-primary">
                 Login
             </button>
          <!--   <p class="messege text-center">Not registered? <a href="{{url('/register')}}" title="Create An Account">Create an account</a></p>   -->

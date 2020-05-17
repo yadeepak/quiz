@@ -8361,7 +8361,7 @@ button.close {
 /* ============================= */
 
 body {
-  background-color: #FFF;
+  background-image: #FFF;
 }
 
 .bg-cream {
@@ -8441,6 +8441,18 @@ button.btn-wave {
   font-size: 17px;
   color: #424242;
   letter-spacing: 0.6px;
+  margin-bottom: -100px;
+
+
+}
+
+.logodesign {
+
+  height: 100px;
+  width: 100px;
+  background-color: #bbb;
+  border-radius: 50%;
+
 }
 
 .remember-me {

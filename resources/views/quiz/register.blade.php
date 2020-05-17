@@ -41,7 +41,7 @@
         @endif
       </div>
     </div> -->
-    <div class="nav-bar">
+    <div class="nav-bar" style="background-color:#488CDF">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -49,7 +49,7 @@
                         <!-- Branding Image -->
                         @if($setting)
                         <a class="tt" title="DcodeTech" href="{{url('/')}}">
-                        <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
+                        <img src="{{asset('/images/logo/logosmall.png')}}" width="120px" height="50px" alt="logo" />
                         </a>
                         @endif
                     </div>
@@ -70,9 +70,22 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
-   
-{!! Form::open(['method' => 'POST', 'action' => 'FrntendQuizController@registerSubmit']) !!}
+<div class="container-fluid" style="background-color:blue" >
+   <div class="row">
+   <div class="col-md-12">
+        <div class="row">
+
+   <div class="col-md-6">
+        
+   <a class="navbar-brand navbar-link smooth-scroll" href="#"><img src="{{asset('/images/logo/male.png')}}" height="700px"></a>
+
+
+
+      </div>
+
+      <div class="col-md-6">
+
+      {!! Form::open(['method' => 'POST', 'action' => 'FrntendQuizController@registerSubmit']) !!}
 {{csrf_field()}}
 <input type="hidden" value={{$tokenid}} name="tokenid" />
 <input type="hidden" value={{$round}} name="round" />
@@ -178,6 +191,15 @@
                 <br />
               </div>
               {!! Form::close() !!}
+
+
+      </div>
+
+      </div>
+      
+
+    </div>
+  </div>
             </div>
    
 

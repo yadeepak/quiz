@@ -2245,7 +2245,7 @@ button.btn-wave {
   border: none;
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
+  background-color: #00a0e3;
   text-align: center;
   letter-spacing: .5px;
   -webkit-transition: .2s ease-out;
@@ -2256,7 +2256,7 @@ button.btn-wave {
 .btn-wave:active,
 .btn-wave:focus,
 .btn-wave.hover {
-  background-color: #2bbbad;
+  background-color: #14b8fd;
   color: #FFF !important;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
   outline: none !important;
@@ -2271,7 +2271,7 @@ button.btn-wave {
   background-color: #008d4c;
 }
 .btn-info {
-  background-color: #26a69a !important;
+  background-color: #00a0e3 !important;
   border-color: #00acd6;
 }
 .btn-info:hover,
@@ -5129,17 +5129,17 @@ table.text-center th {
   margin-left: 15px;
   background-color: transparent !important;
   border: none !important;
-  color: #26a69a;
+  color: #00a0e3;
 }
 .ad-logo {
   margin: 0 auto;
 }
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-  background-color: #26a69a !important;
+  background-color: #00a0e3 !important;
   border: none;
 }
 .dropdown-menu>.active>a {
-  background-color: #26a69a;
+  background-color: #00a0e3;
 }
 .dropdown-menu>.active>a:hover {
   background-color: #1a2226;
@@ -5172,7 +5172,7 @@ table.text-center th {
   position: absolute;
   right: 0;
   top: 3.5px;
-  color: #26a69a;
+  color: #00a0e3;
 }
 
 /*========= Skin Css =======*/

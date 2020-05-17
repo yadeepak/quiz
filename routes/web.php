@@ -8,6 +8,8 @@ use App\copyrighttext;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
+use App\Charts\UserChart;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -96,7 +98,11 @@ Route::group(['middleware'=> 'isadmin'], function(){
     $quiz = Topic::count();
     $user_latest = User::where('role',  'C')->orderBy('created_at', 'desc')->get();
     }
-    return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest'));
+    $chart = new UserChart;
+    $chart->labels(['One', 'Two', 'Three', 'Four']);
+    $chart->dataset('My dataset', 'bar', [1, 2, 3, 4]);
+    $chart->dataset('My dataset 2', 'bar', [4, 3, 2, 1]);
+    return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest','chart'));
     //remove the answer line comment
     // return view('admin.dashboard', compact('user', 'question', 'answer', 'quiz', 'user_latest'));
 

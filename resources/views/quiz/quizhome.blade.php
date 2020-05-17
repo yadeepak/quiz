@@ -10,7 +10,6 @@
 </script>
 <style>
    .login-main-text{
-       color:#fff;
        text-align: center;
        margin-top: 50%;
     margin-left: 50%;
@@ -55,9 +54,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
                             
-                  <li><a href="#" ><span style="color:blue">{{$data['name']}}</span></a></li>
-                  <li><a href="#" ><span style="color:blue">{{$data['email']}}</span></a></li>
-                  <li><a href="#" ><span style="color:blue">{{$data['mobile']}}</span></a></li>
+                  <li><a href="#" class="web_color">{{$data['name']}}</a></li>
+                  <li><a href="#" class="web_color">{{$data['email']}}</a></li>
+                  <li><a href="#" class="web_color">{{$data['mobile']}}</a></li>
                          
                         </ul>
                     </div>
@@ -70,7 +69,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row card">
+    <div class="row card bg-white text-black">
         <div class="col-md-6">
         <div class="sidenav">
          <div class="login-main-text">
@@ -81,14 +80,14 @@
                     {{ csrf_field() }}
                     <input type="hidden" value={{$tokenid}} name="tokenid"/>
                     <input type="hidden" value="{{$data['email']}}" name="student_email"/>
-                    <input type="submit" class="btn btn-wave btn-lg w-25" value="Proceed" style="width: 286px;" />
+                    <input type="submit" class="btn  btn-lg w-25 gradient-button gradient-button-1" value="Proceed" style="width: 286px;" />
                 </form>
          </div>
       </div>
 
         </div>
-        <div class="col-md-6">
-        <div class="main">
+        <div class="col-md-6 web_bgcolor">
+        <div class="main web_bgcolor text-white">
             <div class="login-form">
                 <h1>Topic Covered</h1>
                 <ul>

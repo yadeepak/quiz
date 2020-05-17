@@ -14,9 +14,9 @@
   color: #333;
   border-right: 1px solid #eee;
 }
-.skin-black .main-header .navbar {
+/* .skin-black .main-header .navbar {
   background-color: #2a8ed1;
-}
+} */
 .skin-black .main-header .navbar .nav > li > a {
   color: #333333;
 }

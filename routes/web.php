@@ -198,6 +198,8 @@ Route::get('start_quiz/{id}/finish', function($id){
   return view('finish', compact('ans','q','topic', 'answers', 'count_questions'));
 });
 
+Route::get('/internship/reg','InternCompanyController@internreg')->name('intershipreg');
+Route::get('/company/reg','InternCompanyController@companyreg')->name('companyreg');
 
 Route::get('/admin/pages','PagesController@index')->name('pages.index');
 

@@ -23,6 +23,20 @@ class InternCompanyController extends Controller
         return view('admin.interncompany.indexx', compact('company'));
     }
 
+    public function internreg(){
+
+        return view('internreg');
+
+    }
+
+    public function companyreg(){
+
+      return view('companyreg');
+
+  }
+
+
+
     /**
      * Show the form for creating a new resource.
      *

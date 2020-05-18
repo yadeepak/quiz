@@ -63,47 +63,47 @@ class FrntendQuizController extends Controller
        if($token){
         if($request->validate($validate)) {
             $input = $request->all();
-            // $input['linkId'] = 'dummy'; //to do not  match in round 1
-            // if($round==="2"){
-            //     $input = User::where('email' , $request->email)->first();
-            //     if(!$input){
-            //     return abort(404,'You do not have access to this page or this page may have expired');
-            //     }
-            //     $isAppeared = $input->result??0;
-            //     if(!$isAppeared || $isAppeared->passed === 0){
-            //         return abort(404,'It seems you could not clear first round.');
-            //     }
-            //     //dd('hello2');
-            // }else{
-            //     $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
-            //     if($check ) return Redirect::back()->withInput($input)->withErrors(['email id or phone number already exists']);    
-            // }
+            $input['linkId'] = 'dummy'; //to do not  match in round 1
+            if($round==="2"){
+                $input = User::where('email' , $request->email)->first();
+                if(!$input){
+                return abort(404,'You do not have access to this page or this page may have expired');
+                }
+                $isAppeared = $input->result??0;
+                if(!$isAppeared || $isAppeared->passed === 0){
+                    return abort(404,'It seems you could not clear first round.');
+                }
+                //dd('hello2');
+            }else{
+                $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
+                if($check ) return Redirect::back()->withInput($input)->withErrors(['email id or phone number already exists']);    
+            }
              $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $resp = User::where('email' , $request->email)->latest()->first();
-            // if($resp){
-            //     $input = $resp;
-            // }
-            // if($linkDetails->id == $input['linkId']){
-            //     return abort(404,'You already have appeared for this test.');
-            // }
-            // User::create([
-            //  'name' => $input['name'],
-            //  'email' => $input['email'],
-            //  'dob' => $input['dob'],
-            //  'gender' => $input['gender'],
-            //  'college' => $input['college'],
-            //  'experience' => $input['experience'],
-            //  'appearing' => $input['appearing'],
-            //  'mobile' => $input['mobile'],
-            //  'address' => $input['address'],
-            //  'role' => "U",
-            //  'linkId' => $linkDetails->id,
-            // ]);
+            if($resp){
+                $input = $resp;
+            }
+            if($linkDetails->id == $input['linkId']){
+                return abort(404,'You already have appeared for this test.');
+            }
+            User::create([
+             'name' => $input['name'],
+             'email' => $input['email'],
+             'dob' => $input['dob'],
+             'gender' => $input['gender'],
+             'college' => $input['college'],
+             'experience' => $input['experience'],
+             'appearing' => $input['appearing'],
+             'mobile' => $input['mobile'],
+             'address' => $input['address'],
+             'role' => "U",
+             'linkId' => $linkDetails->id,
+            ]);
             $quizDetails = Topic::find($linkDetails->topic_id)->description;
               $desc = explode(',',$quizDetails); 
-            //   if(!$request->session()->has('isAllowed')){
-            //   $request->session()->put('isAllowed','1');  
-            //   } 
+              if(!$request->session()->has('isAllowed')){
+              $request->session()->put('isAllowed','1');  
+              } 
            return view('quiz.quizhome',['tokenid'=>$token,'data'=>$input,'desc'=>$desc]);
             
         }
@@ -133,13 +133,13 @@ class FrntendQuizController extends Controller
 
     public function submitTest(Request $request){
         $signInCheck = $request->session()->has('tokenid');
+      
         if(!$signInCheck) return abort(404);
         $token = $request->session()->get('tokenid');
         $linkDetails = Generatelinks::where(['token' => $token, 'expired' => 0])->first();
             $emailid = $request->session()->get('emailid');
             $user = User::where(['email' => $emailid])->latest()->first();
             $topics = Topic::where(['id' => $linkDetails->topic_id])->first();
-
             if($topics['round'] == 2){
                 $filedbname = $user['name'].'_'.$user['mobile'].'.txt';
                 $filename = public_path().'/round2_files/'.$user['name'].'_'.$user['mobile'].'.txt';

@@ -9,6 +9,8 @@ use App\Question;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use App\Charts\UserChart;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,37 +76,83 @@ Route::group(['middleware'=> 'isadmin'], function(){
   Route::delete('delete/sheet/quiz/{id}','TopicController@deleteperquizsheet')->name('del.per.quiz.sheet');
 
   Route::get('/admin', function(){
+    $currentYear = date("Y");
+    $months = array_fill(1, 12, 0);
+    $topicWiseStudent=[];
     $role = Auth::user()->role;
+    $question =0;
     if($role === 'C'){
     $quizs = Topic::where('created_by',Auth::id())->get();
-    $user = 0;
-    $question = 0;
-    if($quizs){
-      foreach($quizs as $quiz){
-    $user += $quiz->student->count();
-    $quiz->load(['generatedLink.student' => function ($q) use (&$user) {
-      $user = $q->count();
-      }]);
-    $question +=$quiz->question->count();
-
-      }
-    }
     $user_latest = '';
-    $quiz = $quizs->count();
     }else{
-    $user = User::where('role', '!=', 'A')->count();
-    
+    $userGrouped= DB::select("select count(id) as count,DATE_FORMAT(created_at,'%c') as month  from users where 
+    DATE_FORMAT(created_at,'%Y')='$currentYear' AND role='U' GROUP BY   DATE_FORMAT(created_at,'%m') ORDER BY DATE_FORMAT(created_at,'%m') ASC" );
     $question = Question::count();
-    $quiz = Topic::count();
+    $quizs = Topic::get();
     $user_latest = User::where('role',  'C')->orderBy('created_at', 'desc')->get();
     }
+    $quiz = $quizs->count();
+    $linkIds = [];
+    foreach($quizs as $key=>$quize){
+      $name = Str::substr($quize['title'], 0,8).'...';
+      $topicWiseStudent[$name]=0;
+       $quize->load(['generatedLink.student' => function ($q) use (&$topicWiseStudent,&$name) {
+        $topicWiseStudent[$name]= $q->count();
+        }]);
+        if($role === 'C'){
+      $question +=$quize->question->count();
+        $id= $quize['id'];
+      $linkId = DB::table("generatelinks")->where('topic_id', $id)->get()->pluck('id')->toArray();
+      $values = implode(',',$linkId);
+      array_push($linkIds,$values);
+        }
+        }
+        if($role === 'C'){
+          $linkIdsStr=implode(',',$linkIds);
+          $userGrouped= DB::select("select count(id) as count,DATE_FORMAT(created_at,'%c') as month  from users where 
+          DATE_FORMAT(created_at,'%Y')='$currentYear' AND role='U' AND linkId IN($linkIdsStr)  GROUP BY   DATE_FORMAT(created_at,'%m') ORDER BY DATE_FORMAT(created_at,'%m') ASC" );
+        }
+        if($userGrouped){
+           array_filter($userGrouped,function($value)use(&$months){
+             $months[$value->month] = $value->count;
+          });
+        }
+      $user = array_sum(array_values($topicWiseStudent));
+    $options = [
+      'responsive' => true,
+      'legend' => ['display' => true],
+      'tooltips' => ['enabled'=>true],
+      'scales' => [
+          'yAxes'=> [[
+                      'display'=>true,
+                      'ticks'=> ['beginAtZero'=> true],
+                      'gridLines'=> ['display'=> false],
+                    ]],
+          'xAxes'=> [[
+                      'categoryPercentage'=> 0.8,
+                      'barPercentage' => 1,
+                      'ticks' => ['beginAtZero' => true],
+                      'gridLines' => ['display' => false],
+                    ]],
+      ],
+    ];
+    $monthNames = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
     $chart = new UserChart;
-    $chart->labels(['One', 'Two', 'Three', 'Four']);
-    $chart->dataset('My dataset', 'bar', [1, 2, 3, 4]);
-    $chart->dataset('My dataset 2', 'bar', [4, 3, 2, 1]);
-    return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest','chart'));
-    //remove the answer line comment
-    // return view('admin.dashboard', compact('user', 'question', 'answer', 'quiz', 'user_latest'));
+    $lb= $chart->labels(array_values($monthNames));
+    $ds = $chart->dataset('Students count', 'line', array_values($months));
+    $ds->backgroundColor('#48aad3');
+    $chart->title('No. of Student appeared monthly in '.$currentYear,20, '#666',  true);
+    $ds->color('#48aad3');
+    $chart->options($options);
+
+    $chart2 = new UserChart;
+     $chart2->labels(array_keys($topicWiseStudent));
+    $ds2 = $chart2->dataset('Students count', 'bar', array_values($topicWiseStudent));
+    $ds2->backgroundColor('#48aad3');
+     $chart2->title('No. of Student appeared for quiz ',20, '#666',  true);
+    $ds2->color('#48aad3');
+    $chart2->options($options);
+    return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest','chart','chart2'));
 
   });
   

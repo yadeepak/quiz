@@ -24,9 +24,15 @@
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
+              @if(Auth::user()->role === 'C')
+              <a href="#" class="small-box-footer" style="visibility: hidden">
+                .
+              </a>
+              @else
               <a href="{{url('/admin/users')}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
               </a>
+              @endif
             </div>
           </div>
           <div class="col-md-4">
@@ -100,7 +106,16 @@
       </div>
       <div>
       <div class="col-md-12" style="height: 400px;">
+      <div class="col-md-6">
+        <div class="panel">
       {!! $chart->container() !!}
+      </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel">
+      {!! $chart2->container() !!}
+      </div>
+      </div>
       </div>
       </div>
     </div>
@@ -111,4 +126,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
         {!! $chart->script() !!}
+        {!! $chart2->script() !!}
 @endsection

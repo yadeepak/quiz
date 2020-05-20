@@ -10,6 +10,9 @@
   'sett' => ''
 ])
 
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
 @section('content')
   <div class="margin-bottom">
     <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#createModal">Add Company</button>
@@ -44,11 +47,7 @@
                   {!! Form::text('mobile', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Mobile Number', 'required' => 'required']) !!}
                   <small class="text-danger">{{ $errors->first('mobile') }}</small>
                 </div>
-                <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                  {!! Form::label('city', 'City') !!}
-                  {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Please Enter City']) !!}
-                  <small class="text-danger">{{ $errors->first('city') }}</small>
-                </div>
+               
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                   {!! Form::label('email', 'Email ID') !!}
@@ -101,6 +100,11 @@
                   {!! Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Address', 'rows' => '8']) !!}
                   <small class="text-danger">{{ $errors->first('address') }}</small>
                 </div>
+                <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                  {!! Form::label('city', 'City') !!}
+                  {!! Form::text('city', null, ['class' => 'form-control', 'placeholder' => 'Please Enter City']) !!}
+                  <small class="text-danger">{{ $errors->first('city') }}</small>
+                </div>
                 <div class="form-group{{ $errors->has('company_img') ? ' has-error' : '' }}">
                         {!! Form::label('company_img', 'Add Image To Company') !!}
                         {!! Form::file('company_img') !!}
@@ -111,9 +115,12 @@
             </div>
           </div>
           <div class="modal-footer">
-            <div class="btn-group pull-right">
+          <div class="center" style="padding-right:150px; padding-left:150px">
+<!--              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  
               {!! Form::reset("Reset", ['class' => 'btn btn-default']) !!}
-              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}
+ -->
+             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Add" />
+
             </div>
           </div>
         {!! Form::close() !!}
@@ -214,11 +221,7 @@
                               <small class="text-danger">{{ $errors->first('city') }}</small>
                             </div>
 
-                            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                              {!! Form::label('email', 'Email ID') !!}
-                              {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID']) !!}
-                              <small class="text-danger">{{ $errors->first('email') }}</small>
-                            </div>
+                           
 
                             <label for="">Change Password: </label>
                               
@@ -263,6 +266,12 @@
                               <small class="text-danger">{{ $errors->first('description') }}</small>
                             </div>
 
+                            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                              {!! Form::label('email', 'Email ID') !!}
+                              {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID']) !!}
+                              <small class="text-danger">{{ $errors->first('email') }}</small>
+                            </div>
+
                             <label for="">Change Image: </label>
                               
                               <input type="radio" value="1" name="changeimg" id="chimg1">&nbsp;Yes
@@ -281,9 +290,13 @@
                         
                 
                       <div class="modal-footer">
-                        <div class="btn-group pull-right">
-                          {!! Form::submit("Update", ['class' => 'btn btn-wave']) !!}
-                        </div>
+                      <div class="center" style="padding-right:150px; padding-left:150px">
+<!--              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  
+              {!! Form::reset("Reset", ['class' => 'btn btn-default']) !!}
+ -->
+             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Update" />
+
+            </div>
                       </div>
                     {!! Form::close() !!}
                   </div>

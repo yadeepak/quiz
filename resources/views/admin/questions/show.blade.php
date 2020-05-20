@@ -8,6 +8,7 @@
   'all_re' => '',
   'sett' => ''
 ])
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @section('content')
   <div class="margin-bottom">
@@ -112,9 +113,10 @@
             </div>
           </div>
           <div class="modal-footer">
-            <div class="btn-group pull-right">
-              {!! Form::reset("Reset", ['class' => 'btn btn-default']) !!}
-              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}
+          <div class="center" style="padding-right:150px; padding-left:150px">
+<!--              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  -->
+             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Add" />
+
             </div>
           </div>
         {!! Form::close() !!}
@@ -318,9 +320,11 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <div class="btn-group pull-right">
-                          {!! Form::submit("Update", ['class' => 'btn btn-wave']) !!}
-                        </div>
+                      <div class="center" style="padding-right:150px; padding-left:150px">
+<!--              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  -->
+             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Update" />
+
+            </div>
                       </div>
                     {!! Form::close() !!}
                   </div>

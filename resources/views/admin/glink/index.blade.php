@@ -9,6 +9,9 @@
   'sett' => ''
 ])
 
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
 @section('content')
   <div class="margin-bottom">
     <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#createModal">Generate Link</button>
@@ -45,10 +48,15 @@
             </div>
           </div>
           <div class="modal-footer">
-            <div class="btn-group pull-right">
+          
+          <div class="center" style="padding-right:150px; padding-left:150px">
+<!--              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  
               {!! Form::reset("Reset", ['class' => 'btn btn-default']) !!}
-              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}
+ -->
+             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Add" />
+
             </div>
+          
           </div>
         {!! Form::close() !!}
       </div>

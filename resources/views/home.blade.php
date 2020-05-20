@@ -46,9 +46,9 @@
           Company
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Register</a>
+          <a class="dropdown-item" href="/company/reg">Register</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Login</a>
+          <a class="dropdown-item" href="/login">Login</a>
         </div>
 	  </li>
 	  <li class="nav-item dropdown">
@@ -56,9 +56,9 @@
           Internship
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Register</a>
+          <a class="dropdown-item" href="/internship/reg">Register</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Login</a>
+          <a class="dropdown-item" href="/login">Login</a>
         </div>
       </li>
 	          <li class="nav-item"><a href="#" class="nav-link">Job</a></li>

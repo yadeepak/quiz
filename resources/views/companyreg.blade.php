@@ -129,12 +129,11 @@
                         </div>
                     </div>
                         <div class="submitregbtn ">
-                        {!! Form::reset("Reset", ['class' => 'gradient-buttonreg gradient-button-1']) !!}
-                        {!! Form::submit("Add", ['class' => 'gradient-buttonreg gradient-button-1']) !!}
+                        {!! Form::submit("Register", ['class' => 'gradient-buttonreg gradient-button-1']) !!}
                         </div>
                     {!! Form::close() !!}
 
-                    <a href="#" class="alreadyacc">Have an Account</a>
+                    <a href="/login" class="alreadyacc">Have an Account</a>
                     
                 </div> 
             </div>

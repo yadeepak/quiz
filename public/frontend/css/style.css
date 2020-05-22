@@ -8192,7 +8192,7 @@ h1, h2, h3, h4, h5,
 
 .ftco-navbar-light {
   background: transparent !important;
-  position: absolute;
+  /* position: absolute; */
   top: 20px;
   left: 0;
   right: 0;
@@ -9982,3 +9982,144 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+    .regmainrow{
+      margin-top:5%;
+    }
+    
+    .leftdesign{
+      padding: 55% 10%;
+      /* background: rgb(34,193,195); */
+      background: linear-gradient(0deg, rgba(34,193,195,1) 19%, rgba(70,70,213,1) 93%);
+    }
+    
+    .leftspan1{
+      color:white;
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size:40px;
+    }
+    
+    .leftspan2{
+      color:white;
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size: 70px;
+      line-height: 0.8 !important;
+    }
+    
+    .leftdesign p{
+      color:white;
+      font-size: 12px;
+      font-family: "Arial Black", Gadget, sans-serif;
+    }
+    
+    .rightdstyle{
+      /* border-top: 1px solid black;
+      border-right: 1px solid black;
+      border-bottom: 1px solid black;
+      margin-left:-16px !important; */
+    }
+    
+    .rightdesign h3{
+      text-align: center;
+      margin-top: 5%;
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size: 25px;
+      margin-bottom: 5%;
+      color:#6a5a5a;
+    }
+    
+    .alreadyacc{
+      /* margin-left: auto;
+      margin-right: auto;
+      display: table; */
+      margin-top: 5px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    
+    .form-control1 {
+      height: 32px !important;
+      background: #fff !important;
+      color: #000000 !important;
+      font-size: 12px !important;
+      border-radius: 5px;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+    
+    .form-control1 {
+      display: block;
+      width: 100%;
+      height: calc(1.5em + 0.75rem + 2px);
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+      transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+      -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    }
+    
+    .submitregbtn{
+      margin-left: auto;
+      margin-right: auto;
+      display:table;
+    }
+    
+    .gradient-buttonreg {
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size: 15px;
+      padding: 5px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: #FFF;
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      width: 150px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      cursor: pointer;
+      display: inline-block;
+      border-radius: 25px;
+    }
+    .gradient-buttonreg:hover{
+      color:#fff!important;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.19), 0 1px 1px rgba(0,0,0,0.23);
+    }
+    
+    .gradient-button {
+      font-family: "Arial Black", Gadget, sans-serif;
+      font-size: 20px;
+      padding: 15px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: #FFF;
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      width: 200px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+      cursor: pointer;
+      display: inline-block;
+      border-radius: 25px;
+    }
+    .gradient-button:hover{
+      color:#fff!important;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.19), 0 1px 1px rgba(0,0,0,0.23);
+    }
+    .gradient-button-1 {    background-image: linear-gradient(to right, #00a0e3 0%, #b1b1b1 51%, #00a0e3 100%)!important}
+    .br{
+      border-radius: 21px!important;
+    }

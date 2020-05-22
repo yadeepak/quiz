@@ -12,7 +12,8 @@
 
     <link rel="stylesheet" href="{{asset('frontend/css/aos.css')}}">
 
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('css/app.css')}}"> -->
+    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 
     <link rel="stylesheet" href="{{asset('frontend/css/ionicons.min.css')}}">
 
@@ -22,7 +23,7 @@
     
     <link rel="stylesheet" href="{{asset('frontend/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
+   
   <script>
     window.Laravel =  <?php echo json_encode([
         'csrfToken' => csrf_token(),
@@ -31,10 +32,16 @@
 
 @endsection
 
+@section('top_bar')
+
+@include('topbar')
+
+@endsection
+
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row regmainrow">
             <div class="col-md-1"></div>
             <div class="col-md-4">
@@ -49,7 +56,7 @@
             
             <div class="col-md-6 rightdstyle">
                 <div class="rightdesign">    
-                    <h3>REGISTER YOUR INTERN COMPANY</h3>
+                    <h3>REGISTER YOUR COMPANY</h3>
                     {!! Form::open(['method' => 'POST', 'action' => 'InternCompanyController@store', 'files' => true]) !!}
                     <div class="container">
                         <div class="row">
@@ -116,10 +123,11 @@
                             <br><br>
 
                             <div class="col-md-12">
+                                    {!! Form::label('company_img', 'Choose Company Logo (Use Only .JPG, .JPEG and .PNG)') !!}
                                     <div class="form-group{{ $errors->has('company_img') ? ' has-error' : '' }}">
                                     {!! Form::file('company_img') !!}
                                     <small class="text-danger">{{ $errors->first('company_img') }}</small>
-                                    <p class="help">Please Choose Only .JPG, .JPEG and .PNG</p>
+                                    <!-- <p class="help">Please Choose Only .JPG, .JPEG and .PNG</p> -->
                                     </div>
                             </div>
 
@@ -133,7 +141,7 @@
                         </div>
                     {!! Form::close() !!}
 
-                    <a href="/login" class="alreadyacc">Have an Account</a>
+                    <p style="text-align:center;"><a href="/login" class="alreadyacc">Have an Account? </a>Please Login</p>
 
                 </div> 
             </div>

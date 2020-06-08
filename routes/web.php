@@ -71,6 +71,8 @@ Route::get('/redirect', function () {
     return redirect('http://your-app.com/oauth/authorize?'.$query);
 });
 
+Route::post('compstore','CompanyController@store')->name('compstore');
+Route::post('internstore','InternCompanyController@store')->name('internstore');
 Route::group(['middleware'=> 'isadmin'], function(){
 
   Route::delete('delete/sheet/quiz/{id}','TopicController@deleteperquizsheet')->name('del.per.quiz.sheet');
@@ -110,7 +112,7 @@ Route::group(['middleware'=> 'isadmin'], function(){
         if($role === 'C'){
           $linkIdsStr=implode(',',$linkIds);
           $userGrouped= DB::select("select count(id) as count,DATE_FORMAT(created_at,'%c') as month  from users where 
-          DATE_FORMAT(created_at,'%Y')='$currentYear' AND role='U' AND linkId IN($linkIdsStr)  GROUP BY   DATE_FORMAT(created_at,'%m') ORDER BY DATE_FORMAT(created_at,'%m') ASC" );
+          DATE_FORMAT(created_at,'%Y')='$currentYear' AND role='U' AND linkId IN('$linkIdsStr')  GROUP BY   DATE_FORMAT(created_at,'%m') ORDER BY DATE_FORMAT(created_at,'%m') ASC" );
         }
         if($userGrouped){
            array_filter($userGrouped,function($value)use(&$months){

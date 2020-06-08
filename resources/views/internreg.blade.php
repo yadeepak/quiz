@@ -57,8 +57,17 @@
             <div class="col-md-6 rightdstyle">
                 <div class="rightdesign">    
                     <h3>REGISTER YOUR COMPANY</h3>
-                    {!! Form::open(['method' => 'POST', 'action' => 'InternCompanyController@store', 'files' => true]) !!}
-                    <div class="container">
+                    @if($errors->any())
+<h4 class="bg-danger text-white p-3">{{$errors->first()}}</h4>
+@endif
+@if (Session::has('added'))
+      <div class="alert alert-success sessionmodal">
+        {{session('added')}}
+      </div>
+      @endif
+                  <form action="{{route('internstore')}}" method="post" enctype="multipart/form-data">
+                  {{@csrf_field()}}
+                  <div class="container">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -105,7 +114,7 @@
                             
                             <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                {!! Form::text('password', null, ['class' => 'form-control1', 'placeholder' => 'Password']) !!}
+                                {!! Form::password( 'password', ['class' => 'form-control1', 'placeholder' => 'Password']) !!}
                                 {!! Form::hidden('company_type', null, ['class' => 'form-control']) !!}
                                 <small class="text-danger">{{ $errors->first('password') }}</small>
                                 </div>
@@ -135,11 +144,11 @@
 
                         </div>
                         </div>
-                    </div>
                         <div class="submitregbtn ">
                         {!! Form::submit("Register", ['class' => 'gradient-buttonreg gradient-button-1']) !!}
                         </div>
                     {!! Form::close() !!}
+                    </div>
 
                     <p style="text-align:center;"><a href="/login" class="alreadyacc">Have an Account? </a>Please Login</p>
 

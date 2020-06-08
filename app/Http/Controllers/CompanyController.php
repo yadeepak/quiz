@@ -43,12 +43,13 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
 
-      // $request->validate([
-      //   'name' => 'required',
-      //   'email' => 'required|email',
-      //   'company_website' => 'required',
-      //   'mobile' => 'required',
-      // ]);
+      $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'company_website' => 'required',
+        'mobile' => 'required',
+        'password'=>'required'
+      ]);
 
        $input = $request->all();
    
@@ -64,17 +65,15 @@ class CompanyController extends Controller
 
     }
 
-       // $input = $request->all();
        $check = User::where('email' , $input['email'])->orWhere('mobile', $input['mobile'])->first();
         if($check){ 
-         //return Redirect::back()->withErrors(['email id or phone number already exists']);
-          return 'abcd';
+         return redirect()->back()->withErrors(['email id or phone number already exists']);
         }else{
           $quiz = User::create($input);
         }   
        // $input['show_ans'] = $request->show_ans;
         //return Topic::create($input);
-        return back()->with('added', 'Company has been added');
+        return redirect()->back()->with('added', 'Company has been added');
     }
 
     /**

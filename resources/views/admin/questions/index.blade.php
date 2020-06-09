@@ -52,7 +52,7 @@
                     {{$topic->timer}} minutes
                   </li>
                   <li>
-                    {{$topic->round}}
+                  {{$topic->round==1?'Aptitude Test':'Program Test'}}
                   </li>
                 </ul>
               </div>

@@ -138,16 +138,24 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $topic = Topic::findOrFail($request->topic_id);
         $question = Question::findOrFail($id);
-        $request->validate([
-          'topic_id' => 'required',
-          'question' => 'required',
-          'a' => 'required',
-          'b' => 'required',
-          'c' => 'required',
-          'd' => 'required',
-          'answer' => 'required',
-        ]);
+        if($topic->round == '2'){
+            $request->validate([
+                'topic_id' => 'required',
+                'question' => 'required',
+            ]);
+        } else {
+            $request->validate([
+                'topic_id' => 'required',
+                'question' => 'required',
+                'a' => 'required',
+                'b' => 'required',
+                'c' => 'required',
+                'd' => 'required',
+                'answer' => 'required',
+              ]);
+        }
 
         $input = $request->all();
 

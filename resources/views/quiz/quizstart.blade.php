@@ -171,8 +171,17 @@ margin-top : 10px;
                 <div class="quesdiv globalques qustion{{$i}}" style="display: none">
                <div class="dflex"> <h4 class="quesno"><b>Question No . {{$i+1}}</b></h4>
                 <h4 class="quesno pull-right"><b>Single Choice Question</b></h4>
+                
                </div>
                 <h1 class="mainque"><b> {{$questions[$i]->question}}</b></h1>
+                @if($questions[$i]->code_snippet)
+                     <pre>
+                    {{{$questions[$i]->code_snippet}}}
+                  </pre>
+                  @endif
+                @if($questions[$i]->question_img)
+                <img src="{{asset('images/questions/').'/'.$questions[$i]->question_img}}" class="img-responsive "/>
+                @endif
                 @if($round==1)
 
                 <div class="custom-control custom-radio radio-holder optionsClick" data-id={{$i}}>
@@ -215,7 +224,7 @@ margin-top : 10px;
          
         <div class="parentBlock">
             
-                <?php for($i=0;$i<30;$i++) { ?>
+                <?php for($i=0;$i<count($questions);$i++) { ?>
                    <span class="parentCount active{{$i}} " onClick="showDiv(<?php echo $i; ?>);"> <a class="countstyle" id="<?php echo $i; ?>no"  ><?php echo $i+1; ?></a>
                    </span> <?php
                     if ( (($i+1) % 5) == 0)

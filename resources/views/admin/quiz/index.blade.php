@@ -1,147 +1,120 @@
 @extends('layouts.admin', [
-  'page_header' => 'Quiz',
-  'dash' => '',
-  'quiz' => 'active',
-  'users' => '',
-  'questions' => '',
-  'top_re' => '',
-  'all_re' => '',
-  'sett' => ''
+'page_header' => 'Quiz',
+'dash' => '',
+'quiz' => 'active',
+'users' => '',
+'questions' => '',
+'top_re' => '',
+'all_re' => '',
+'sett' => ''
 ])
 
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
 @section('content')
-  <div class="margin-bottom">
-    <button type="button" class="btn btn-wave" data-toggle="modal" data-target="#createModal">Add Quiz</button>
-  </div>
-  <!-- Create Modal -->
-  <div id="createModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Quiz</h4>
-        </div>
-        {!! Form::open(['method' => 'POST', 'action' => 'TopicController@store']) !!}
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                  {!! Form::label('title', 'Quiz Title') !!}
-                  <span class="required">*</span>
-                  {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Title', 'required' => 'required']) !!}
-                  <small class="text-danger">{{ $errors->first('title') }}</small>
-                </div>
-                <div class="form-group{{ $errors->has('per_q_mark') ? ' has-error' : '' }}">
-                  {!! Form::label('per_q_mark', 'Per Question Mark') !!}
-                  <span class="required">*</span>
-                  {!! Form::number('per_q_mark', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Per Question Mark', 'required' => 'required']) !!}
-                  <small class="text-danger">{{ $errors->first('per_q_mark') }}</small>
-                </div>
-                <div class="form-group{{ $errors->has('timer') ? ' has-error' : '' }}">
-                  {!! Form::label('timer', 'Quiz Time (in minutes)') !!}
-                  {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
-                  <small class="text-danger">{{ $errors->first('timer') }}</small>
-                </div>
-
-                <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
-                    {!! Form::label('round', 'Select Round') !!}
-                    {!! Form::select('round', array('1'=>'Aptitude Test', '2'=>'Program Test'),1, ['class' => 'form-control','placeholder'=>'']) !!}
-                </div>
+<!-- Create Modal -->
+<div class="modal fade" id="addQuiz" tabindex="-1" role="dialog" aria-hidden="true">
 
 
-                <!-- <label for="round">Rounds:</label>
-                 <select name="round" id="round" class="form-control">
-                  <option value="1">Round 1</option>
-                  <option value="2">Round 2</option>
-                </select>  -->
-<!-- 
-                <label for="married_status">Quiz Price:</label>
-                {{-- <select name="married_status" id="ms" class="form-control">
-                  <option value="no">Free</option>
-                  <option value="yes">Paid</option>
-                </select> --}}
-
-                <input type="checkbox" class="quizfp toggle-input" name="quiz_price" id="toggle">
-                <label for="toggle"></label>
-               
-                <div style="display: none;" id="doabox">
-                   <br>
-                  <label for="dob">Choose Quiz Price: </label>
-                  <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                <input value="" name="amount" id="doa" type="text" class="form-control"  placeholder="Please Enter Quiz Price">
-                 <small class="text-danger">{{ $errors->first('amount') }}</small>
-                 </div>
-                </div>
-                <br>
-
-
-
-
-
-
-              <div class="form-group {{ $errors->has('show_ans') ? ' has-error' : '' }}">
-                  <label for="">Enable Show Answer: </label>
-                 <input type="checkbox" class="toggle-input" name="show_ans" id="toggle2">
-                 <label for="toggle2"></label>
-                <br>
-              </div> -->
-                
-              </div>
-              <div class="col-md-6">
-                <div class="form-group{{ $errors->has('minpercentage') ? ' has-error' : '' }}">
-                  {!! Form::label('minpercentage', 'Minimum Passing Percentage ') !!}
-                  {!! Form::number('minpercentage', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Min. Passing Percentage', 'rows' => '8']) !!}
-                  <small class="text-danger">{{ $errors->first('minpercentage') }}</small>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                  {!! Form::label('description', 'topics covered in this quiz') !!}
-                  {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'javascript , html , mathematic, etc.', 'rows' => '8']) !!}
-                  <small class="text-danger">{{ $errors->first('description') }}</small>
-                </div>
-              </div>
-
-             
-
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="center" style="padding-right:150px; padding-left:150px">
-           <!--   {!! Form::reset("Reset", ['class' => 'btn btn-default']) !!}
-              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  -->
-             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Add" />
-
-            </div>
-          </div>
-        {!! Form::close() !!}
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="example-Modal3">Add Quiz</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      {!! Form::open(['method' => 'POST', 'action' => 'TopicController@store']) !!}
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                {!! Form::label('title', 'Quiz Title',['class'=>'form-control-label']) !!}
+                <span class="required">*</span>
+                {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Title', 'required' => 'required']) !!}
+                <small class="text-danger">{{ $errors->first('title') }}</small>
+              </div>
+              <div class="form-group{{ $errors->has('per_q_mark') ? ' has-error' : '' }}">
+                {!! Form::label('per_q_mark', 'Per Question Mark') !!}
+                <span class="required">*</span>
+                {!! Form::number('per_q_mark', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Per Question Mark', 'required' => 'required']) !!}
+                <small class="text-danger">{{ $errors->first('per_q_mark') }}</small>
+              </div>
+              <div class="form-group{{ $errors->has('timer') ? ' has-error' : '' }}">
+                {!! Form::label('timer', 'Quiz Time (in minutes)') !!}
+                {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
+                <small class="text-danger">{{ $errors->first('timer') }}</small>
+              </div>
+
+              <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
+                {!! Form::label('round', 'Select Round') !!}
+                {!! Form::select('round', array('1'=>'Aptitude Test', '2'=>'Program Test'),1, ['class' => 'form-control','placeholder'=>'']) !!}
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group{{ $errors->has('minpercentage') ? ' has-error' : '' }}">
+                {!! Form::label('minpercentage', 'Minimum Passing Percentage ') !!}
+                {!! Form::number('minpercentage', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Min. Passing Percentage']) !!}
+                <small class="text-danger">{{ $errors->first('minpercentage') }}</small>
+            </div>
+
+            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+              {!! Form::label('description', 'topics covered in this quiz') !!}
+              {!! Form::textarea('description', null, ['class' => 'form-control border-gray', 'placeholder' => 'javascript , html , mathematic, etc.', 'rows' => '8']) !!}
+              <small class="text-danger">{{ $errors->first('description') }}</small>
+            </div>
+
+          </div>
+          </div>
+      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Add</button>
     </div>
+    </form>
   </div>
-  <div class="box">
-    <div class="box-body table-responsive">
-      <table id="search" class="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Quiz Title</th>
-            <th>Topics Covered</th>
-            <th>Per Question Mark</th>
-            <th>Time</th>
-            <th>Minimum Percentage</th>
-            <th>Created By</th>
-            <th>Round</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @if ($topics)
-            @php($i = 1)
-            @foreach ($topics as $topic)
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <button type="button" class="btn btn-info  mt-2" data-toggle="modal" data-target="#addQuiz">
+          <i class="fa fa-plus"></i>
+          Add Quiz
+        </button>
+      </div>
+      <!-- <div class="card-header ">
+        <div class="btn-group my-1">
+          <button class="btn btn-info" type="button">Print</button>
+          <button class="btn btn-info" type="button">Excel</button>
+          <button class="btn btn-info" type="button">Csv</button>
+
+        </div>
+
+      </div> -->
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="example2" class="hover table-bordered border-top-0 border-bottom-0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Quiz Title</th>
+                <th>Topics Covered</th>
+                <th>Per Question Mark</th>
+                <th>Time</th>
+                <th>Minimum Percentage</th>
+                <th>Created By </th>
+                <th>Round</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if ($topics)
+              @php($i = 1)
+              @foreach ($topics as $topic)
               <tr>
                 <td>
                   {{$i}}
@@ -156,10 +129,10 @@
                 <td>{{$topic->round==1?'Aptitude Test':'Program Test'}}</td>
                 <td>
                   <!-- Edit Button -->
-                  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#{{$topic->id}}EditModal"><i class="fa fa-edit"></i> Edit</a>
+                  <a type="button" class="btn btn-info btn-sm mt-2" data-toggle="modal" data-target="#exampleModal{{$topic->id}}"><i class="fa fa-edit"></i> Edit</a>
                   <!-- Delete Button -->
-                  <a type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#{{$topic->id}}deleteModal"><i class="fa fa-close"></i> Delete</a>
-                  <div id="{{$topic->id}}deleteModal" class="delete-modal modal fade" role="dialog">
+                  <a type="button" class="btn btn-red btn-sm mt-2" data-toggle="modal" data-target="#deleteModal{{$topic->id}}"><i class="fa fa-close"></i> Delete</a>
+                  <div id="deleteModal{{$topic->id}}" class="delete-modal modal fade" role="dialog">
                     <!-- Delete Modal -->
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">
@@ -173,8 +146,8 @@
                         </div>
                         <div class="modal-footer">
                           {!! Form::open(['method' => 'DELETE', 'action' => ['TopicController@destroy', $topic->id]]) !!}
-                            {!! Form::reset("No", ['class' => 'btn btn-gray', 'data-dismiss' => 'modal']) !!}
-                            {!! Form::submit("Yes", ['class' => 'btn btn-danger']) !!}
+                          {!! Form::reset("No", ['class' => 'btn btn-gray', 'data-dismiss' => 'modal']) !!}
+                          {!! Form::submit("Yes", ['class' => 'btn btn-danger']) !!}
                           {!! Form::close() !!}
                         </div>
                       </div>
@@ -183,147 +156,133 @@
                 </td>
               </tr>
               <!-- edit model -->
-              <div id="{{$topic->id}}EditModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+              <div class="modal fade" id="exampleModal{{$topic->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Edit Quiz</h4>
-                    </div>
                     {!! Form::model($topic, ['method' => 'PATCH', 'action' => ['TopicController@update', $topic->id]]) !!}
-                      <div class="modal-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                              {!! Form::label('title', 'Topic Title') !!}
-                              <span class="required">*</span>
-                              {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Title', 'required' => 'required']) !!}
-                              <small class="text-danger">{{ $errors->first('title') }}</small>
-                            </div>
-                            <div class="form-group{{ $errors->has('per_q_mark') ? ' has-error' : '' }}">
-                              {!! Form::label('per_q_mark', 'Per Question Mark') !!}
-                              <span class="required">*</span>
-                              {!! Form::number('per_q_mark', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Per Question Mark', 'required' => 'required']) !!}
-                              <small class="text-danger">{{ $errors->first('per_q_mark') }}</small>
-                            </div>
-                            <div class="form-group{{ $errors->has('timer') ? ' has-error' : '' }}">
-                              {!! Form::label('timer', 'Quiz Time (in minutes)') !!}
-                              {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
-                              <small class="text-danger">{{ $errors->first('timer') }}</small>
-                            </div>
-                            
-                            <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
-                                {!! Form::label('round', 'Select Round') !!}
-                                {!! Form::select('round', array('1'=>'Aptitude Test', '2'=>'Program Test'),null, ['class' => 'form-control','placeholder'=>'']) !!}
-                            </div>
-                             
-                           <!-- <label for="">Enable Show Answer: </label>
-                           <input {{ $topic->show_ans ==1 ? "checked" : "" }} type="checkbox" class="toggle-input" name="show_ans" id="toggle{{ $topic->id }}">
-                           <label for="toggle{{ $topic->id }}"></label>
-                          
-                           <label for="">Quiz Price:</label>
-                           <input onchange="showprice('{{ $topic->id }}')" {{ $topic->amount !=NULL  ? "checked" : ""}} type="checkbox" class="toggle-input " name="pricechk" id="toggle2{{ $topic->id }}">
-                           <label for="toggle2{{ $topic->id }}"></label>
-                        
-                          <div style="{{ $topic->amount == NULL ? "display: none" : "" }}" id="doabox2{{ $topic->id }}">
-                           
-                          <label for="doba">Choose Quiz Price: </label>
-                          <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                           <input value="{{ $topic->amount }}" name="amount" id="doa" type="text" class="form-control"  placeholder="Please Enter Quiz Price">
-                           <small class="text-danger">{{ $errors->first('amount') }}</small>
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="example-Modal3">Edit Quiz</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            {!! Form::label('title', 'Quiz Title',['class'=>'form-control-label']) !!}
+                            <span class="required">*</span>
+                            {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Title', 'required' => 'required']) !!}
+                            <small class="text-danger">{{ $errors->first('title') }}</small>
                           </div>
-                        </div> -->
-               
-                             
-                            </div>
+                          <div class="form-group{{ $errors->has('per_q_mark') ? ' has-error' : '' }}">
+                            {!! Form::label('per_q_mark', 'Per Question Mark',['class'=>'form-control-label']) !!}
+                            <span class="required">*</span>
+                            {!! Form::number('per_q_mark', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Per Question Mark', 'required' => 'required']) !!}
+                            <small class="text-danger">{{ $errors->first('per_q_mark') }}</small>
+                          </div>
+                          <div class="form-group{{ $errors->has('timer') ? ' has-error' : '' }}">
+                            {!! Form::label('timer', 'Quiz Time (in minutes)',['class'=>'form-control-label']) !!}
+                            {!! Form::number('timer', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Quiz Total Time (In Minutes)']) !!}
+                            <small class="text-danger">{{ $errors->first('timer') }}</small>
+                          </div>
+
+                          <div class="form-group{{ $errors->has('round') ? ' has-error' : '' }}">
+                            {!! Form::label('round', 'Select Round',['class'=>'form-control-label']) !!}
+                            {!! Form::select('round', array('1'=>'Aptitude Test', '2'=>'Program Test'),null, ['class' => 'form-control','placeholder'=>'']) !!}
+                          </div>
+                        </div>
 
                         <div class="col-md-6">
+
                           <div class="form-group{{ $errors->has('minpercentage') ? ' has-error' : '' }}">
-                            {!! Form::label('minpercentage', 'Minimum Passing Percentage ') !!}
-                            {!! Form::number('minpercentage', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Min. Passing Percentage', 'rows' => '8']) !!}
+                            {!! Form::label('minpercentage', 'Minimum Passing Percentage ',['class'=>'form-control-label']) !!}
+                            {!! Form::number('minpercentage', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Min. Passing Percentage']) !!}
                             <small class="text-danger">{{ $errors->first('minpercentage') }}</small>
                           </div>
-                        </div>
 
 
-                          <div class="col-md-6">
-                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                              {!! Form::label('description', 'topics covered in this quiz') !!}
-                              {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'javascript , html , mathematic, etc.']) !!}
-                              <small class="text-danger">{{ $errors->first('description') }}</small>
-                            </div>
+                          <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                            {!! Form::label('description', 'topics covered in this quiz',['class'=>'form-control-label']) !!}
+                            {!! Form::textarea('description', null, ['class' => 'form-control border-gray', 'placeholder' => 'javascript , html , mathematic, etc.' ,'rows' => '10']) !!}
+                            <small class="text-danger">{{ $errors->first('description') }}</small>
                           </div>
                         </div>
-
-                        
-                
-                      <div class="modal-footer">
-                      <div class="center" style="padding-right:150px; padding-left:150px">
-<!--              {!! Form::submit("Add", ['class' => 'btn btn-wave']) !!}  -->
-             <input class="btn  btn-block gradient-button gradient-button-1 " type="submit" value="Update" />
-
-            </div>
                       </div>
-                    {!! Form::close() !!}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
-            @endforeach
-          @endif
-        </tbody>
-      </table>
+              @endforeach
+              @endif
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Quiz Title</th>
+                <th>Topics Covered</th>
+                <th>Per Question Mark</th>
+                <th>Time</th>
+                <th>Minimum Percentage</th>
+                <th>Created By </th>
+                <th>Round</th>
+                <th>Actions</th>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </div>
     </div>
   </div>
+</div>
 @endsection
 @section('scripts')
 <script type="text/javascript">
-  
- 
   $(function() {
     $('#fb_check').change(function() {
-      $('#fb').val(+ $(this).prop('checked'))
+      $('#fb').val(+$(this).prop('checked'))
     })
   })
 
- 
-                  
-                    $(document).ready(function(){
 
-                        $('.quizfp').change(function(){
 
-                          if ($('.quizfp').is(':checked')){
-                              $('#doabox').show('fast');
-                          }else{
-                              $('#doabox').hide('fast');
-                          }
+  $(document).ready(function() {
 
-                         
-                        });
+    $('.quizfp').change(function() {
 
-                    });
-                                
+      if ($('.quizfp').is(':checked')) {
+        $('#doabox').show('fast');
+      } else {
+        $('#doabox').hide('fast');
+      }
 
-                               
-  $('#priceCheck').change(function(){
+
+    });
+
+  });
+
+
+
+  $('#priceCheck').change(function() {
     alert('hi');
   });
 
-  function showprice(id)
-  {
-    if ($('#toggle2'+id).is(':checked')){
-      $('#doabox2'+id).show('fast');
-    }else{
+  function showprice(id) {
+    if ($('#toggle2' + id).is(':checked')) {
+      $('#doabox2' + id).show('fast');
+    } else {
 
-      $('#doabox2'+id).hide('fast');
+      $('#doabox2' + id).hide('fast');
     }
   }
-                                   
-
-  
-
 </script>
 
 
 
 @endsection
-

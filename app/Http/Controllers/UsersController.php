@@ -97,45 +97,14 @@ class UsersController extends Controller
 
         $request->validate([
           'name' => 'required|string|max:255',
-          'email' => 'required|string|email',
+          'email' => 'required|string',
          // 'password' => 'required|string|min:6',
         //'mobile' => 'unique:users',
         ]);
 
         $input = $request->all();
 
-         // if(isset($request->changepass))
-         //    {
-         //       DB::table('users')->where('id', $user->id)->update(['password' => Hash::make($request->password)]);
-         //    }
-         //    else
-         //    {
-         //      $input['password'] = $user->password;
-         //    }
-
-        if (Auth::user()->role == 'A') {
-          $user->update([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => bcrypt($input['password']),
-            'mobile' => $input['mobile'],
-            'address' => $input['address'],
-            'city' => $input['city'],
-            'role' => $input['role'],
-          ]);
-        } else if (Auth::user()->role == 'S') {
-          $user->update([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => bcrypt($input['password']),
-            'mobile' => $input['mobile'],
-            'address' => $input['address'],
-            'city' => $input['city'],
-          ]);
-        }
-        else if (Auth::user()->role == 'C') {
-
-          
+          // dd($input);
           $user->company_website = $request->company_website;
           $user->email = $request->email;
           $user->mobile = $request->mobile;
@@ -161,39 +130,7 @@ class UsersController extends Controller
           }
         }
                      $user->save();
-
-          //return back()->with('updated','Company updated !');
-          
-
-          // if($input['password'] !== null) {
-             
-          //   $user->update([
-          //     'name' => $input['name'],
-          //     'email' => $input['email'],
-          //     'password' => bcrypt($input['password']),
-          //     'mobile' => $input['mobile'],
-          //     'address' => $input['address'],
-          //     'city' => $input['city'],
-          //     'company_website' => $input['company_website'],
-          //   ]);
-          // }
-
-          // else {
-
-              
-          //   $user->update([
-          //     'name' => $input['name'],
-          //     'email' => $input['email'],
-          //    // 'password' => bcrypt($input['password']),
-          //     'mobile' => $input['mobile'],
-          //     'address' => $input['address'],
-          //     'city' => $input['city'],
-          //     'company_website' => $input['company_website'],
-          //   ]);
-            
-          // }
     
-        }
 
         return back()->with('updated', 'Your Profile has been updated');
     }

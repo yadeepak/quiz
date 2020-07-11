@@ -1,76 +1,94 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+    <!--[if IE]>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+    <![endif]-->
 
-@section('head')
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <title>Job Dcodetech</title>
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('../assets/plugins/bootstrap-4.3.1-dist/css/bootstrap.min.css')}}" rel="stylesheet" />
+
   <script>
     window.Laravel =  <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
   </script>
   <style>
-   
-  </style>
-@endsection
-
-@section('content')
-  <div class="back" style="background-image: linear-gradient(#6F81E5, #3591DC);">
-    <div class="container" style="height:600px">
+   .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    border-radius: 3px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #eaeef9;
+    box-shadow: 0 0 40px 0 rgba(234, 238, 249, .5);
+}
+.card-header {
+    background: 0 0;
+    padding: .5rem 1.5rem;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 3.5rem;
+    -ms-flex-align: center;
+    align-items: center;
+}
+    .construction-image {
+    background: url({{asset('assets/images/photos/construction.jpg')}});
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.construction-image:before {
+    position: fixed;
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(-225deg, rgba(72, 1, 255, .9) 0, rgba(121, 24, 242, .9) 48%, rgba(172, 50, 228, .9) 100%);
+}
+    </style>
+</head>
+<body class="construction-image">
+    <div id="app"  style="position: relative">
+    <div class="page">
+    <div class="container">
       @if (Session::has('error'))
         <div class="alert alert-danger sessionmodal">
           {{session('error')}}
         </div>
       @endif
-      <h3 style="text-align:center; margin-top:50px; color: white"><b>Let's get started now !</b></h3>
-                
-      <div class="login-page">
-        <div class="logo">
-          @if ($setting)
-            <a href="{{url('/')}}" title="{{$setting->welcome_txt}}"></a>
-            <div class="user-register-heading text-center">
-        <h4><img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" /></h4>
-        </div>
-          @endif
-        </div>
-
-        
         <div class="row">
-          @php
-            $fb_status = App\Setting::select('fb_login')->where('id','=',1)->first();
-            $g_status = App\Setting::select('google_login')->where('id','=',1)->first();
-            $gitlab_status = App\Setting::select('gitlab_login')->where('id','=',1)->first();
-          @endphp
-          @if($fb_status->fb_login == 1)
-          <div class="col-md-12">
-            
-            <a onclick="window.open('{{ route('sociallogin','facebook') }}','popup','width=600','height=600')" class="btn btn-facebook btn-block">
-              <i class="fa fa-facebook"></i> Facebook
-            </a>
-            
-          </div>
-          @endif
-          
-          @if($g_status->google_login == 1)
-          <div class="gap col-md-12">
-             
-             <a  onclick="window.open('{{ route('sociallogin','google') }}','popup','width=600','height=600')"  class="btn btn-google btn-block">
-              <i class="fa fa-google"></i> Google
-            </a>
-          
-          </div>
-            @endif
-          @if($gitlab_status->gitlab_login == 1)
-            <div class="gap col-md-12">
-              <a  onclick="window.open('{{ route('sociallogin','gitlab') }}','popup','width=600','height=600')"  class="btn btn-gitlab btn-block">
-              <i class="fa fa-gitlab"></i> Gitlab
-            </a>
-            </div>
-            @endif
-        </div>
-        <br>
+        <div class="col-xl-4 col-md-6 col-sm-12 d-block mx-auto">
+        <div class="card mb-0">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <img src="../assets/new images/logo.png" class="d-inline-block mx-5 px-5" alt="" />
+                </h3>
+              </div>
+              <div class="card-body">
         <form class="form login-form" method="POST" action="{{ route('login') }}">
           {{ csrf_field() }}
           <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter Your Email" required autofocus>
+          <label class="form-label text-dark" style="font-size: 13px;">Email address</label>
+            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter Your Email" required style="height: 36px;" autofocus>
             @if ($errors->has('email'))
               <span class="help-block">
                 <strong>{{ $errors->first('email') }}</strong>
@@ -78,7 +96,8 @@
             @endif
           </div>
           <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-            <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required>
+          <label class="form-label text-dark" style="font-size: 13px;">Password</label>
+            <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required style="height: 36px;">
             @if ($errors->has('password'))
               <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>
@@ -89,8 +108,8 @@
             <div class="checkbox remember-me">
               <label>
                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-              </label>
-               Remember Me
+                 </label><span style="font-size: 13px;"> Remember Me</span>
+               
             </div>
           </div>
           <div class="form-group">
@@ -105,10 +124,14 @@
         </form>
       </div>
     </div>
-  </div>    
-@endsection
+  </div> 
+        </div>
+    </div>
+  </div>  
+    </div> 
 
-@section('scripts')
+  <script src="{{ asset('js/app.js') }}"></script>
+
   <script>
     $(function () {
       $( document ).ready(function() {
@@ -119,4 +142,6 @@
       });
     });
   </script>
-@endsection
+</body>
+</html>
+

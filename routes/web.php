@@ -142,17 +142,17 @@ Route::group(['middleware'=> 'isadmin'], function(){
     $chart = new UserChart;
     $lb= $chart->labels(array_values($monthNames));
     $ds = $chart->dataset('Students count', 'line', array_values($months));
-    $ds->backgroundColor('#48aad3');
+    $ds->backgroundColor('#1650e2');
     $chart->title('No. of Student appeared monthly in '.$currentYear,20, '#666',  true);
-    $ds->color('#48aad3');
+    $ds->color('#1650e2');
     $chart->options($options);
 
     $chart2 = new UserChart;
      $chart2->labels(array_keys($topicWiseStudent));
     $ds2 = $chart2->dataset('Students count', 'bar', array_values($topicWiseStudent));
-    $ds2->backgroundColor('#48aad3');
+    $ds2->backgroundColor('#1650e2');
      $chart2->title('No. of Student appeared for quiz ',20, '#666',  true);
-    $ds2->color('#48aad3');
+    $ds2->color('#1650e2');
     $chart2->options($options);
     return view('admin.dashboard', compact('user', 'question', 'quiz', 'user_latest','chart','chart2'));
 

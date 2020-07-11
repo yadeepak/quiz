@@ -1,172 +1,417 @@
-<!DOCTYPE html>
-<html>
-@php
-$setting = App\Setting::first();
-@endphp
+<!doctype html>
+<html lang="en" dir="ltr">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" type="image/ico" href="{{asset('/images/logo/'. $setting->favicon)}}">
-  <!--[if IE]>
-  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
-  <![endif]-->
-  <title>Admin Panel</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
-  <!-- Admin Theme style -->
-  <link rel="stylesheet" href="{{asset('css/AdminLTE.css')}}">
-  <link rel="stylesheet" href="{{asset('css/skin-black.css')}}">
-   <link rel="stylesheet" href="{{asset('css/fontawesome-iconpicker.min.css')}}">
-  <!-- Select 2 -->
-  <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
-  <!-- DataTable -->
-  <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/new images/favicon.ico" />
 
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <!-- Title -->
+    <title>JobDcodetech</title>
+    <link rel="stylesheet" href="{{asset('/assets/fonts/fonts/font-awesome.min.css')}}">
+
+    <!-- Sidemenu Css -->
+    <link href="{{asset('/assets/plugins/toggle-sidebar/sidemenu.css')}}" rel="stylesheet" />
 
 
+    <!-- Bootstrap Css -->
+    <link href="{{asset('/assets/plugins/bootstrap-4.3.1-dist/css/bootstrap.min.css')}}" rel="stylesheet" />
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Dashboard Css -->
+    <link href="{{asset('/assets/css/style.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/css/admin-custom.css')}}" rel="stylesheet" />
 
-  <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <!-- c3.js Charts Plugin -->
+    <link href="{{asset('/assets/plugins/charts-c3/c3-chart.css')}}" rel="stylesheet" />
+
+    <!-- Morris.js Charts Plugin -->
+    <link href="{{asset('/assets/plugins/morris/morris.css')}}" rel="stylesheet" />
+    <!-- Data table css -->
+    <link href="{{asset('assets/plugins/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/plugins/datatable/jquery.dataTables.min.css')}}" rel="stylesheet" />
+
+
+    <!-- Slect2 css -->
+    <link href="{{asset('assets/plugins/select2/select2.min.css')}}" rel="stylesheet" />
+
+
+
+    <link href="{{asset('assets/plugins/fileuploads/css/dropify.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- Custom scroll bar css-->
+    <link href="{{asset('/assets/plugins/scroll-bar/jquery.mCustomScrollbar.css')}}" rel="stylesheet" />
+
+    <!---Font icons-->
+    <link href="{{asset('/assets/css/icons.css')}}" rel="stylesheet" />
+
+    <!-- Color-Skins -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all"
+        href="{{asset('/assets/color-skins/color-skins/color10.css')}}" />
+    <link href="{{asset('/assets/css/custom.css')}}" rel="stylesheet" />
 </head>
-<body class="hold-transition skin-black sidebar-mini">
-@if ($auth)
-<div class="wrapper">
-  <!-- Main Header -->
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="{{url('/')}}" class="logo" title="{{$setting->welcome_txt}}">
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-sm">
-        @if ($setting)
-        @endif
-        <img src="{{asset('/images/logo/logosmall.png')}}" height="30px" width="100px" alt="logo" />
-      </span>
-    </a>
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-   <!--   <a href="{{url('/')}}" class="btn visit-btn" target="_blank" title="Visit Site">Visit Site <i class="fa fa-arrow-circle-o-right"></i></a>   -->
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account Menu -->
-          <li class="dropdown">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{$auth->name}}</span>
-              <i class="fa fa-user hidden-lg hidden-md hidden-sm"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- Menu Body -->
-              <li><a href="{{url('/admin/profile')}}" title="Profile">Profile</a></li>
-              <li>
-                <a href="{{ route('logout') }}" title="Logout"
-                    onclick="event.preventDefault();
+
+<body class="app sidebar-mini">
+    <!--Loader-->
+    <div id="global-loader">
+        <img src="{{asset('assets/images/loader.svg')}}" class="loader-img" alt="">
+    </div>
+    <div class="page">
+        <div class="page-main">
+            <div class="app-header1 header py-1 d-flex">
+                <div class="container-fluid">
+                    <div class="d-flex">
+                        <a class="header-brand" href="{{url('/admin')}}">
+                            <img src="{{asset('assets/new images/logo.png')}}" class="header-brand-img" alt="Jobslist logo">
+                        </a>
+                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
+                        <div class="header-navicon">
+                            <a href="#" data-toggle="search" class="nav-link d-lg-none navsearch-icon">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                        <div class="header-navsearch">
+                            <a href="#" class=" "></a>
+                            <form class="form-inline mr-auto">
+                                <div class="nav-search">
+                                    <input type="search" class="form-control header-search" placeholder="Search…"
+                                        aria-label="Search">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="d-flex order-lg-2 ml-auto">
+                            <div class="dropdown d-none d-md-flex">
+                                <a class="nav-link icon full-screen-link">
+                                    <i class="fe fe-maximize-2" id="fullscreen-button"></i>
+                                </a>
+                            </div>
+                            <!-- <div class="dropdown d-none d-md-flex country-selector">
+                                <a href="#" class="d-flex nav-link leading-none" data-toggle="dropdown">
+                                    <img src="../assets/images/us_flag.jpg" alt="img"
+                                        class="avatar avatar-xs mr-1 align-self-center">
+                                    <div>
+                                        <strong class="text-dark">English</strong>
+                                    </div>
+                                </a>
+                                <div class="language-width dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/french_flag.jpg" alt="flag-img"
+                                            class="avatar  mr-3 align-self-center">
+                                        <div>
+                                            <strong>French</strong>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/germany_flag.jpg" alt="flag-img"
+                                            class="avatar  mr-3 align-self-center">
+                                        <div>
+                                            <strong>Germany</strong>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/italy_flag.jpg" alt="flag-img"
+                                            class="avatar  mr-3 align-self-center">
+                                        <div>
+                                            <strong>Italy</strong>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/russia_flag.jpg" alt="flag-img"
+                                            class="avatar  mr-3 align-self-center">
+                                        <div>
+                                            <strong>Russia</strong>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/spain_flag.jpg" alt="flag-img"
+                                            class="avatar  mr-3 align-self-center">
+                                        <div>
+                                            <strong>Spain</strong>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="dropdown d-none d-md-flex">
+                                <a class="nav-link icon" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class=" nav-unread badge badge-danger  badge-pill">4</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a href="#" class="dropdown-item text-center">You have 4 notification</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <div class="notifyimg">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </div>
+                                        <div>
+                                            <strong>2 new Messages</strong>
+                                            <div class="small text-muted">17:50 Pm</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <div class="notifyimg">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <div>
+                                            <strong> 1 Event Soon</strong>
+                                            <div class="small text-muted">19-10-2019</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <div class="notifyimg">
+                                            <i class="fa fa-comment-o"></i>
+                                        </div>
+                                        <div>
+                                            <strong> 3 new Comments</strong>
+                                            <div class="small text-muted">05:34 Am</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <div class="notifyimg">
+                                            <i class="fa fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div>
+                                            <strong> Application Error</strong>
+                                            <div class="small text-muted">13:45 Pm</div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item text-center">See all Notification</a>
+                                </div>
+                            </div> -->
+                            <!-- <div class="dropdown d-none d-md-flex">
+                                <a class="nav-link icon" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class=" nav-unread badge badge-warning  badge-pill">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/users/male/41.jpg" alt="avatar-img"
+                                            class="avatar brround mr-3 align-self-center">
+                                        <div>
+                                            <strong>Blake</strong> I've finished it! See you so.......
+                                            <div class="small text-muted">30 mins ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/users/female/1.jpg" alt="avatar-img"
+                                            class="avatar brround mr-3 align-self-center">
+                                        <div>
+                                            <strong>Caroline</strong> Just see the my Admin....
+                                            <div class="small text-muted">12 mins ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/users/male/18.jpg" alt="avatar-img"
+                                            class="avatar brround mr-3 align-self-center">
+                                        <div>
+                                            <strong>Jonathan</strong> Hi! I'am singer......
+                                            <div class="small text-muted">1 hour ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex pb-3">
+                                        <img src="../assets/images/users/female/18.jpg" alt="avatar-img"
+                                            class="avatar brround mr-3 align-self-center">
+                                        <div>
+                                            <strong>Emily</strong> Just a reminder that you have.....
+                                            <div class="small text-muted">45 mins ago</div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item text-center">View all Messages</a>
+                                </div>
+                            </div> -->
+                            <!-- <div class="dropdown d-none d-md-flex">
+                                <a class="nav-link icon" data-toggle="dropdown">
+                                    <i class="fe fe-grid"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow  app-selector">
+                                    <ul class="drop-icon-wrap">
+                                        <li>
+                                            <a href="#" class="drop-icon-item">
+                                                <i class="icon icon-speech text-dark"></i>
+                                                <span class="block"> E-mail</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="drop-icon-item">
+                                                <i class="icon icon-map text-dark"></i>
+                                                <span class="block">map</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="drop-icon-item">
+                                                <i class="icon icon-bubbles text-dark"></i>
+                                                <span class="block">Messages</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="drop-icon-item">
+                                                <i class="icon icon-user-follow text-dark"></i>
+                                                <span class="block">Followers</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="drop-icon-item">
+                                                <i class="icon icon-picture text-dark"></i>
+                                                <span class="block">Photos</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="drop-icon-item">
+                                                <i class="icon icon-settings text-dark"></i>
+                                                <span class="block">Settings</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item text-center">View all</a>
+                                </div>
+                            </div> -->
+                            <div class="dropdown ">
+                                <a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
+                                    <img src="{{asset('/images/company/'.$auth->company_img)}}" 
+                            alt="" class="avatar avatar-md brround">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
+                                    <a class="dropdown-item" href="{{url('/admin/profile')}}">
+                                        <i class="dropdown-icon icon icon-user"></i> My Profile
+                                    </a>
+                                    <!-- <a class="dropdown-item" href="emailservices.html">
+                                        <i class="dropdown-icon icon icon-speech"></i> Inbox
+                                    </a>
+                                    <a class="dropdown-item" href="editprofile.html">
+                                        <i class="dropdown-icon  icon icon-settings"></i> Account Settings
+                                    </a> -->
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <i class="dropdown-icon icon icon-power"></i> Log out
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left info">
-          <h4>{{$auth->name}}</h4>
-        </div>
-      </div>
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Main Sections</li>
-        @if ($auth->role == 'A')
-          <!-- Optionally, you can add icons to the links -->
-          <li class="{{$dash}}"><a href="{{url('/admin')}}" title="Dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li class="{{$quiz}}"><a href="{{url('admin/topics')}}" title="Quiz"><i class="fa fa-gears"></i> <span>Quiz</span></a></li>
-          <li class="{{$questions}}"><a href="{{url('admin/questions')}}" title="Questions"><i class="fa fa-question-circle-o"></i> <span>Questions</span></a></li>  
-          <li class=""><a href="{{url('admin/glink')}}" title="Link Generate"><i class="fa fa-gears"></i> <span>Generate Link</span></a></li>       
-          <li class=""><a href="{{url('/admin/company')}}" title="Companies"><i class="fa fa-circle"></i> <span>Companies</span></a></li>
-          <li class=""><a href="{{url('/admin/interncompany')}}" title="Intern Companies"><i class="fa fa-building"></i> <span>Intern Companies</span></a></li>
-          <li class="{{$users}}"><a href="{{url('/admin/users')}}" title="Students"><i class="fa fa-users"></i> <span>Students</span></a></li>
-          <li class="{{$all_re}}"><a href="{{url('/admin/all_reports')}}" title="Student Report"><i class="fa fa-file-text-o"></i> <span>Student Report</span></a></li>
-        <!--  <li class="{{$top_re}}"><a href="{{url('/admin/top_report')}}" title="Top Student Report"><i class="fa fa-user"></i> <span>Top Student Report</span></a></li>   -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar menu-->
+            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+            <aside class="app-sidebar doc-sidebar">
+                <div class="app-sidebar__user clearfix">
+                    <div class="dropdown user-pro-body">
+                        <div>
+                            <img src="{{asset('/images/company/'.$auth->company_img)}}" 
+                            alt=""
+                                class="avatar avatar-lg brround">
+                            <a href="{{url('/admin/profile')}}" class="profile-img">
+                                <span class="fa fa-pencil" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <div class="user-info">
+                            <h2>{{$auth->name}}</h2>
+                            <span>{{$auth->role==='A'?'Admin':'Company'}}</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="side-menu">
+                @if ($auth->role == 'A')
+                    <li class="slide {{$dash}}">
+                        <a class="side-menu__item" href="{{url('/admin')}}">
+                            <i class="side-menu__icon fa fa-tachometer"></i>
+                            <span class="side-menu__label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="slide {{$quiz}}">
+                        <a class="side-menu__item" href="{{url('admin/topics')}}">
+                            <i class="side-menu__icon fa fa-gear"></i>
+                            <span class="side-menu__label">Quiz</span>
+                        </a>
+                    </li>
+                    <li class="slide {{$questions}}">
+                        <a class="side-menu__item" href="{{url('admin/questions')}}">
+                            <i class="side-menu__icon fa fa-question-circle-o"></i>
+                            <span class="side-menu__label">Questions</span>
+                        </a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{url('admin/glink')}}">
+                            <i class="side-menu__icon fa fa-link"></i>
+                            <span class="side-menu__label">Generate Link</span>
+                        </a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{url('/admin/company')}}">
+                            <i class="side-menu__icon fa fa-building"></i>
+                            <span class="side-menu__label">Companies</span>
+                        </a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{url('/admin/interncompany')}}">
+                            <i class="side-menu__icon fa fa-building-o"></i>
+                            <span class="side-menu__label">Intern Companies</span>
+                        </a>
+                    </li>
+                    <li class="slide {{$users}}">
+                        <a class="side-menu__item" href="{{url('/admin/users')}}">
+                            <i class="side-menu__icon fa fa-graduation-cap"></i>
+                            <span class="side-menu__label">Students</span>
+                        </a>
+                    </li>
+                    <li class="slide {{$all_re}}">
+                        <a class="side-menu__item" href="{{url('/admin/all_reports')}}">
+                            <i class="side-menu__icon fa fa-file-text-o"></i>
+                            <span class="side-menu__label">Students Report</span>
+                        </a>
+                    </li>
+                    @elseif ($auth->role == 'C')
+                    <li class="slide {{$dash}}">
+                        <a class="side-menu__item" href="{{url('/admin')}}">
+                            <i class="side-menu__icon fa fa-tachometer"></i>
+                            <span class="side-menu__label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="slide {{$quiz}}">
+                        <a class="side-menu__item" href="{{url('admin/topics')}}">
+                            <i class="side-menu__icon fa fa-gear"></i>
+                            <span class="side-menu__label">Quiz</span>
+                        </a>
+                    </li>
+                    <li class="slide {{$questions}}">
+                        <a class="side-menu__item" href="{{url('admin/questions')}}">
+                            <i class="side-menu__icon fa fa-question-circle-o"></i>
+                            <span class="side-menu__label">Questions</span>
+                        </a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" href="{{url('admin/glink')}}">
+                            <i class="side-menu__icon fa fa-link"></i>
+                            <span class="side-menu__label">Generate Link</span>
+                        </a>
+                    </li>
+                    </li>
+                    <li class="slide {{$all_re}}">
+                        <a class="side-menu__item" href="{{url('/admin/all_reports')}}">
+                            <i class="side-menu__icon fa fa-file-text-o"></i>
+                            <span class="side-menu__label">Students Report</span>
+                        </a>
+                    </li>
+                   @endif
 
-          
-           
-       <!--   <li class="{{$sett}}"><a href="{{url('/admin/settings')}}" title="Settings"><i class="fa fa-gear"></i> <span>Settings</span></a></li>  -->
-          
+                </ul>
+            </aside>
 
-          <li class="treeview {{ Nav::isRoute('pages.index') }} {{ Nav::isRoute('pages.add') }} {{ Nav::isRoute('pages.edit') }} {{ Nav::isRoute('faq.index') }} {{ Nav::isRoute('faq.add') }} {{ Nav::isRoute('faq.edit') }} {{ Nav::isRoute('copyright.index') }} {{ Nav::isRoute('set.facebook') }} {{ Nav::isRoute('customstyle') }} {{ Nav::isRoute('mail.getset') }} {{ Nav::isRoute('socialicons.index')}}">
-        <!--     <a href="#">
-             <i class="fa fa-user"></i> <span>More settings</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>  -->
-            <ul class="treeview-menu">
-              <li class="{{ Nav::isRoute('pages.index') }} {{ Nav::isRoute('pages.add') }} {{ Nav::isRoute('pages.edit') }}"><a href="{{route('pages.index')}}"><i class="fa fa-circle-o"></i>Pages</a>
-               </li>
-
-               <li class="{{ Nav::isRoute('faq.index') }} {{ Nav::isRoute('faq.add') }} {{ Nav::isRoute('faq.edit') }}"><a href="{{route('faq.index')}}"><i class="fa fa-circle-o"></i>FAQ</a>
-               </li>
-                <li class="{{ Nav::isRoute('copyright.index') }}"><a href="{{route('copyright.index')}}"><i class="fa fa-circle-o"></i>Copyright</a>
-               </li>
-
-                <li class="{{ Nav::isRoute('set.facebook') }}"><a href="{{route('set.facebook')}}"><i class="fa fa-circle-o"></i>Social Login Setting</a>
-               </li>
-
-               <li class="{{ Nav::isRoute('socialicons.index')}}"><a href="{{route('socialicons.index')}}"><i class="fa fa-circle-o"></i>Social Icon</a>
-               </li>
-                <li class="{{ Nav::isRoute('mail.getset') }}"><a href="{{route('mail.getset')}}"><i class="fa fa-circle-o"></i>Mail Setting</a>
-               </li>
-               </li>
-                <li class="{{ Nav::isRoute('customstyle') }}"><a href="{{route('customstyle')}}"><i class="fa fa-circle-o"></i>Custom Style Settings</a>
-               </li>
-
-            </ul>
-
-
-          </li>
-
-    <!--      <li class="{{ Nav::isRoute('admin.payment') }}"><a href="{{route('admin.payment')}} " title="Payment History"><i class="fa fa-money"></i> <span>Payment History</span></a></li>   -->
-
-        @elseif ($auth->role == 'C')
-        <li class="{{$dash}}"><a href="{{url('/admin')}}" title="Dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li class="{{$quiz}}"><a href="{{url('admin/topics')}}" title="Quiz"><i class="fa fa-gears"></i> <span>Quiz</span></a></li>
-          <li class="{{$questions}}"><a href="{{url('admin/questions')}}" title="Questions"><i class="fa fa-question-circle-o"></i> <span>Questions</span></a></li> 
-          <li class=""><a href="{{url('admin/glink')}}" title="Link Generate"><i class="fa fa-gears"></i> <span>Generate Link</span></a></li>       
-          <li class="{{$all_re}}"><a href="{{url('/admin/all_reports')}}" title="Student Report"><i class="fa fa-file-text-o"></i> <span>Student Report</span></a></li>
-        
-        @endif
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    @if (Session::has('added'))
+            <div class="app-content">
+                <div class="side-app">
+                @if (Session::has('added'))
       <div class="alert alert-success sessionmodal">
         {{session('added')}}
       </div>
@@ -179,198 +424,93 @@ $setting = App\Setting::first();
         {{session('deleted')}}
       </div>
     @endif
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{$page_header}}
-        {{-- <small>Optional description</small> --}}
-      </h1>
-    </section>
-    <!-- Main content -->
-    <section class="content container-fluid">
-      @yield('content')
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <!-- Main Footer -->
-  <footer class="main-footer">   
-      @php
-      $copyright = \DB::table('copyrighttexts')->first()->name;
-      @endphp 
-    <!-- Default to the left -->
-    <strong>
-        
-        {{-- $copyright --}}
+                    <div class="page-header">
+                        <h4 class="page-title">{{$page_header}}</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{url('/admin')}}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Home</li>
+                        </ol>
+                    </div>
 
-        &copy; <?php echo date("Y"); ?> DcodeTech. All Rights Reserved.
+@yield('content')
+              
+                </div>
+            </div>
+        </div>
 
-    </strong>
-  </footer>
-</div>
-@endif
-<!-- ./wrapper -->
-<!-- REQUIRED JS SCRIPTS -->
-<!-- jQuery 3 -->
+        <!--footer-->
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-lg-12 col-sm-12 mt-3 mt-lg-0 text-center">
+                        Copyright © 2020 <a href="#">JobDcodetech</a>. All rights
+                        reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer-->
+    </div>
 
-<script src="{{asset('js/jquery.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vendors/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/bootstrap-4.3.1-dist/js/popper.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/bootstrap-4.3.1-dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vendors/jquery.sparkline.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vendors/selectize.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vendors/jquery.tablesorter.min.js')}}"></script>
+    <script src="{{asset('/assets/js/vendors/circle-progress.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/rating/jquery.rating-stars.js')}}"></script>
 
-<!-- Bootstrap 3.3.7 -->
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
-<!-- DataTable -->
-<script src="{{asset('js/datatables.min.js')}}"></script>
-<!-- Select2 -->
-<script src="{{asset('js/select2.full.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('js/adminlte.min.js')}}"></script>
-
-<script src="{{asset('js/fontawesome-iconpicker.min.js')}}"></script>
+    <!-- Fullside-menu Js-->
+    <script src="{{asset('/assets/plugins/toggle-sidebar/sidemenu.js')}}"></script>
 
 
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!--Morris.js Charts Plugin -->
+    <script src="{{asset('/assets/plugins/morris/raphael-min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/morris/morris.js')}}"></script>
 
+    <!-- Input Mask Plugin -->
+    <script src="{{asset('/assets/plugins/input-mask/jquery.mask.min.js')}}"></script>
 
+    <!-- Index Scripts -->
+    <script src="{{asset('/assets/js/morris.js')}}"></script>
+  <!-- Data tables -->
+  <script src="{{asset('assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatable/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatable.js')}}"></script>
 
-<script>
-  $(function () {
-    $( document ).ready(function() {
-       $('.sessionmodal').addClass("active");
-       setTimeout(function() {
-           $('.sessionmodal').removeClass("active");
-      }, 4500);
-    });
+    <!-- Select2 js -->
+    <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
 
-    $('#example1').DataTable({
-      "sDom": "<'row'><'row'<'col-md-4'l><'col-md-4'B><'col-md-4'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-      buttons: [
-            {
-               extend: 'print',
-               exportOptions: {
-                   columns: ':visible'
-               }
-            },
-            'csvHtml5',
-            'excelHtml5',
-            'colvis',
-          ]
-    });
+    <!-- Inline js -->
+    <script src="{{asset('assets/js/select2.js')}}"></script>
+    <script src="{{asset('assets/js/formelements.js')}}"></script>
 
-    $('#questions_table').DataTable({
-      "sDom": "<'row'><'row'<'col-md-4'l><'col-md-4'B><'col-md-4'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-      buttons: [
-        {
-           extend: 'print',
-           exportOptions: {
-               columns: ':visible'
-           }
-        },
-        'csvHtml5',
-        'excelHtml5',
-        'colvis',
-      ]
-    });
+    <!-- file uploads js -->
+    <script src="{{asset('assets/plugins/fileuploads/js/dropify.js')}}"></script>
 
-    $('#search').DataTable({
-      'paging'      : false,
-      'lengthChange': false,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : false,
-      'autoWidth'   : true,
-      "sDom": "<'row'><'row'<'col-md-4'B><'col-md-8'f>r>t<'row'>",
-      buttons: [
-            {
-               extend: 'print',
-               exportOptions: {
-                   columns: ':visible'
-               }
-            },
-            'excelHtml5',
-            'csvHtml5',
-            'colvis',
-          ]
-    });
+    <!-- Custom scroll bar Js-->
+    <script src="{{asset('/assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 
-    $('#topTable').DataTable({
-      "order": [[ 5, "desc" ]],
-      "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-      "sDom": "<'row'><'row'<'col-md-4'l><'col-md-4'B><'col-md-4'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
-      buttons: [
-            {
-               extend: 'print',
-               exportOptions: {
-                   columns: ':visible'
-               }
-            },
-            'excelHtml5',
-            'csvHtml5',
-            'colvis',
-          ]
-    });
-    //Initialize Select2 Elements
-    $('.select2').select2()
-    $('.currency-icon-picker').iconpicker({
-      title: 'Currency Symbols',
-      icons: ['fa fa-dollar', 'fa fa-euro', 'fa fa-gbp', 'fa fa-ils', 'fa fa-inr', 'fa fa-krw', 'fa fa-money', 'fa fa-rouble', 'fa fa-try'],
-      selectedCustomClass: 'label label-primary',
-      mustAccept: true,
-      placement: 'topRight',
-      showFooter: false,
-      hideOnSelect: true
-    });
-  });
+    <!--Counters -->
+    <script src="{{asset('/assets/plugins/counters/counterup.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/counters/waypoints.min.js')}}"></script>
+    <script src="{{asset('/assets/plugins/counters/numeric-counter.js')}}"></script>
 
-
-                                  
-</script>
-
-
- @if($setting->right_setting == 1)
-  <script type="text/javascript" language="javascript">
-   // Right click disable
-    $(function() {
-    $(this).bind("contextmenu", function(inspect) {
-    inspect.preventDefault();
-    });
-    });
-      // End Right click disable
-  </script>
-@endif
-
-@if($setting->element_setting == 1)
-<script type="text/javascript" language="javascript">
-//all controller is disable
-      $(function() {
-      var isCtrl = false;
-      document.onkeyup=function(e){
-      if(e.which == 17) isCtrl=false;
-}
-
-      document.onkeydown=function(e){
-       if(e.which == 17) isCtrl=true;
-      if(e.which == 85 && isCtrl == true) {
-     return false;
-    }
- };
-      $(document).keydown(function (event) {
-       if (event.keyCode == 123) { // Prevent F12
-       return false;
-  }
-      else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I
-     return false;
-   }
- });
-});
-     // end all controller is disable
- </script>
-
-
-@endif
+    <script src="{{asset('/assets/plugins/echarts/echarts.js')}}"></script>
+    <script src="{{asset('/assets/plugins/echarts/echarts.js')}}"></script>
+    <script src="{{asset('/assets/js/index1.js')}}"></script>
 
 
 
+    <!-- Custom Js-->
+    <script src="{{asset('/assets/js/admin-custom.js')}}"></script>
 
-
-@yield('scripts')
+    <!-- CHARTJS CHART -->
+    <script src="{{asset('/assets/plugins/chart/Chart.bundle.js')}}"></script>
+    <script src="{{asset('/assets/plugins/chart/utils.js')}}"></script>
+    
+    @yield('scripts')
 </body>
+
 </html>

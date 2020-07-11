@@ -10,30 +10,27 @@
 ])
 
 @section('content')
-  <div class="row">
-    @if ($topics)
+<div class="row">
+@if ($topics)
       @foreach ($topics as $key => $topic)
-        <div class="col-md-4">
-          <div class="quiz-card">
-            <h3 class="quiz-name">{{$topic->title}}</h3>
-            <p title="{{$topic->description}}">
+                        <div class="col-xl-4 col-lg-6 ">
+                            <div class="card">
+                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
+                                <div class="card-header d-block">
+                                    <h3 class="card-title">{{$topic->title}}</h3>
+                                    <small >
               {{str_limit($topic->description, 120)}}
-            </p>
-            <div class="row">
-              <div class="col-xs-6 pad-0">
-                <ul class="topic-detail">
-                  <li>Per Question Mark <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Round <i class="fa fa-long-arrow-right"></i></li>
-                </ul>
-              </div>
-              <div class="col-xs-6">
-                <ul class="topic-detail right">
-                  <li>{{$topic->per_q_mark}}</li>
-                  <li>
-                    @php
+            </small>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group border-0">
+                                        <li class="list-group-item">
+                                            Per Question Mark
+                                            <span class="badgetext badge badge-default badge-pill">{{$topic->per_q_mark}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Marks
+                                            <span class=" badgetext badge badge-default badge-pill">@php
                         $qu_count = 0;
                     @endphp
                     @foreach($questions as $question)
@@ -43,46 +40,32 @@
                         @endphp
                       @endif
                     @endforeach
-                    {{$topic->per_q_mark*$qu_count}}
-                  </li>
-                  <li>
-                    {{$qu_count}}
-                  </li>
-                  <li>
-                    {{$topic->timer}} minutes
-                  </li>
-                  <li>
-                  {{$topic->round==1?'Aptitude Test':'Program Test'}}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <a href="{{route('questions.show', $topic->id)}}" class="btn btn-wave">Add Questions</a>
-          </div>
+                    {{$topic->per_q_mark*$qu_count}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Questions
+                                            <span class=" badgetext badge badge-default badge-pill"> {{$qu_count}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Time
+                                            <span class=" badgetext badge badge-default badge-pill">{{$topic->timer}}
+                                                Minutes</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Round
+                                            <span class=" badgetext badge badge-default badge-pill">{{$topic->round==1?'Aptitude Test':'Program Test'}}</span>
+                                        </li>
 
-          <div id="deleteans{{ $topic->id }}" class="delete-modal modal fade" role="dialog">
-                    <!-- Delete Modal -->
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <div class="delete-icon"></div>
+                                    </ul>
+                                    <a href="{{route('questions.show', $topic->id)}}" class="btn btn-info mt-3"> Add Questions</a>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body text-center">
-                          <h4 class="modal-heading">Are You Sure ?</h4>
-                          <p>Do you really want to delete these Quiz Answer Sheet? This process cannot be undone.</p>
-                        </div>
-                        <div class="modal-footer">
-                          {!! Form::open(['method' => 'DELETE', 'action' => ['TopicController@deleteperquizsheet', $topic->id]]) !!}
-                            {!! Form::reset("No", ['class' => 'btn btn-gray', 'data-dismiss' => 'modal']) !!}
-                            {!! Form::submit("Yes", ['class' => 'btn btn-danger']) !!}
-                          {!! Form::close() !!}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-        </div>
-      @endforeach
+                        @endforeach
     @endif
-  </div>
+                    </div>
+
+        
+
 @endsection

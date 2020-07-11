@@ -74,6 +74,15 @@ audio:not([controls]) {
   color:#fff!important;
   box-shadow: 0 2px 18px rgba(0,0,0,0.19), 0 1px 1px rgba(0,0,0,0.23);
 }
+.page {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 
 .gradient-button {
   font-family: "Arial Black", Gadget, sans-serif;

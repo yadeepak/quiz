@@ -10,9 +10,14 @@
 ])
 
 @section('content')
-  <div class="content-block box">
-    <div class="box-body table-responsive">
-      <table id="topTable" class="table table-striped">
+<div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example2" class="hover table-bordered border-top-0 border-bottom-0">
+                                          
         <thead>
           <tr>
             <th>#</th>
@@ -89,6 +94,9 @@
       </table>
     </div>
   </div>
+                            </div>
+                        </div>
+</div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>

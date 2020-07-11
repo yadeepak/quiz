@@ -1,181 +1,72 @@
-@extends('layouts.app')
-
-@section('head')
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-<script>
-    window.Laravel = <?php echo json_encode([
-                            'csrfToken' => csrf_token(),
-                        ]); ?>
-</script>
-<style>
-   .countstyle{
-    padding:10px;
-    border:1px solid;
-    text-decoration:none;
-    margin-left:5px;
-    line-height:3.6;
-    cursor: pointer;
-   }
-   .active{
-    background: #424242;
-    color: #fff;
-   }
-   .btn-outline-success{
-    width: 200px;
-    border-radius: 3px;
-    background: none;
-    border: 1px solid;
-   }
-   .btn-outline-success:hover{
-color: #fff;
-background: #424242;
-}  
-
-#gree {
-
-background-color: #7CB342;    
-}
-
-#re {
-
-    background-color: #e53935;
-}
-
-#warn {
-
-    background-color : #F4511E;
-}
-
-.cent {
-
-    text-align: center;
-  font-size: 27px;
-
-}
-h3.cent{
-  font-size: 65px;
-}
-
-  </style>
+@extends('layouts.quizapp',[
+  'bodyClass'=>'construction-image'
+  ])
+  @section('heads')
+<link id="theme" rel="stylesheet" type="text/css" media="all" href="{{asset('assets/color-skins/color-skins/color10.css')}}" />
 @endsection
 
-@section('top_bar')
-<nav class="navbar navbar-default navbar-static-top">
-    <!-- <div class="logo-main-block">
-      <div class="container">
-        @if ($setting)
-          <a href="{{ url('/') }}" title="{{$setting->welcome_txt}}">
-            <img src="{{asset('/images/logo/'. $setting->logo)}}" class="img-responsive" alt="{{$setting->welcome_txt}}">
-          </a>
-        @endif
-      </div>
-    </div> -->
-    <div class="nav-bar">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="navbar-header">
-                        <!-- Branding Image -->
-                        @if($setting)
-                        <a class="tt" title="DcodeTech" href="{{url('/')}}">
-                        <img src="{{asset('/images/logo/logosmall.png')}}" alt="logo" />
-                        </a>
-                        @endif
-                    </div>
+
+@section('content')
+
+<div class="page custom-pages" style="min-height: auto;">
+    <div class=" z-index-10">
+           <header class="link-registration bg-white">
+            <div class=" container d-flex justify-content-between">
+                <div>
+                    <img src="{{asset('assets/new images/logo.png')}}" alt="">
                 </div>
-                <div class="col-md-6">
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                        <!-- Right Side Of Navbar -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
-                            
-                  <li><a href="#" ><span style="color:blue">{{$user['name']}}</span></a></li>
-                  <li><a href="#" ><span style="color:blue">{{$user['email']}}</span></a></li>
-                  <li><a href="#" ><span style="color:blue">{{$user['mobile']}}</span></a></li>
-                         
-                        </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="px-5 ">{{@$user['name']}}</a>
+                    <a href="#" class="px-5">{{@$user['email']}}</a>
+                    <a href="#" class="px-5">{{@$user['mobile']}}</a>
+                </div>
+            </div>
+        </header>
+            <div class="container link-form" style="position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);">
+
+                <div class="row justify-content-center">
+                    <div class="col-xl-12 " >
+                        <div class="card m-b-20">
+                        <div class="p-4 text-center border">
+                                <h2 class="text-center">Your Test Submitted Successfully
+                                </h2>
+
+                            </div>
+ <?php if($data['round'] == 1 ){ ?>
+                           
+                            <div class="card-body p-4">
+                                <div class="row justify-content-between">
+                                    <div class="col-12 p-5 mb-3 text-center text-white bg-info">
+                                        <h3>Result- {{$data['pass']?'Pass':'Fail'}}</h3>
+                                        <h1 class="display-2">{{$data['percentage']}}%</h1>
+                                    </div>
+                                    <div class="col-md-3 p-5  text-center text-white bg-primary">
+                                        <h3>Total <br> Questions</h3>
+                                        <h1 class="display-3">{{$data['total']}}</h1>
+                                    </div>
+                                    <div class="col-md-3 p-5  text-center text-white bg-success">
+                                        <h3>Right <br> Questions</h3>
+                                        <h1 class="display-3">{{$data['rightQ']}}</h1>
+                                    </div>
+                                    <div class="col-md-3 p-5  text-center text-white bg-danger">
+                                        <h3>Wrong <br> Questionss</h3>
+                                        <h1 class="display-3">{{$data['wrongQ']}}</h1>
+                                    </div>
+                                    <div class="col-md-3 p-5  text-center text-white bg-orange">
+                                        <h3>UnAttempted Questions</h3>
+                                        <h1 class="display-3">{{$data['unAttemptedCount']}}</h1>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</nav>
-@endsection
-
-@section('content')
-
-
-<div class="container">
-    
-<?php 
-  if($data['round'] == 1 ){
-?>      
-<h1 style="padding:30px 0px;" class="text-center">Your Test Submitted Succesfully.</h1>
-
-<div class="row my-3">
-    <div class="col-md-12">
-<div class="card text-white bg-primary mb-3" style="padding: 40px;background: #514e4e;">
-  <div class="card-header cent">Result - {{$data['pass']?'Pass':'Fail'}}</div>
-  <div class="card-body">
-    <h3 class="card-title cent">{{$data['percentage']}}%</h3>
-  </div>
-</div>
-</div>
-</div>
-<div class="row">
-    <div class="col-md-3">
-<div class="card text-white bg-primary mb-3" style="padding: 40px;background: #007ad5;">
-  <div class="card-header cent">Total Questions</div>
-  <div class="card-body">
-    <h3 class="card-title cent"> {{$data['total']}}</h3>
-  </div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="card text-white mb-3" id="gree" style="padding: 40px;">
-  <div class="card-header cent" class="tex"><font color="white">Right Questions</font></div>
-  <div class="card-body">
-    <h3 class="card-title cent"><font color="white">{{$data['rightQ']}}</font></h3>
-  </div>
-</div>
-</div>
-
- 
-  <div class="col-md-3">
-<div class="card text-white mb-3" id="re" style="padding: 40px;">
-  <div class="card-header cent"><font color="white">Wrong Questions</font></div>
-  <div class="card-body">
-    <h3 class="card-title cent" ><font color="white">{{$data['wrongQ']}}</font></h3>
-</div>
-</div>
-</div>
-<div class="col-md-3">
-<div class="card text-white mb-3" id="warn" style="padding: 40px;">
-  <div class="card-header cent"><font color="white">UnAttempted Questions</font></div>
-  <div class="card-body">
-    <h3 class="card-title cent"><font color="white"> {{$data['unAttemptedCount']}}</font></h3>
-</div>
-</div>
-</div>
-</div>
-
-<?php }
-if($data['round'] == 2 )
-{ ?>
-  <h1 style="padding:30px 0px;" class="text-center">Your Test Submitted Succesfully.</h1>
-<?php } ?>
-
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  
-});
-
-</script>
-
-@endsection
-
-@section('scripts')
-@endsection
+    @endsection

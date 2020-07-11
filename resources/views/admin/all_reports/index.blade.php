@@ -10,33 +10,26 @@
 ])
 
 @section('content')
+  
   <div class="row">
-    @if ($topics)
+  @if ($topics)
       @foreach ($topics as $key => $topic)
-        <div class="col-md-4">
-          <div class="quiz-card">
-            <h3 class="quiz-name">{{$topic->title}}</h3>
-            <p title="{{$topic->description}}">
-              {{str_limit($topic->description, 120)}}
-            </p>
-            <div class="row">
-              <div class="col-xs-6 pad-0">
-                <ul class="topic-detail">
-                  <li>Per Question Mark <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Created By <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total students <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Total students Passed <i class="fa fa-long-arrow-right"></i></li>
-                  <li>Round <i class="fa fa-long-arrow-right"></i></li>
-                </ul>
-              </div>
-              <div class="col-xs-6">
-                <ul class="topic-detail right">
-                  <li>{{$topic->per_q_mark}}</li>
-                  <li>
-                    @php
+                        <div class="col-xl-4 col-lg-6 ">
+                            <div class="card">
+                                <div class="card-status bg-blue br-tr-7 br-tl-7"></div>
+                                <div class="card-header d-block">
+                                    <h3 class="card-title">{{$topic->title}}</h3>
+                                    <small>{{str_limit($topic->description, 120)}}</small>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group border-0">
+                                        <li class="list-group-item">
+                                            Per Question Mark
+                                            <span class="badgetext badge badge-default badge-pill">{{$topic->per_q_mark}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Marks
+                                            <span class=" badgetext badge badge-default badge-pill"> @php
                         $qu_count = 0;
                     @endphp
                     @foreach($questions as $question)
@@ -46,35 +39,43 @@
                         @endphp
                       @endif
                     @endforeach
-                    {{$topic->per_q_mark*$qu_count}}
-                  </li>
-                  <li>
-                    {{$qu_count}}
-                  </li>
-                  <li>
-                    {{$topic->timer}} minutes
-                  </li>
-                  <li>
-                    {{$topic->creator}}
-                  </li>
-                  <li>
-                    {{$students[$key]??0}}
-                  </li>
-                  <li>
-                    {{$passedStudents[$key]??0}}
-                  </li>
-                  <li>
-                    {{$topic->round}}
-                  </li>
-                </ul>
-              </div>
-            </div>
-            @if(Auth::user()->role === 'A')
-            <a href="{{route('all_reports.show', $topic->id)}}" class="btn btn-wave">Show Report</a>
+                    {{$topic->per_q_mark*$qu_count}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Questions
+                                            <span class=" badgetext badge badge-default badge-pill">{{$qu_count}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Time
+                                            <span class=" badgetext badge badge-default badge-pill">{{$topic->timer}} Minutes
+                                                </span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Created By
+                                            <span class=" badgetext badge badge-default badge-pill"> {{$topic->creator}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total students
+                                            <span class=" badgetext badge badge-default badge-pill">{{$students[$key]??0}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total students Passed
+                                            <span class=" badgetext badge badge-default badge-pill">{{$passedStudents[$key]??0}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Round
+                                            <span class=" badgetext badge badge-default badge-pill">{{$topic->round}}</span>
+                                        </li>
+                                    </ul>
+                                    @if(Auth::user()->role === 'A')
+            <a href="{{route('all_reports.show', $topic->id)}}" class="btn btn-info mt-3">Show Report</a>
+
         @endif
-          </div>
-        </div>
-      @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
     @endif
-  </div>
+                    </div>
 @endsection

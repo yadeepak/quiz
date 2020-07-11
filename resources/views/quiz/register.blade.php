@@ -1,104 +1,30 @@
-@extends('layouts.app')
-
-@section('head')
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-</title>
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-
-<script>
-  window.Laravel = <?php echo json_encode([
-                      'csrfToken' => csrf_token(),
-                    ]); ?>
-</script>
-
-<style type="text/css">
-  .auto-style1 {
-    max-width: 38em;
-    padding: 1em 3em 2em 3em;
-    margin: 0em auto;
-    background-color: #fff;
-    border-radius: 4.2px;
-    box-shadow: 10px 3px 10px -2px rgba(0, 0, 0, 0.2);
-    text-align: left;
-  }
-  .auto-style1 label {
-    color:#000;
-    font-weight: 900;
-  }
-
-
-  .auto-style3 {
-    text-align: start;
-    padding-left: 12px;
-    font-weight: 800;
-    padding-bottom: 21px;
-    color: #000;
-}
-</style>
-
-
-@endsection
-
-@section('top_bar')
-<nav class="navbar navbar-default navbar-static-top">
-  <!-- <div class="logo-main-block">
-      <div class="container">
-        @if ($setting)
-          <a href="{{ url('/') }}" title="{{$setting->welcome_txt}}">
-            <img src="{{asset('/images/logo/'. $setting->logo)}}" class="img-responsive" alt="{{$setting->welcome_txt}}">
-          </a>
-        @endif
-      </div>
-    </div> -->
-  <div class="nav-bar">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="navbar-header">
-            <!-- Branding Image -->
-            @if($setting)
-            <a class="tt" title="DcodeTech" href="{{url('/')}}">
-              <img src="{{asset('/images/logo/logosmall.png')}}" width="120px" height="50px" alt="logo" />
-            </a>
-            @endif
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-              <!-- Authentication Links -->
-
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-@endsection
-
+@extends('layouts.quizapp',[
+  'bodyClass'=>'construction-image'
+  ])
 @section('content')
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
+<div class="page custom-pages" style="min-height: auto;">
+		<div class="z-index-10">
+			<header class="link-registration">
+				<div class="bg-white d-flex justify-content-center">
+					<div>
+						<img src="{{asset('assets/new images/logo.png')}}" alt="">
+					</div>
+				</div>
+			</header>
+			<div class="container mt-5 link-form">
+				<div class="row ">
+					<div class="col-xl-6 col-md-12 col-md-12 d-block mx-auto">
+						<div class="card mb-xl-0">
+							<div class="py-4">
+								<h2 class="text-center ">Welcome To {{$round===2?'Next Round':'DcodeTech'}}</h2>
+							</div>
+							<div class="card-body">
 
-        <div class="col-md-6">
-<img src="{{asset('/images/logo/Male.png')}}" height="700px" class="pull-right">
-        </div>
-
-        <div class="col-md-6">
-
-          {!! Form::open(['method' => 'POST', 'action' => 'FrntendQuizController@registerSubmit']) !!}
+              {!! Form::open(['method' => 'POST', 'action' => 'FrntendQuizController@registerSubmit']) !!}
           {{csrf_field()}}
           <input type="hidden" value={{$tokenid}} name="tokenid" />
           <input type="hidden" value={{$round}} name="round" />
-          <div class="auto-style1">
-            <div class="row">
-              <h3 class="auto-style3">Welcome To {{$round===2?'Next Round':'DcodeTech'}}</h3>
-              @if ($errors->any())
+          @if ($errors->any())
               <div class="alert alert-danger">
                 <ul>
                   @foreach ($errors->all() as $error)
@@ -107,61 +33,68 @@
                 </ul>
               </div>
             @endif
-
+									<div class="form-row">
             @if($round===1)
+										<div class="form-group col-md-6">
+											<div class="form-group">
+												<label class="form-label" for="exampleInputEmail1">Full
+													Name</label>
+												<input type="text" class="form-control" id="name1"
+													placeholder="First Name" name="name" value="{{ old('name')}}">
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="form-group">
+												<label class="form-label" for="exampleInputEmail1">DOB</label>
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<div class="input-group-text">
+															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+														</div>
+													</div><input class="form-control fc-datepicker"
+														placeholder="MM/DD/YYYY" type="text" name="dob" value="{{ old('dob')}}">
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="inputEmail4" class="col-form-label">Email</label>
+											<input type="email" class="form-control" id="inputEmail5"
+												placeholder="Email" name="email" value="{{ old('email')}}">
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-form-label">Gender</label>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="name">Full Name</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="Full Name" value="{{ old('name')}}">
-              </div>
-
-
-              <div class="form-group col-md-6">
-                <label for="dob">DOB</label>
-                <input type="date" name="dob" class="form-control" id="dob" placeholder="DOB" value="{{ old('dob')}}" />
-              </div>
-
-
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
-                <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" value="{{ old('email')}}" />
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="dob">Gender</label><br>
-                <label class="radio-inline"><input type="radio" name="gender" value="male" {{ (old("gender") == 'male') ? "checked" : '' }} />Male</label>
-                <label class="radio-inline"><input type="radio" name="gender" value="female" {{ (old("gender") == 'female') ? "checked" : '' }} />Female</label> </div>
-            </div>
-
-
-          </div>
-
-          <div class="form-group">
-            <label for="mobile">Mobile</label>
-            <input type="number" name="mobile" class="form-control" required id="mobile" placeholder="Mobile" value="{{ old('mobile')}}" />
-          </div>
-
-          <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 Main St" value="{{ old('address') }}" />
-          </div>
-
-
-
-          <div class="form-group">
-            <label for="college">College</label>
-            <input type="text" name="college" placeholder="College" class="form-control" id="inputZip" value="{{ old('college')}}" />
-          </div>
+											<div class="d-flex">
+												<label class="custom-control custom-radio mr-2">
+													<input type="radio" class="custom-control-input"
+														name="gender" value="male" {{ (old("gender") == 'male') ? "checked" : '' }}>
+													<span class="custom-control-label">Male</span>
+												</label>
+												<label class="custom-control custom-radio">
+													<input type="radio" class="custom-control-input"
+														name="gender" value="female" {{ (old("gender") == 'female') ? "checked" : '' }}>
+													<span class="custom-control-label">Female</span>
+												</label>
+											</div>
 
 
-
-
-
-          <div class="form-group">
-            <label for="experience">experience:</label>
-            <select name="experience" id="" class="form-control">
-              <option value="0" {{ (old("experience") == '0') ? "selected" : '' }}>Select Experience</option>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label">Mobile</label>
+											<input type="tel" class="form-control" placeholder="Mobile" name="mobile" required value="{{ old('mobile')}}">
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label">Address</label>
+											<textarea class="form-control" rows="2" placeholder="Address" name="address">{{ old('address') }}</textarea>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label">College</label>
+											<input type="text" class="form-control" placeholder="College" name="college" value="{{ old('college')}}">
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label">Experience</label>
+											<select class="form-control select2 custom-select px-0" name="experience">
+							<option value="0" {{ (old("experience") == '0') ? "selected" : '' }}>Select Experience</option>
               <option value="1" {{ (old("experience") == '1') ? "selected" : '' }}>Fresher</option>
               <option value="2" {{ (old("experience") == '2') ? "selected" : '' }}>1 yr</option>
               <option value="3" {{ (old("experience") == '3') ? "selected" : '' }}>2 yr</option>
@@ -169,83 +102,38 @@
               <option value="5" {{ (old("experience") == '5') ? "selected" : '' }}>4 yr</option>
               <option value="6" {{ (old("experience") == '6') ? "selected" : '' }}>5 yr</option>
               <option value="7" {{ (old("experience") == '7') ? "selected" : '' }}>&gt; 6 yr</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="appearing">Appearing For:</label>
-            <select name="appearing" id="" class="form-control" value="{{ old('appearing')}}">
-              <option value="0" {{ (old("appearing") == '0') ? "selected" : '' }}>Select Appearing For</option>
+            
+											</select>
+										</div>
+										<div class="form-group col-12">
+											<label class="form-label">Appearing For</label>
+											<select class="form-control select2 custom-select px-0" name="appearing">
+                      <option value="0" {{ (old("appearing") == '0') ? "selected" : '' }}>Select Appearing For</option>
               <option value="1" {{ (old("appearing") == '1') ? "selected" : '' }}>junior software Devloper</option>
               <option value="2" {{ (old("appearing") == '2') ? "selected" : '' }}>Associate Software Devloper</option>
               <option value="3" {{ (old("appearing") == '3') ? "selected" : '' }}>Senior Software Devloper</option>
-            </select>
-          </div>
-
+         </select>
+										</div>
+							
+                    @endif
+                    @if($round===2)
+          <div class="form-group col-12" style="padding: 20px 0">
+											<label class="form-label">Mobile</label>
+											<input type="email" class="form-control" placeholder="Enter your email id" name="email" required value="{{ old('email')}}">
+										</div>
           @endif
-          @if($round===2)
-          <div class="form-group" style="padding: 20px 0">
-            <input type="text" name="email" class="form-control p-2" id="email" placeholder="Enter your email id" value="{{ old('email')}}">
-          </div>
-          @endif
+          <div class="form-group col-12">
+                      {!! Form::submit("submit", ['class' => 'btn btn-primary w-100']) !!}
 
-
-
-          {!! Form::submit("submit", ['class' => 'btn br btn-block gradient-button gradient-button-1 ']) !!}
-          <br />
-          <br />
-        </div>
-        {!! Form::close() !!}
-
-
-      </div>
-
-    </div>
-
-
+                    </div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
   </div>
-</div>
-</div>
-
-
-
-@endsection
-
-@section('scripts')
-
-
-
-<script>
-  function mydate1() {
-    var now = new Date();
-    var selectedDate = new Date($(this).val());
-
-    alert(selectedDate);
-
-    if (selectedDate > now) {
-      $(this).val(dateControler.currentDate)
-    } else {
-      dateControler.currentDate = $(this).val();
-    }
-
-  }
-</script>
-<script type="text/javascript">
-  function wOpener(url, name) {
-    if (screen.width >= 800) {
-      var iwidth = (screen.width);
-    }
-    if (screen.width >= 600) {
-      var iheight = (screen.height)
-    }
-
-    var param = "width=" + iwidth + ",height=" + iheight + ",left=1,top=1,status=yes,resizable=yes,scrollbars=yes,menubar=no";
-    myWindow = window.open(url, name, param);
-
-    myWindow.focus();
-
-  }
-</script>
-
-
+  
 @endsection

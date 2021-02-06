@@ -335,3 +335,5 @@ Route::post('/admin/moresettings/socialicons/insert','SocialController@store')->
 
     //
 });
+
+Route::get('/{path}', 'Frontend\FrontendController@renderPage')->name('render_page');

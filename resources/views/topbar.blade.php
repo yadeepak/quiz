@@ -36,11 +36,11 @@
 					<div class="top-bar-right ">
 						<ul class="custom">
 							<li>
-								<a class="" href="companyreg.html"><i class="fa fa-user mr-1"></i>
+								<a class="" href="{{url('/companyreg')}}"><i class="fa fa-user mr-1"></i>
 									<span>Company Registration</span></a>
 							</li>
 							<li>
-								<a class="" href="../dashboard/login.html"><i class="fa fa-sign-in mr-1"></i>
+								<a class="" href="{{url('/login')}}"><i class="fa fa-sign-in mr-1"></i>
 									<span>Login</span></a>
 							</li>
 							<li class="dropdown">

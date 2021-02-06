@@ -188,6 +188,7 @@
 	<!-- Bootstrap js -->
 	<script src="{{asset('assets/plugins/bootstrap-4.3.1-dist/js/popper.min.js')}}"></script>
 	<script src="{{asset('assets/plugins/bootstrap-4.3.1-dist/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('assets/js/common.js')}}"></script>
 
 	<!--JQuery Sparkline Js-->
 	<script src="{{asset('assets/js/vendors/jquery.sparkline.min.js')}}"></script>

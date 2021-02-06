@@ -127,7 +127,7 @@
             case 116 : //F5 button
                 event.returnValue = false;
                 event.keyCode = 0;
-                alert('If you refresh the page your data will be submitted.');
+                alert('If you refresh the page your data will be su5bmitted.');
                 return false; 
             case 82 : //R button
                 if (event.ctrlKey) { 

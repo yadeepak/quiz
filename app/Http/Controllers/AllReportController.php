@@ -21,7 +21,7 @@ class AllReportController extends Controller
     public function index()
     {
         if(Auth::user()->role === 'C'){
-            $topics = Topic::where('created_by',Auth::id())->get();
+            $topics = Topic::where('created_by',Auth::id())->orderBy('id', 'desc')->get();
             $topics->load(['question' => function ($q) use (&$questions) {
                 $questions = $q->get();
             }]);
@@ -41,8 +41,8 @@ class AllReportController extends Controller
           }
         
     } else {
-        $topics = Topic::all();
-        $questions = Question::all();
+        $topics = Topic::orderBy('id', 'desc')->get();
+        $questions = Question::orderBy('id', 'desc')->get();
         $students = array();
         $passedStudents = array();  
         foreach($topics as $key =>$topic){
@@ -98,8 +98,8 @@ class AllReportController extends Controller
             $users = $q->get();
         }]);
         
-        $answers = Answer::where('topic_id', $topic->id)->get();
-        $students = User::where('id', '!=', Auth::id())->get();
+        $answers = Answer::where('topic_id', $topic->id)->orderBy('id', 'desc')->get();
+        $students = User::where('id', '!=', Auth::id())->orderBy('id', 'desc')->get();
         $c_que = Question::where('topic_id', $id)->count();
 
         $filtStudents = collect();

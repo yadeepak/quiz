@@ -88,7 +88,7 @@
               <td>{{$glink->expired==1?'Expired':'Not Expired'}} </td>
               <td>
                 <!-- Edit Button -->
-                <a type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal{{$glink->id}}"><i class="fa fa-close"></i> Delete</a>
+                <a type="button" class="btn btn-xs btn-danger" tabindex="1" data-toggle="modal" data-target="#deleteModal{{$glink->id}}"><i class="fa fa-close"></i> Delete</a>
                 <div id="deleteModal{{$glink->id}}" class="delete-modal modal fade" role="dialog">
                   <!-- Delete Modal -->
                   <div class="modal-dialog modal-sm">

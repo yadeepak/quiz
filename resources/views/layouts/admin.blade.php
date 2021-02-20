@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="HandheldFriendly" content="True">
@@ -12,7 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/new images/favicon.ico" />
 
     <!-- Title -->
-    <title>JobDcodetech</title>
+    <title>Jobping</title>
     <link rel="stylesheet" href="{{asset('/assets/fonts/fonts/font-awesome.min.css')}}">
 
     <!-- Sidemenu Css -->
@@ -50,23 +50,24 @@
     <link href="{{asset('/assets/css/icons.css')}}" rel="stylesheet" />
 
     <!-- Color-Skins -->
-    <link id="theme" rel="stylesheet" type="text/css" media="all"
-        href="{{asset('/assets/color-skins/color-skins/color10.css')}}" />
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{asset('/assets/color-skins/color-skins/color10.css')}}" />
     <link href="{{asset('/assets/css/custom.css')}}" rel="stylesheet" />
 </head>
 
 <body class="app sidebar-mini">
     <!--Loader-->
-    <div id="global-loader">
+    <!-- <div id="global-loader">
         <img src="{{asset('assets/images/loader.svg')}}" class="loader-img" alt="">
-    </div>
+    </div> -->
     <div class="page">
         <div class="page-main">
             <div class="app-header1 header py-1 d-flex">
                 <div class="container-fluid">
                     <div class="d-flex">
                         <a class="header-brand" href="{{url('/admin')}}">
-                            <img src="{{asset('assets/new images/logo.png')}}" class="header-brand-img" alt="Jobslist logo">
+                            <img src="
+                            {{$auth->role==='A'?asset('assets/new images/jobping1.png'):asset('/images/company/'.$auth->company_img)}}
+                            " class="header-brand-img" alt="{{$auth->name}}">
                         </a>
                         <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
                         <div class="header-navicon">
@@ -78,8 +79,7 @@
                             <a href="#" class=" "></a>
                             <form class="form-inline mr-auto">
                                 <div class="nav-search">
-                                    <input type="search" class="form-control header-search" placeholder="Search…"
-                                        aria-label="Search">
+                                    <input type="search" class="form-control header-search" placeholder="Search…" aria-label="Search">
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>
@@ -276,8 +276,7 @@
                             </div> -->
                             <div class="dropdown ">
                                 <a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
-                                    <img src="{{asset('/images/company/'.$auth->company_img)}}" 
-                            alt="" class="avatar avatar-md brround">
+                                    <img src="{{asset('/images/company/'.$auth->company_img)}}" alt="" class="avatar avatar-md brround">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
                                     <a class="dropdown-item" href="{{url('/admin/profile')}}">
@@ -289,14 +288,13 @@
                                     <a class="dropdown-item" href="editprofile.html">
                                         <i class="dropdown-icon  icon icon-settings"></i> Account Settings
                                     </a> -->
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                                         <i class="dropdown-icon icon icon-power"></i> Log out
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                                        {{ csrf_field() }}
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -309,9 +307,7 @@
                 <div class="app-sidebar__user clearfix">
                     <div class="dropdown user-pro-body">
                         <div>
-                            <img src="{{asset('/images/company/'.$auth->company_img)}}" 
-                            alt=""
-                                class="avatar avatar-lg brround">
+                            <img src="{{asset('/images/company/'.$auth->company_img)}}" alt="" class="avatar avatar-lg brround">
                             <a href="{{url('/admin/profile')}}" class="profile-img">
                                 <span class="fa fa-pencil" aria-hidden="true"></span>
                             </a>
@@ -323,7 +319,7 @@
                     </div>
                 </div>
                 <ul class="side-menu">
-                @if ($auth->role == 'A')
+                    @if ($auth->role == 'A')
                     <li class="slide {{$dash}}">
                         <a class="side-menu__item" href="{{url('/admin')}}">
                             <i class="side-menu__icon fa fa-tachometer"></i>
@@ -404,26 +400,36 @@
                             <span class="side-menu__label">Students Report</span>
                         </a>
                     </li>
-                   @endif
+                    @endif
 
                 </ul>
             </aside>
 
             <div class="app-content">
                 <div class="side-app">
-                @if (Session::has('added'))
-      <div class="alert alert-success sessionmodal">
-        {{session('added')}}
-      </div>
-    @elseif (Session::has('updated'))
-      <div class="alert alert-info sessionmodal">
-        {{session('updated')}}
-      </div>
-    @elseif (Session::has('deleted'))
-      <div class="alert alert-danger sessionmodal">
-        {{session('deleted')}}
-      </div>
-    @endif
+                    @if (Session::has('added'))
+                    <div class="alert alert-success sessionmodal">
+                        {{session('added')}}
+                    </div>
+                    @elseif (Session::has('updated'))
+                    <div class="alert alert-info sessionmodal">
+                        {{session('updated')}}
+                    </div>
+                    @elseif (Session::has('deleted'))
+                    <div class="alert alert-danger sessionmodal">
+                        {{session('deleted')}}
+                    </div>
+                    @elseif (Session::has('error'))
+                    <div class="alert alert-danger sessionmodal">
+                        {{session('error')}}
+                    </div>
+                    @elseif (Session::has('errors'))
+                    <div class="alert alert-danger sessionmodal">
+                        @foreach(session('errors') as $error)
+                        {{$error}}
+                        @endforeach
+                    </div>
+                    @endif
                     <div class="page-header">
                         <h4 class="page-title">{{$page_header}}</h4>
                         <ol class="breadcrumb">
@@ -432,8 +438,8 @@
                         </ol>
                     </div>
 
-@yield('content')
-              
+                    @yield('content')
+
                 </div>
             </div>
         </div>
@@ -474,8 +480,8 @@
 
     <!-- Index Scripts -->
     <script src="{{asset('/assets/js/morris.js')}}"></script>
-  <!-- Data tables -->
-  <script src="{{asset('assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
+    <!-- Data tables -->
+    <script src="{{asset('assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatable/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('assets/js/datatable.js')}}"></script>
 
@@ -509,7 +515,7 @@
     <!-- CHARTJS CHART -->
     <script src="{{asset('/assets/plugins/chart/Chart.bundle.js')}}"></script>
     <script src="{{asset('/assets/plugins/chart/utils.js')}}"></script>
-    
+
     @yield('scripts')
 </body>
 

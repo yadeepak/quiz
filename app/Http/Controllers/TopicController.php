@@ -19,7 +19,8 @@ class TopicController extends Controller
       if(Auth::user()->role === 'C'){
         $topics = Topic::where('created_by',Auth::id())->get();
       } else {
-        $topics = Topic::all();
+        $topics = Topic::orderBy('id', 'desc')->get();
+        // dd($topics);
       }
         return view('admin.quiz.index', compact('topics'));
     }

@@ -56,7 +56,7 @@
             <div id="pass" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
               {!! Form::label('password', 'Password') !!}
               <span class="required">*</span>
-              <input class="form-control" type="password" value="" placeholder="Enter new password" name="password">
+              <input class="form-control" type="password" value="" placeholder="Enter new password" name="password" required>
               <small class="text-danger">{{ $errors->first('password') }}</small>
             </div>
           </div>
@@ -66,13 +66,13 @@
 
             <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
               {!! Form::label('address', 'Company Address') !!}
-              {!! Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Address']) !!}
+              {!! Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Address','required' => 'required']) !!}
               <small class="text-danger">{{ $errors->first('description') }}</small>
             </div>
 
             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
               {!! Form::label('email', 'Email ID') !!}
-              {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID']) !!}
+              {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID','required' => 'required',"pattern"=>"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"]) !!}
               <small class="text-danger">{{ $errors->first('email') }}</small>
             </div>
             <div id="chimg" class="form-group{{ $errors->has('company_img') ? ' has-error' : '' }} file">
@@ -135,9 +135,9 @@
               <td><img src="{{asset('/images/company/'.$comp->company_img)}}" width="100px" height="100px" class="img-responsive" alt="image"></td>
               <td>
                 <!-- Edit Button -->
-                <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#EditModal{{$comp->id}}"><i class="fa fa-edit"></i> Edit</a>
+                <a type="button" class="btn btn-info btn-xs" tabindex="1" data-toggle="modal" data-target="#EditModal{{$comp->id}}"><i class="fa fa-edit"></i> Edit</a>
                 <!-- Delete Button -->
-                <a type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal{{$comp->id}}"><i class="fa fa-close"></i> Delete</a>
+                <a type="button" class="btn btn-xs btn-danger" tabindex="1" data-toggle="modal" data-target="#deleteModal{{$comp->id}}"><i class="fa fa-close"></i> Delete</a>
                 <div id="deleteModal{{$comp->id}}" class="delete-modal modal fade" role="dialog">
                   <!-- Delete Modal -->
                   <div class="modal-dialog modal-sm">
@@ -220,13 +220,13 @@
 
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                           {!! Form::label('address', 'Company Address') !!}
-                          {!! Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Address']) !!}
+                          {!! Form::textarea('address', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Company Address','required' => 'required']) !!}
                           <small class="text-danger">{{ $errors->first('description') }}</small>
                         </div>
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                           {!! Form::label('email', 'Email ID') !!}
-                          {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Please Enter Email ID']) !!}
+                          {!! Form::email('email', null, ['class' => 'form-control','required' => 'required' ,'placeholder' => 'Please Enter Email ID']) !!}
                           <small class="text-danger">{{ $errors->first('email') }}</small>
                         </div>
 

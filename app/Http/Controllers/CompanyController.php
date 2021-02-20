@@ -19,7 +19,7 @@ class CompanyController extends Controller
         $company = User::select('*')
         ->where('role', '=', 'C')
         ->where('company_type', '=', 'fulltime')
-        ->get();
+        ->orderBy('id', 'desc')->get();
         return view('admin.company.indexx', compact('company'));
     }
 

@@ -85,7 +85,7 @@
 		<div class="horizontal-header clearfix ">
 			<div class="container">
 				<a class="animated-arrow" id="horizontal-navtoggle"><span></span></a>
-				<span class="smllogo"><img alt="img" src="./assets/New Images/jobping1.png" width="120" /></span>
+				<span class="smllogo"><img alt="img" src="./assets/new images/jobping1.png" width="120" /></span>
 				<a class="callusbtn bg-light" href="#"><i aria-hidden="true" class="fa fa-bell text-body"></i></a>
 			</div>
 		</div>
@@ -103,7 +103,7 @@
             <a href="index.html"><img alt="" src="./assets/New Images/logo.png"></a>
         </div> -->
 			<div class="desktoplogo pt-1">
-				<a href="index.html"><img alt="" src="./assets/New Images/jobping1.png"></a>
+				<a href="index.html"><img alt="" src="./assets/new images/jobping1.png"></a>
 			</div>
 			<!--Nav-->
 			<nav class="horizontalMenu clearfix d-md-flex  ">

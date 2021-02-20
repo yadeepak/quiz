@@ -17,7 +17,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/new images/favicon.ico')}}" />
 
 	<!-- Title -->
-	<title>JobDcodetech</title>
+	<title>Jobping</title>
 	<link rel="stylesheet" href="{{asset('assets/fonts/fonts/font-awesome.min.css')}}">
 
 	<!-- Bootstrap Css -->
@@ -44,9 +44,9 @@
     
 </head>
 <body class="{{$bodyClass}}">
-<div id="global-loader">
+<!-- <div id="global-loader">
         <img src="{{asset('assets/images/loader.svg')}}" class="loader-img" alt="">
-    </div>
+    </div> -->
 @yield('content')
 
 

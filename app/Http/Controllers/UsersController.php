@@ -17,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', '!=', 'A')->get();
+        $users = User::where('role', '!=', 'A')->orderBy('id', 'desc')->get();
         return view('admin.users.indexx', compact('users'));
 
     }
@@ -104,7 +104,6 @@ class UsersController extends Controller
 
         $input = $request->all();
 
-          // dd($input);
           $user->company_website = $request->company_website;
           $user->email = $request->email;
           $user->mobile = $request->mobile;
@@ -119,7 +118,6 @@ class UsersController extends Controller
           
           if($request->changeimg == '1'){
           if ($file = $request->file('company_img')) {
-              
             $name = 'company_'.time().$file->getClientOriginalName();
            
             if($request->company_img != null) {

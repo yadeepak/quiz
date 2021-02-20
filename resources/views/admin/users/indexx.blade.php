@@ -140,7 +140,7 @@
                   <td>{{$user->address}}</td>
                   <td>
                     <!-- Edit Button -->
-                    <a type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal{{$user->id}}"><i class="fa fa-close"></i> Delete</a>
+                    <a type="button" class="btn btn-xs btn-danger" tabindex="1" data-toggle="modal" data-target="#deleteModal{{$user->id}}"><i class="fa fa-close"></i> Delete</a>
                     <div id="deleteModal{{$user->id}}" class="delete-modal modal fade" role="dialog">
                       <!-- Delete Modal -->
                       <div class="modal-dialog modal-sm">

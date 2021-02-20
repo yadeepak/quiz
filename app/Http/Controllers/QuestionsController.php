@@ -16,13 +16,13 @@ class QuestionsController extends Controller
     public function index()
     {
         if(Auth::user()->role === 'C'){
-        $topics = Topic::where('created_by',Auth::id())->get();
+        $topics = Topic::where('created_by',Auth::id())->orderBy('id', 'desc')->get();
         $topics->load(['question' => function ($q) use (&$questions) {
             $questions = $q->get();
         }]);
     }else {
-        $topics = Topic::all();
-        $questions = Question::all();
+        $topics = Topic::orderBy('id', 'desc')->get();
+        $questions = Question::orderBy('id', 'desc')->get();
     }
         return view('admin.questions.index', compact('questions', 'topics'));
     }
@@ -114,7 +114,7 @@ class QuestionsController extends Controller
     public function show($id)
     {
         $topic = Topic::findOrFail($id);
-        $questions = Question::where('topic_id', $topic->id)->get();
+        $questions = Question::where('topic_id', $topic->id)->orderBy('id', 'desc')->get();
         return view('admin.questions.show', compact('topic', 'questions'));
     }
 

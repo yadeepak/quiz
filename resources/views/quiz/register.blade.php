@@ -7,7 +7,7 @@
 			<header class="link-registration">
 				<div class="bg-white d-flex justify-content-center">
 					<div>
-						<img src="{{asset('assets/new images/logo.png')}}" alt="">
+						<img src="{{asset('assets/new images/jobping1.png')}}" alt="">
 					</div>
 				</div>
 			</header>
@@ -40,7 +40,7 @@
 												<label class="form-label" for="exampleInputEmail1">Full
 													Name</label>
 												<input type="text" class="form-control" id="name1"
-													placeholder="First Name" name="name" value="{{ old('name')}}">
+													placeholder="First Name" name="name" value="{{ old('name')}}" required>
 											</div>
 										</div>
 										<div class="form-group col-md-6">
@@ -52,14 +52,14 @@
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
 													</div><input class="form-control fc-datepicker"
-														placeholder="MM/DD/YYYY" type="text" name="dob" value="{{ old('dob')}}">
+														placeholder="MM/DD/YYYY" type="text" name="dob" value="{{ old('dob')}}" required>
 												</div>
 											</div>
 										</div>
 										<div class="form-group col-md-6">
 											<label for="inputEmail4" class="col-form-label">Email</label>
 											<input type="email" class="form-control" id="inputEmail5"
-												placeholder="Email" name="email" value="{{ old('email')}}">
+												placeholder="Email" name="email" value="{{ old('email')}}" required>
 										</div>
 										<div class="form-group col-md-6">
 											<label class="col-form-label">Gender</label>
@@ -81,15 +81,15 @@
 										</div>
 										<div class="form-group col-12">
 											<label class="form-label">Mobile</label>
-											<input type="tel" class="form-control" placeholder="Mobile" name="mobile" required value="{{ old('mobile')}}">
+											<input type="tel" class="form-control" placeholder="Mobile" name="mobile" required value="{{ old('mobile')}}" max="10" maxlength="10">
 										</div>
 										<div class="form-group col-12">
 											<label class="form-label">Address</label>
-											<textarea class="form-control" rows="2" placeholder="Address" name="address">{{ old('address') }}</textarea>
+											<textarea class="form-control" rows="2" placeholder="Address" name="address" required>{{ old('address') }}</textarea>
 										</div>
 										<div class="form-group col-12">
 											<label class="form-label">College</label>
-											<input type="text" class="form-control" placeholder="College" name="college" value="{{ old('college')}}">
+											<input type="text" class="form-control" placeholder="College" name="college" required value="{{ old('college')}}">
 										</div>
 										<div class="form-group col-12">
 											<label class="form-label">Experience</label>

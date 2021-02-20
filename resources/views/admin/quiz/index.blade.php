@@ -91,7 +91,7 @@
           <button class="btn btn-info" type="button">Print</button>
           <button class="btn btn-info" type="button">Excel</button>
           <button class="btn btn-info" type="button">Csv</button>
-
+data-target
         </div>
 
       </div> -->
@@ -129,9 +129,9 @@
                 <td>{{$topic->round==1?'Aptitude Test':'Program Test'}}</td>
                 <td>
                   <!-- Edit Button -->
-                  <a type="button" class="btn btn-info btn-sm mt-2" data-toggle="modal" data-target="#exampleModal{{$topic->id}}"><i class="fa fa-edit"></i> Edit</a>
+                  <a type="button" class="btn btn-info btn-sm mt-2" tabindex="1" data-toggle="modal" data-target="#exampleModal{{$topic->id}}"><i class="fa fa-edit"></i> Edit</a>
                   <!-- Delete Button -->
-                  <a type="button" class="btn btn-red btn-sm mt-2" data-toggle="modal" data-target="#deleteModal{{$topic->id}}"><i class="fa fa-close"></i> Delete</a>
+                  <a type="button" class="btn btn-red btn-sm mt-2" tabindex="1" data-toggle="modal" data-target="#deleteModal{{$topic->id}}"><i class="fa fa-close"></i> Delete</a>
                   <div id="deleteModal{{$topic->id}}" class="delete-modal modal fade" role="dialog">
                     <!-- Delete Modal -->
                     <div class="modal-dialog modal-sm">

@@ -1,147 +1,149 @@
 @extends('layouts.admin', [
-  'page_header' => 'Dashboard',
-  'dash' => 'active',
-  'quiz' => '',
-  'users' => '',
-  'questions' => '',
-  'top_re' => '',
-  'all_re' => '',
-  'sett' => ''
+'page_header' => 'Dashboard',
+'dash' => 'active',
+'quiz' => '',
+'users' => '',
+'questions' => '',
+'top_re' => '',
+'all_re' => '',
+'sett' => ''
 ])
 
 @section('content')
-  <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 ">
-                            <div class="card overflow-hidden">
-                                <div class="card-header">
-                                    <h3 class="card-title">Students</h3>
-      @if(Auth::user()->role === 'A')
-                                    <div class="card-options"> <a class="btn btn-sm btn-primary" href="{{url('/admin/users')}}">View</a>
-                                  @endif 
-                                  </div>
-                                </div>
-                                <div class="card-body ">
-                                    <h5 class="">Total Students</h5>
-                                    <h2 class="text-dark  mt-0 ">{{$user}}</h2>
-                                    <div class="progress progress-sm mt-0 mb-2">
-                                        <div class="progress-bar bg-primary w-75" role="progressbar"></div>
-                                    </div>
-                                    <div class=""><i class="fa fa-caret-up text-green"></i>10% increases</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="card overflow-hidden">
-                                <div class="card-header">
-                                    <h3 class="card-title">Questions</h3>
-      @if(Auth::user()->role === 'A')
-                                    <div class="card-options"> <a class="btn btn-sm btn-secondary" href="{{url('/admin/questions')}}">View</a>
-                                  @endif 
-                                  </div>
-                                </div>
-                                <div class="card-body ">
-                                    <h5 class="">Total Questions</h5>
-                                    <h2 class="text-dark  mt-0 ">{{$question}}</h2>
-                                    <div class="progress progress-sm mt-0 mb-2">
-                                        <div class="progress-bar bg-secondary w-45" role="progressbar"></div>
-                                    </div>
-                                    <div class=""><i class="fa fa-caret-down text-danger"></i>12% decrease</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="card overflow-hidden">
-                                <div class="card-header">
-                                    <h3 class="card-title">Quiz</h3>
-                                    <div class="card-options"> <a class="btn btn-sm btn-warning" href="{{url('/admin/topics')}}">View</a>
-                                    </div>
-                                </div>
-                                <div class="card-body ">
-                                    <h5 class="">Total Quiz</h5>
-                                    <h2 class="text-dark  mt-0 ">{{$quiz}}</h2>
-                                    <div class="progress progress-sm mt-0 mb-2">
-                                        <div class="progress-bar bg-warning w-50" role="progressbar"></div>
-                                    </div>
-                                    <div class=""><i class="fa fa-caret-down text-danger"></i>5% decrease</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 ">
-                            <div class="card overflow-hidden">
-                                <div class="card-header">
-                                    <h3 class="card-title">Placements</h3>
-                                    <div class="card-options"> <a class="btn btn-sm btn-success" href="#">View</a>
-                                    </div>
-                                </div>
-                                <div class="card-body ">
-                                    <h5 class="">Total Placements</h5>
-                                    <h2 class="text-dark  mt-0  ">5,759</h2>
-                                    <div class="progress progress-sm mt-0 mb-2">
-                                        <div class="progress-bar bg-success w-25" role="progressbar"></div>
-                                    </div>
-                                    <div class=""><i class="fa fa-caret-up text-success"></i>15% increase</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 ">
+        <div class="card overflow-hidden">
+            <div class="card-header">
+                <h3 class="card-title">Students</h3>
+                <div class="card-options">
                     @if(Auth::user()->role === 'A')
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card rounded">
-                                <div class="card-header bg-primary text-center br-tr-7 br-tl-7">
-                                    <h3 class="card-title text-white">Latest Companies</h3>
-                                    <div class=" card-options ">
-                                        <a href=" #" class="card-options-collapse" data-toggle="card-collapse"><i
-                                                class="fe fe-chevron-up text-white"></i></a>
+                    <a class="btn btn-sm btn-primary" href="{{url('/admin/users')}}">View</a>
+                    @endif
+                </div>
+            </div>
+            <div class="card-body ">
+                <h5 class="">Total Students</h5>
+                <h2 class="text-dark  mt-0 ">{{$user}}</h2>
+                <div class="progress progress-sm mt-0 mb-2">
+                    <div class="progress-bar bg-primary w-75" role="progressbar"></div>
+                </div>
+                <div class=""><i class="fa fa-caret-up text-green"></i>10% increases</div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card overflow-hidden">
+            <div class="card-header">
+                <h3 class="card-title">Questions</h3>
 
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <ul class="row">
-                                    @if ($user_latest)
-                @foreach ($user_latest as $user)
-                  <li class="col-4 col-md-3  p-3">
-                                            <b class="d-block">{{$user->name}}</b>
-                                            <a href="" class="small text-gray">{{$user->created_at->diffForHumans()}}</a>
-                                        </li>
-                @endforeach
-              @endif
-                                     
-                                    </ul>
-                                </div>
-                                <div class="card-footer ">
-                                    <a href="{{url('admin/company')}}">View all companies</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-options">
+                    @if(Auth::user()->role === 'A')
+                    <a class="btn btn-sm btn-secondary" href="{{url('/admin/questions')}}">View</a>
+                    @endif
+                </div>
+            </div>
+            <div class="card-body ">
+                <h5 class="">Total Questions</h5>
+                <h2 class="text-dark  mt-0 ">{{$question}}</h2>
+                <div class="progress progress-sm mt-0 mb-2">
+                    <div class="progress-bar bg-secondary w-45" role="progressbar"></div>
+                </div>
+                <div class=""><i class="fa fa-caret-down text-danger"></i>12% decrease</div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-sm-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card overflow-hidden">
+            <div class="card-header">
+                <h3 class="card-title">Quiz</h3>
+                <div class="card-options"> <a class="btn btn-sm btn-warning" href="{{url('/admin/topics')}}">View</a>
+                </div>
+            </div>
+            <div class="card-body ">
+                <h5 class="">Total Quiz</h5>
+                <h2 class="text-dark  mt-0 ">{{$quiz}}</h2>
+                <div class="progress progress-sm mt-0 mb-2">
+                    <div class="progress-bar bg-warning w-50" role="progressbar"></div>
+                </div>
+                <div class=""><i class="fa fa-caret-down text-danger"></i>5% decrease</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 ">
+        <div class="card overflow-hidden">
+            <div class="card-header">
+                <h3 class="card-title">Placements</h3>
+                <div class="card-options"> <a class="btn btn-sm btn-success" href="#">View</a>
+                </div>
+            </div>
+            <div class="card-body ">
+                <h5 class="">Total Placements</h5>
+                <h2 class="text-dark  mt-0  ">5,759</h2>
+                <div class="progress progress-sm mt-0 mb-2">
+                    <div class="progress-bar bg-success w-25" role="progressbar"></div>
+                </div>
+                <div class=""><i class="fa fa-caret-up text-success"></i>15% increase</div>
+            </div>
+        </div>
+    </div>
+</div>
+@if(Auth::user()->role === 'A')
+<div class="row">
+    <div class="col-12">
+        <div class="card rounded">
+            <div class="card-header bg-primary text-center br-tr-7 br-tl-7">
+                <h3 class="card-title text-white">Latest Companies</h3>
+                <div class=" card-options ">
+                    <a href=" #" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up text-white"></i></a>
+
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="row">
+                    @if ($user_latest)
+                    @foreach ($user_latest as $user)
+                    <li class="col-4 col-md-3  p-3">
+                        <b class="d-block">{{$user->name}}</b>
+                        <a href="" class="small text-gray">{{$user->created_at->diffForHumans()}}</a>
+                    </li>
+                    @endforeach
+                    @endif
+
+                </ul>
+            </div>
+            <div class="card-footer ">
+                <a href="{{url('admin/company')}}">View all companies</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
-                    <div class="row">
-                        <div class=" col-md-12">
-                            <div class="card">
-                              
-                                <div class="card-body">
-                                    <div  class="chartsh">
-      {!! $chart->container() !!}
+<div class="row">
+    <div class=" col-md-12">
+        <div class="card">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-md-12">
-                            <div class="card">
-                              
-                                <div class="card-body">
-                                    <div  class="chartsh">
-      {!! $chart2->container() !!}
+            <div class="card-body">
+                <div class="chartsh">
+                    {!! $chart->container() !!}
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-12">
+        <div class="card">
 
-                    <!-- <div class="row">
+            <div class="card-body">
+                <div class="chartsh">
+                    {!! $chart2->container() !!}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
                         <div class="col-xl-8 col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header">
@@ -199,7 +201,7 @@
                         </div>
                     </div> -->
 
-                    <!-- <div class="row">
+<!-- <div class="row">
                         <div class="col-xl-4 col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header">
@@ -323,7 +325,7 @@
                         </div>
                     </div> -->
 
-                    <!-- <div class="row">
+<!-- <div class="row">
                         <div class="col-xl-4 col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header">
@@ -493,10 +495,9 @@
                     </div> -->
 @endsection
 @section('scripts')
-   
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
-        {!! $chart->script() !!}
-        {!! $chart2->script() !!}
+{!! $chart->script() !!}
+{!! $chart2->script() !!}
 @endsection
-

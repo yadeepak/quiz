@@ -7,7 +7,7 @@
         <header class="link-registration bg-white">
             <div class=" container d-flex justify-content-between">
                 <div>
-                    <img src="../assets/new images/logo.png" alt="">
+                    <img src="../assets/new images/jobping1.png" alt="">
                 </div>
                 <div class="d-flex align-items-center">
                     <a href="#" class="px-5 ">{{$data['name']}}</a>

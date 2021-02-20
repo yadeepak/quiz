@@ -10,7 +10,7 @@
         <header class="link-registration bg-white">
             <div class=" container d-flex justify-content-between">
                 <div>
-                    <img src="{{asset('assets/new images/logo.png')}}" alt="">
+                    <img src="{{asset('assets/new images/jobping1.png')}}" alt="">
                 </div>
                 <div class="d-flex align-items-center">
                     <a href="#" class="text-danger"><span><span id="min" style="font-size:19px"></span><span id="sec" style="font-size:17px"> </span></span></a></li>

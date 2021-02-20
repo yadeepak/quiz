@@ -13,7 +13,7 @@
 
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>Job Dcodetech</title>
+	<title>Jobping</title>
 	@yield('top_head_files')
 
 	<!-- Bootstrap Css -->
@@ -59,9 +59,9 @@
 <!--/Header Main-->
 
 <body>
-	<div id="global-loader">
+	<!-- <div id="global-loader">
 		<img src="{{asset('assets/images/loader.svg')}}" class="loader-img" alt="">
-	</div>
+	</div> -->
 	<div id="app" style="position: relative">
 
 		@yield('top_bar')

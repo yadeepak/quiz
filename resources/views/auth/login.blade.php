@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>Job Dcodetech</title>
+    <title>Jobping</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -80,7 +80,7 @@
         <div class="card mb-0">
               <div class="card-header">
                 <h3 class="card-title">
-                  <img src="../assets/new images/logo.png" class="d-inline-block mx-5 px-5" alt="" />
+                  <img src="../assets/new images/jobping1.png" class="d-inline-block mx-5 px-5" alt="" />
                 </h3>
               </div>
               <div class="card-body">

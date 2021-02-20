@@ -13,7 +13,7 @@
            <header class="link-registration bg-white">
             <div class=" container d-flex justify-content-between">
                 <div>
-                    <img src="{{asset('assets/new images/logo.png')}}" alt="">
+                    <img src="{{asset('assets/new images/jobping1.png')}}" alt="">
                 </div>
                 <div class="d-flex align-items-center">
                     <a href="#" class="px-5 ">{{@$user['name']}}</a>
@@ -63,6 +63,7 @@
 
                             </div>
                             <?php } ?>
+                            <button class="btn btn-primary w-25 mx-auto my-2" onClick="window.close()">Close</button>
                         </div>
                     </div>
                 </div>

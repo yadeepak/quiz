@@ -19,7 +19,7 @@ class InternCompanyController extends Controller
         $company = User::select('*')
         ->where('role', '=', 'C')
         ->where('company_type', '=', 'internship')
-        ->get();
+        ->orderBy('id', 'desc')->get();
         return view('admin.interncompany.indexx', compact('company'));
     }
 
